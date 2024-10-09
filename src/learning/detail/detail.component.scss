@@ -1,0 +1,14 @@
+
+:host::ng-deep {
+    .text-br{
+        line-height: 25px;
+        margin-bottom: 16px;
+        display: block;
+        font-size: 18px;
+        padding-left: 16px;
+        
+        br:first-of-type{
+        display: none;
+    }
+    }
+  }
