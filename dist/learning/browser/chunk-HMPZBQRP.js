@@ -1,0 +1,1 @@
+import"./chunk-2NFLSA4Y.js";var o=[{path:"",redirectTo:"list",pathMatch:"full"},{path:"list",loadComponent:()=>import("./chunk-SQS5MWK5.js").then(t=>t.ListComponent)},{path:"detail/:id",loadComponent:()=>import("./chunk-UBBMBOW4.js").then(t=>t.DetailComponent)}];export{o as learningRoutes};
