@@ -34,8 +34,10 @@
                                 </div>
                             </div>
                             <div class="card-body text-success" 
-                                style="background-color: #09090b !important; color: white">
-                                <h5 class="card-title" [innerText]="codes.code"></h5>
+                                style="background-color: #09090b !important; color: white;padding: 0;
+    margin: 0;">
+                                <!-- <h5 class="card-title" [innerText]="codes.code"></h5> -->
+                                <app-code-formatter [code]="codes.code"></app-code-formatter>
                             </div>
                         </div>
                     </ng-container>

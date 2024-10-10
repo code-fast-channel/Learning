@@ -33,7 +33,8 @@
                                     <span class="badge text-bg-success cursor-pointer" style="font-family: sans-serif;font-size: 14px; cursor: pointer;" (click)="copy(codes.code,i,ri,ci)">{{codes?.isCopied ?  'Copied':'Click to Copy'}}</span>
                                 </div>
                             </div>
-                            <div class="card-body text-success"  style="background-color: #09090b !important; color: white">
+                            <div class="card-body text-success"  style="padding: 0;
+    margin: 0;background-color: #09090b !important; color: white">
                                 <!-- <h5 class="card-title" [innerText]="codes.code"></h5> -->
                                 <app-code-formatter [code]="codes.code"></app-code-formatter>
                             </div>

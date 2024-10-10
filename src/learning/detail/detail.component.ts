@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { learningList } from '../learning.constant';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CodeFormatterComponent } from '../code-formatter/code-formatter.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CodeFormatterComponent],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })

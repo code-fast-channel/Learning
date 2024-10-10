@@ -39,7 +39,7 @@ export class CodeFormatterComponent {
         mode: 'ace/mode/javascript',
         value: formattedCode, // Use the formatted or original code
         autoScrollEditorIntoView: true,
-        minLines: 10,
+        minLines: 7,
         fontSize: 16
       });
 
