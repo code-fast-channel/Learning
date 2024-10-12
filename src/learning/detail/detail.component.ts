@@ -66,6 +66,10 @@ export class DetailComponent implements OnInit {
     this.router.navigate(['learning/detail', id])
   }
 
+  navigatetoList() {
+    this.router.navigate(['learning/list'])
+  }
+
   copy(text: any,i: any,parentIndex: any,childIndex: any) {
     this.listData[i].filesList[parentIndex].codeLists[childIndex].isCopied = true;
     navigator.clipboard.writeText(text);

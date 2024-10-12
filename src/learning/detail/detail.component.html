@@ -3,6 +3,7 @@
         <h2 style="text-align: center;">{{selectedListData.title}}</h2>
     </div>
     <div class="d-flex justify-content-end mr-1">
+        <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;margin-right: 2px;" (click)="navigatetoList()">Home</button>
         <select [(ngModel)]="selectedValue" placeholder="Select Frame">
             <option [value]="val.value" *ngFor="let val of framPerList;trackBy: trackByIndex">{{val.name}}</option>
         </select>
