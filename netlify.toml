@@ -1,6 +1,6 @@
 [build]
   command = "npm install --force && npm run build"
-  publish = "dist/learning"  # Update to match your outputPath
+  publish = "dist/"
 
 [build.environment]
   NODE_VERSION = "18.20.4"
