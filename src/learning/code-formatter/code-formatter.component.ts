@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 declare const ace: any;
 declare const prettier: any; // Declare the global prettier object
@@ -9,12 +9,17 @@ declare const prettierPlugins: any; // Declare the plugins object from the CDN
   standalone: true,
   imports: [],
   templateUrl: './code-formatter.component.html',
-  styleUrls: ['./code-formatter.component.scss']
+  styleUrls: ['./code-formatter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeFormatterComponent {
   @Input() code: string | any;
 
   @ViewChild('editor', { static: false }) editor!: ElementRef;
+
+  constructor(private ref: ChangeDetectorRef) {
+
+  }
 
   ngAfterViewInit() {
     if (this.editor) {
@@ -54,6 +59,7 @@ export class CodeFormatterComponent {
       aceEditor.session.setUseSoftTabs(true);
       aceEditor.session.setTabSize(4);
       aceEditor.session.setUseWorker(false);
+      this.ref.markForCheck();
     } else {
       // console.error('Editor element not found');
     }

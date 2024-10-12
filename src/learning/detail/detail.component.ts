@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { learningList } from '../learning.constant';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,8 @@ import { CodeFormatterComponent } from '../code-formatter/code-formatter.compone
   standalone: true,
   imports: [CommonModule, FormsModule, CodeFormatterComponent],
   templateUrl: './detail.component.html',
-  styleUrl: './detail.component.scss'
+  styleUrl: './detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailComponent implements OnInit {
   
@@ -39,8 +40,10 @@ export class DetailComponent implements OnInit {
     }
   ];
 
-  checkGroupExist = (val: any) => val.some((ele: any) => ele?.code); 
-  constructor(private activateRoute: ActivatedRoute,private router: Router) {
+  trackByIndex(index: number, item: any): number {
+    return index;
+  }
+  constructor(private activateRoute: ActivatedRoute,private router: Router, private ref: ChangeDetectorRef) {
 
   }
   ngOnInit() {
@@ -48,18 +51,14 @@ export class DetailComponent implements OnInit {
       const data: any = learningList[+params.id].filesList;
       let arr: any = [];
       data.forEach((element: any) => {
-        console.log('ele', element);
         let obj = {filesList: [element],title: element.title, isGroup: element.isGroup}
         arr.push(obj);
 
       });
       this.listData = arr;
       this.selectedListData = learningList[+params.id];
-      console.log('data',this.selectedListData,learningList);
+      this.ref.markForCheck();
     });
-    this.activateRoute.data.subscribe(Val=> {
-      console.log(Val)
-    })
   }
 
 
@@ -72,6 +71,7 @@ export class DetailComponent implements OnInit {
     navigator.clipboard.writeText(text);
     setTimeout(() => {
       this.listData[i].filesList[parentIndex].codeLists[childIndex].isCopied = false;
+      this.ref.markForCheck();
     },4000)
   }
 
