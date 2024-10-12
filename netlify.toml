@@ -4,3 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "18.20.4"
+
+[[redirects]]
+  from = "/*"               # Redirect all paths
+  to = "/index.html"        # Redirect to index.html (useful for single-page apps)
+  status = 200              # Status code for the redirect
+  force = true              # Force the redirect, even if the path exists

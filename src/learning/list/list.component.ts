@@ -19,7 +19,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
   
   listData: any = learningList;
-  selectedValue = null;
+  selectedValue = '1';
   framPerList = [
     {
       name: 'Auto Adjust',

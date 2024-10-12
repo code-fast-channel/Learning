@@ -3838,7 +3838,4760 @@ export const learningList = [
         ],
       },
                         
+      {
+        "title": "Complete List of Lifecycle Hooks in Angular",
+        "isGroup": false,
+        "description": "Angular provides a series of lifecycle hooks that allow developers to intervene at key moments during the life of a component. Each hook is executed at a specific time in the lifecycle, giving you control over the behavior of the component. Below are all the lifecycle hooks in Angular, along with their definitions and examples.",
+        "codeLists": [
+          {
+            "title": "ngOnChanges",
+            "description": "Called before ngOnInit and whenever one or more data-bound input properties change. Receives a SimpleChanges object containing the previous and current values of the changed properties.",
+            "code": `
+              // In the component class
+              export class AppComponent implements OnChanges {
+                @Input() inputValue: string;
+                
+                ngOnChanges(changes: SimpleChanges) {
+                  console.log('ngOnChanges called!', changes); // Responds to input property changes
+                }
+              }
+            `
+          },
+          {
+            "title": "ngOnInit",
+            "description": "Called once, after the first ngOnChanges. It is typically used for initialization logic, such as fetching data or setting up the component.",
+            "code": `
+              // In the component class
+              export class AppComponent implements OnInit {
+                ngOnInit() {
+                  console.log('ngOnInit called!'); // Code that runs after the component is initialized
+                }
+              }
+            `
+          },
+          {
+            "title": "ngDoCheck",
+            "description": "Called during every change detection run, after ngOnChanges and ngOnInit. It allows you to implement custom change detection logic.",
+            "code": `
+              // In the component class
+              export class AppComponent implements DoCheck {
+                ngDoCheck() {
+                  console.log('ngDoCheck called!'); // Custom change detection logic
+                }
+              }
+            `
+          },
+          {
+            "title": "ngAfterContentInit",
+            "description": "Called once after the component's projected content (ng-content) has been initialized. It is useful for interacting with content projected into the component.",
+            "code": `
+              // In the component class
+              export class AppComponent implements AfterContentInit {
+                ngAfterContentInit() {
+                  console.log('ngAfterContentInit called!'); // Code that runs after projected content is initialized
+                }
+              }
+            `
+          },
+          {
+            "title": "ngAfterContentChecked",
+            "description": "Called after every check of the component's projected content (ng-content). Useful for reacting to changes in content.",
+            "code": `
+              // In the component class
+              export class AppComponent implements AfterContentChecked {
+                ngAfterContentChecked() {
+                  console.log('ngAfterContentChecked called!'); // Code that runs after each check of projected content
+                }
+              }
+            `
+          },
+          {
+            "title": "ngAfterViewInit",
+            "description": "Called once after Angular has fully initialized the component's view (and its child views).",
+            "code": `
+              // In the component class
+              export class AppComponent implements AfterViewInit {
+                ngAfterViewInit() {
+                  console.log('ngAfterViewInit called!'); // Code that runs after view initialization
+                }
+              }
+            `
+          },
+          {
+            "title": "ngAfterViewChecked",
+            "description": "Called after every check of the component's view (and child views). It is useful for responding to changes in the view.",
+            "code": `
+              // In the component class
+              export class AppComponent implements AfterViewChecked {
+                ngAfterViewChecked() {
+                  console.log('ngAfterViewChecked called!'); // Code that runs after each view check
+                }
+              }
+            `
+          },
+          {
+            "title": "ngOnDestroy",
+            "description": "Called right before Angular destroys the component. Use it for cleanup tasks like unsubscribing from observables, detaching event handlers, or freeing resources.",
+            "code": `
+              // In the component class
+              export class AppComponent implements OnDestroy {
+                ngOnDestroy() {
+                  console.log('ngOnDestroy called!'); // Cleanup code before component destruction
+                }
+              }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Angular Forms Overview",
+        "description": "This document provides examples of different types of forms in Angular, including Reactive Forms and Template-Driven Forms, covering various validation techniques and states.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "reactive-form-single-field.component.ts",
+            "title": "Reactive Form - Single Field",
+            "description": "This example shows how to create a reactive form with a single field using FormControl.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormControl } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-reactive-form-single-field',
+                templateUrl: './reactive-form-single-field.component.html',
+              })
+              export class ReactiveFormSingleFieldComponent {
+                nameControl = new FormControl(''); // Create a FormControl for the name field
+      
+                // To get the form control value as JSON
+                get formValue() {
+                  return JSON.stringify(this.nameControl.value);
+                }
+              }
+            `
+          },
+          {
+            "filename": "reactive-form-single-field.component.html",
+            "title": "Reactive Form - Single Field Template",
+            "description": "Template for the Reactive Form with a single field.",
+            "code": `
+              <div>
+                <form>
+                  <!-- Input for name -->
+                  <input [formControl]="nameControl" placeholder="Enter your name" />
+                  <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)">
+                    <div *ngIf="nameControl.errors.required">Name is required.</div>
+                  </div>
+                </form>
+                <p>Form Value: {{ formValue }}</p>
+              </div>
+            `
+          },
+          {
+            "filename": "reactive-form-group.component.ts",
+            "title": "Reactive Form - FormGroup",
+            "description": "This example demonstrates how to create a reactive form using FormGroup.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-reactive-form-group',
+                templateUrl: './reactive-form-group.component.html',
+              })
+              export class ReactiveFormGroupComponent {
+                userForm: FormGroup;
+      
+                constructor(private fb: FormBuilder) {
+                  this.userForm = this.fb.group({
+                    name: ['', Validators.required],
+                    email: ['', [Validators.required, Validators.email]],
+                  });
+                }
+      
+                // To get the form value as JSON
+                get formValue() {
+                  return JSON.stringify(this.userForm.value);
+                }
+      
+                // Reset the form
+                resetForm() {
+                  this.userForm.reset();
+                }
+              }
+            `
+          },
+          {
+            "filename": "reactive-form-group.component.html",
+            "title": "Reactive Form - FormGroup Template",
+            "description": "Template for the Reactive Form using FormGroup.",
+            "code": `
+              <form [formGroup]="userForm">
+                <div>
+                  <input formControlName="name" placeholder="Name" />
+                  <div *ngIf="userForm.get('name').invalid && (userForm.get('name').dirty || userForm.get('name').touched)">
+                    <div *ngIf="userForm.get('name').errors.required">Name is required.</div>
+                  </div>
+                </div>
+                <div>
+                  <input formControlName="email" placeholder="Email" />
+                  <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+                    <div *ngIf="userForm.get('email').errors.required">Email is required.</div>
+                    <div *ngIf="userForm.get('email').errors.email">Enter a valid email.</div>
+                  </div>
+                </div>
+                <button type="button" (click)="resetForm()">Reset</button>
+                <p>Form Value: {{ formValue }}</p>
+              </form>
+            `
+          },
+          {
+            "filename": "reactive-form-builder.component.ts",
+            "title": "Reactive Form - FormBuilder",
+            "description": "This example demonstrates how to create a reactive form using FormBuilder.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-reactive-form-builder',
+                templateUrl: './reactive-form-builder.component.html',
+              })
+              export class ReactiveFormBuilderComponent {
+                userForm: FormGroup;
+      
+                constructor(private fb: FormBuilder) {
+                  this.userForm = this.fb.group({
+                    username: ['', [Validators.required, Validators.minLength(3)]],
+                    password: ['', [Validators.required, Validators.minLength(6)]],
+                  });
+                }
+      
+                get formValue() {
+                  return JSON.stringify(this.userForm.value);
+                }
+      
+                resetForm() {
+                  this.userForm.reset();
+                }
+              }
+            `
+          },
+          {
+            "filename": "reactive-form-builder.component.html",
+            "title": "Reactive Form - FormBuilder Template",
+            "description": "Template for the Reactive Form using FormBuilder.",
+            "code": `
+              <form [formGroup]="userForm">
+                <div>
+                  <input formControlName="username" placeholder="Username" />
+                  <div *ngIf="userForm.get('username').invalid && (userForm.get('username').dirty || userForm.get('username').touched)">
+                    <div *ngIf="userForm.get('username').errors.required">Username is required.</div>
+                    <div *ngIf="userForm.get('username').errors.minlength">Minimum length is 3.</div>
+                  </div>
+                </div>
+                <div>
+                  <input type="password" formControlName="password" placeholder="Password" />
+                  <div *ngIf="userForm.get('password').invalid && (userForm.get('password').dirty || userForm.get('password').touched)">
+                    <div *ngIf="userForm.get('password').errors.required">Password is required.</div>
+                    <div *ngIf="userForm.get('password').errors.minlength">Minimum length is 6.</div>
+                  </div>
+                </div>
+                <button type="button" (click)="resetForm()">Reset</button>
+                <p>Form Value: {{ formValue }}</p>
+              </form>
+            `
+          },
+          {
+            "filename": "reactive-nested-form.component.ts",
+            "title": "Reactive Form - Nested Form",
+            "description": "This example demonstrates how to create a nested reactive form.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-reactive-nested-form',
+                templateUrl: './reactive-nested-form.component.html',
+              })
+              export class ReactiveNestedFormComponent {
+                userForm: FormGroup;
+      
+                constructor(private fb: FormBuilder) {
+                  this.userForm = this.fb.group({
+                    name: ['', Validators.required],
+                    address: this.fb.group({
+                      street: ['', Validators.required],
+                      city: ['', Validators.required],
+                    }),
+                  });
+                }
+      
+                get formValue() {
+                  return JSON.stringify(this.userForm.value);
+                }
+      
+                resetForm() {
+                  this.userForm.reset();
+                }
+              }
+            `
+          },
+          {
+            "filename": "reactive-nested-form.component.html",
+            "title": "Reactive Form - Nested Form Template",
+            "description": "Template for the nested Reactive Form.",
+            "code": `
+              <form [formGroup]="userForm">
+                <div>
+                  <input formControlName="name" placeholder="Name" />
+                  <div *ngIf="userForm.get('name').invalid && (userForm.get('name').dirty || userForm.get('name').touched)">
+                    <div *ngIf="userForm.get('name').errors.required">Name is required.</div>
+                  </div>
+                </div>
+                <div formGroupName="address">
+                  <h4>Address</h4>
+                  <input formControlName="street" placeholder="Street" />
+                  <div *ngIf="userForm.get('address.street').invalid && (userForm.get('address.street').dirty || userForm.get('address.street').touched)">
+                    <div *ngIf="userForm.get('address.street').errors.required">Street is required.</div>
+                  </div>
+                  <input formControlName="city" placeholder="City" />
+                  <div *ngIf="userForm.get('address.city').invalid && (userForm.get('address.city').dirty || userForm.get('address.city').touched)">
+                    <div *ngIf="userForm.get('address.city').errors.required">City is required.</div>
+                  </div>
+                </div>
+                <button type="button" (click)="resetForm()">Reset</button>
+                <p>Form Value: {{ formValue }}</p>
+              </form>
+            `
+          },
+          {
+            "filename": "dynamic-validation-radio.component.ts",
+            "title": "Dynamic Validation with Radio Field",
+            "description": "This example demonstrates how to add and remove form controls dynamically with validation based on the selection of a radio field.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+          
+              @Component({
+                selector: 'app-dynamic-validation-radio',
+                templateUrl: './dynamic-validation-radio.component.html',
+              })
+              export class DynamicValidationRadioComponent {
+                userForm: FormGroup;
+                activities = [
+                  { value: 'games', label: 'Games' },
+                  { value: 'study', label: 'Study' },
+                  { value: 'none', label: 'None' },
+                ];
+          
+                constructor(private fb: FormBuilder) {
+                  this.userForm = this.fb.group({
+                    activity: ['', Validators.required],
+                    gameName: [''],
+                    gameDescription: [''],
+                    studySubject: [''],
+                  });
+                }
+          
+                onActivityChange(activity: string) {
+                  this.setValidators(activity);
+                }
+          
+                private setValidators(activity: string) {
+                  const validators = {
+                    games: { gameName: [Validators.required], gameDescription: [Validators.required], studySubject: [] },
+                    study: { gameName: [], gameDescription: [], studySubject: [Validators.required] },
+                    none: { gameName: [], gameDescription: [], studySubject: [] },
+                  };
+          
+                  Object.keys(validators[activity]).forEach((control) => {
+                    this.userForm.get(control).setValidators(validators[activity][control]);
+                    this.userForm.get(control).updateValueAndValidity();
+                  });
+                }
+          
+                get formValue() {
+                  return JSON.stringify(this.userForm.value);
+                }
+          
+                resetForm() {
+                  this.userForm.reset();
+                }
+              }
+            `
+          },
+          {
+            "filename": "dynamic-validation-radio.component.html",
+            "title": "Dynamic Validation with Radio Field Template",
+            "description": "Template for the dynamic validation with radio field example.",
+            "code": `
+              <form [formGroup]="userForm">
+                <div>
+                  <label>Activity:</label>
+                  <div *ngFor="let activity of activities">
+                    <input type="radio" [value]="activity.value" formControlName="activity" (change)="onActivityChange(activity.value)">
+                    {{ activity.label }}
+                  </div>
+                </div>
+                <div *ngIf="userForm.get('activity').value === 'games'">
+                  <input formControlName="gameName" placeholder="Game Name" />
+                  <div *ngIf="userForm.get('gameName').invalid && (userForm.get('gameName').dirty || userForm.get('gameName').touched)">
+                    <div *ngIf="userForm.get('gameName').errors.required">Game Name is required.</div>
+                  </div>
+                  <input formControlName="gameDescription" placeholder="Game Description" />
+                  <div *ngIf="userForm.get('gameDescription').invalid && (userForm.get('gameDescription').dirty || userForm.get('gameDescription').touched)">
+                    <div *ngIf="userForm.get('gameDescription').errors.required">Game Description is required.</div>
+                  </div>
+                </div>
+                <div *ngIf="userForm.get('activity').value === 'study'">
+                  <input formControlName="studySubject" placeholder="Study Subject" />
+                  <div *ngIf="userForm.get('studySubject').invalid && (userForm.get('studySubject').dirty || userForm.get('studySubject').touched)">
+                    <div *ngIf="userForm.get('studySubject').errors.required">Study Subject is required.</div>
+                  </div>
+                </div>
+                <p>Form Value: {{ formValue }}</p>
+                <button type="button" (click)="resetForm()">Reset</button>
+              </form>
+            `
+          },
+          {
+            "filename": "setvalue-patchvalue.component.ts",
+            "title": "SetValue and PatchValue",
+            "description": "This example demonstrates how to use setValue and patchValue to update form controls.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+          
+              @Component({
+                selector: 'app-setvalue-patchvalue',
+                templateUrl: './setvalue-patchvalue.component.html',
+              })
+              export class SetValuePatchValueComponent {
+                userForm: FormGroup;
+          
+                constructor(private fb: FormBuilder) {
+                  this.userForm = this.fb.group({
+                    username: ['', Validators.required],
+                    email: ['', [Validators.required, Validators.email]],
+                  });
+                }
+          
+                setValueExample() {
+                // this.userForm.get('username').setValue('John Doe');
+                  this.userForm.setValue({
+                    username: 'John Doe',
+                    email: 'john.doe@example.com',
+                  });
+                }
+          
+                patchValueExample() {
+                  this.userForm.patchValue({
+                    username: 'Jane Doe',
+                  });
+                }
+          
+                get formValue() {
+                  return JSON.stringify(this.userForm.value);
+                }
+          
+                resetForm() {
+                  this.userForm.reset();
+                }
+              }
+            `
+          },
+          {
+            "filename": "setvalue-patchvalue.component.html",
+            "title": "SetValue and PatchValue Template",
+            "description": "Template for the setValue and patchValue form.",
+            "code": `
+              <form [formGroup]="userForm">
+                <div>
+                  <input formControlName="username" placeholder="Username" />
+                  <div *ngIf="userForm.get('username').invalid && (userForm.get('username').dirty || userForm.get('username').touched)">
+                    <div *ngIf="userForm.get('username').errors.required">Username is required.</div>
+                  </div>
+                </div>
+                <div>
+                  <input formControlName="email" placeholder="Email" />
+                  <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+                    <div *ngIf="user Form.get('email').errors.required">Email is required.</div>
+                    <div *ngIf="userForm.get('email').errors.email">Enter a valid email.</div>
+                  </div>
+                </div>
+                <button type="button" (click)="setValueExample()">Set Value Example</button>
+                <button type="button" (click)="patchValueExample()">Patch Value Example</button>
+                <p>Form Value: {{ formValue }}</p>
+                <button type="button" (click)="resetForm()">Reset</button>
+              </form>
+            `
+          },
+          {
+            "filename": "form-states.component.ts",
+            "title": "Form States",
+            "description": "This example demonstrates how to use form states such as touched, untouched, dirty, and pristine.",
+            "code": `
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+          
+              @Component({
+                selector: 'app-form-states',
+                templateUrl: './form-states.component.html',
+              })
+              export class FormStatesComponent {
+                userForm: FormGroup;
+          
+                constructor(private fb: FormBuilder) {
+                  this.userForm = this.fb.group({
+                    username: ['', Validators.required],
+                    email: ['', [Validators.required, Validators.email]],
+                  });
+                }
+          
+                get formValue() {
+                  return JSON.stringify(this.userForm.value);
+                }
+          
+                resetForm() {
+                  this.userForm.reset();
+                }
+              }
+            `
+          },
+          {
+            "filename": "form-states.component.html",
+            "title": "Form States Template",
+            "description": "Template for the form states example.",
+            "code": `
+              <form [formGroup]="userForm">
+                <div>
+                  <input formControlName="username" placeholder="Username" />
+                  <div *ngIf="userForm.get('username').invalid && (userForm.get('username').dirty || userForm.get('username').touched)">
+                    <div *ngIf="userForm.get('username').errors.required">Username is required.</div>
+                  </div>
+                  <p>Touched: {{ userForm.get('username').touched }}</p>
+                  <p>Untouched: {{ userForm.get('username').untouched }}</p>
+                  <p>Dirty: {{ userForm.get('username').dirty }}</p>
+                  <p>Pristine: {{ userForm.get('username').pristine }}</p>
+                </div>
+                <div>
+                  <input formControlName="email" placeholder="Email" />
+                  <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+                    <div *ngIf="userForm.get('email').errors.required">Email is required.</div>
+                    <div *ngIf="userForm.get('email').errors.email">Enter a valid email.</div>
+                  </div>
+                  <p>Touched: {{ userForm.get('email').touched }}</p>
+                  <p>Untouched: {{ userForm.get('email').untouched }}</p>
+                  <p>Dirty: {{ userForm.get('email').dirty }}</p>
+                  <p>Pristine: {{ userForm.get('email').pristine }}</p>
+                  <p>Valid: {{ userForm.get('email').valid }}</p>
+                  <p>Invalid: {{ userForm.get('email').invalid }}</p>
 
+                </div>
+                <p>Form Value: {{ formValue }}</p>
+                <button type="button" (click)="resetForm()">Reset</button>
+              </form>
+            `
+          },
+          {
+            "filename": "template-driven-form.component.ts",
+            "title": "Template-Driven Form",
+            "description": "This example demonstrates a template-driven form with validations.",
+            "code": `
+              import { Component } from '@angular/core';
+      
+              @Component({
+                selector: 'app-template-driven-form',
+                templateUrl: './template-driven-form.component.html',
+              })
+              export class TemplateDrivenFormComponent {
+                model = {
+                  name: '',
+                  email: '',
+                  password: ''
+                };
+      
+                onSubmit(form) {
+                  console.log('Form Submitted!', form.value);
+                }
+              }
+            `
+          },
+          {
+            "filename": "template-driven-form.component.html",
+            "title": "Template-Driven Form Template",
+            "description": "Template for the Template-Driven Form.",
+            "code": `
+              <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                <div>
+                  <input [(ngModel)]="model.name" name="name" required minlength="3" placeholder="Name" />
+                  <div *ngIf="form.controls.name?.invalid && (form.controls.name?.dirty || form.controls.name?.touched)">
+                    <div *ngIf="form.controls.name?.errors?.required">Name is required.</div>
+                    <div *ngIf="form.controls.name?.errors?.minlength">Minimum length is 3.</div>
+                  </div>
+                </div>
+                <div>
+                  <input [(ngModel)]="model.email" name="email" required email placeholder="Email" />
+                  <div *ngIf="form.controls.email?.invalid && (form.controls.email?.dirty || form.controls.email?.touched)">
+                    <div *ngIf="form.controls.email?.errors?.required">Email is required.</div>
+                    <div *ngIf="form.controls.email?.errors?.email">Enter a valid email.</div>
+                  </div>
+                </div>
+                <div>
+                  <input [(ngModel)]="model.password" name="password" required minlength="6" placeholder="Password" />
+                  <div *ngIf="form.controls.password?.invalid && (form.controls.password?.dirty || form.controls.password?.touched)">
+                    <div *ngIf="form.controls.password?.errors?.required">Password is required.</div>
+                    <div *ngIf="form.controls.password?.errors?.minlength">Minimum length is 6.</div>
+                  </div>
+                </div>
+                <button type="submit" [disabled]="form.invalid">Submit</button>
+              </form>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Dynamic Validation Add and Remove with FormBuilder and Validators in Angular",
+        "description": "This Angular example demonstrates a dynamic form where validators are added or removed based on the value of a radio button group. Depending on the selected terms and conditions option, certain fields like 'firstname', 'lastname', and 'reason' will have required validation applied or removed. The form utilizes Angular's FormBuilder, Validators, and reactive form controls.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "dynamic-validation-add-removegs.component.ts",
+            "title": "DynamicValidationAddRemovegsComponent",
+            "description": "This TypeScript file contains the logic to dynamically add or remove validators based on the selection from the radio buttons. Validators are set using `dynamicValidationAddRemoveObject` and `setValidators` methods for fields like 'firstname', 'lastname', and 'reason'.",
+            "code": `
+           import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-dynamic-validation-add-removegs',
+  templateUrl: './dynamic-validation-add-removegs.component.html',
+  styleUrls: ['./dynamic-validation-add-removegs.component.css'],
+})
+export class DynamicValidationAddRemovegsComponent implements OnInit {
+  submitted: boolean = false;
+  constructor(private fb: FormBuilder) {
+    this.formName.get('terms&condition').valueChanges.subscribe((val: any) => {
+      switch (val) {
+        case 0:
+          // this.setValidators(['firstname','lastname']);
+
+          // or
+
+          // let sgsgg = [
+          //   {name:'firstname',validations:[Validators.required]},
+          //   {name:'lastname',validations:[Validators.required]},
+          //   {name:'reason'}
+          // ];
+          // this.dynamicValidationAddRemove(sgsgg);
+
+          //or
+
+          let sgsgg = {
+            firstname: [Validators.required],
+            lastname: [Validators.required],
+            reason: [],
+          };
+          this.dynamicValidationAddRemoveObject(sgsgg);
+
+          break;
+        case 1:
+          // this.setValidators(['reason']);
+
+          //or
+
+          // let sgsgs = [
+          //   {name:'firstname',validations:[]}, // validation:[] is optional
+          //   {name:'lastname'},
+          //   {name:'reason',validations:[Validators.required]}
+          // ];
+          // this.dynamicValidationAddRemove(sgsgs);
+
+          //or
+
+          let sgsgs = {
+            firstname: [],
+            lastname: [],
+            reason: [Validators.required],
+          };
+          this.dynamicValidationAddRemoveObject(sgsgs);
+
+          break;
+        case 2:
+          // this.setValidators([]);
+
+          //or
+
+          // let sgsgss = [
+          //   {name:'firstname'},
+          //   {name:'lastname'},
+          //   {name:'reason'}
+          // ];
+          // this.dynamicValidationAddRemove(sgsgss);
+
+          //or
+
+          let sgsgss = { firstname: [], lastname: [], reason: [] };
+          this.dynamicValidationAddRemoveObject(sgsgss);
+          break;
+      }
+    });
+  }
+
+  formName: any = this.fb.group({
+    inputName: ['', Validators.required],
+    'terms&condition': ['', Validators.required],
+    firstname: [],
+    lastname: [],
+    reason: [],
+  });
+
+  ngOnInit() {}
+
+  submit() {
+    this.submitted = true;
+    console.log('sgsg', this.formName);
+    if (!this.formName.valid) {
+      // !this.formName.valid === false
+      alert('fill all the field sgsgs');
+    }
+    console.log('gsgs', this.formName.value);
+  }
+
+  private setValidators(allowedFiels: any = []):void {
+    const fields = ['firstname', 'lastname', 'reason'];
+    fields.forEach((element: any) => {
+      let validators: any = [];
+      if (allowedFiels.includes(element)) {
+        validators = [Validators.required];
+      }
+      this.formName.get(element).setValidators(validators);
+      this.formName.get(element).updateValueAndValidity();
+    });
+    console.log('gsgsgsgsgs', this.formName);
+  }
+
+  private dynamicValidationAddRemove(fields: any = []):void {
+    fields.forEach((gs: any) => {
+      this.formName.get(gs.name).setValidators(gs?.validations?.length > 0 ? gs.validations : []);
+      this.formName.get(gs.name).updateValueAndValidity();
+    });
+  }
+
+  private dynamicValidationAddRemoveObject(fields: any):void {
+    Object.keys(fields).forEach((sg: any) => {
+      this.formName.get(sg).setValidators(fields[sg]);
+      this.formName.get(sg).updateValueAndValidity();
+    });
+  }
+}
+            `
+          },
+          {
+            "filename": "dynamic-validation-add-removegs.component.html",
+            "title": "HTML Template for DynamicValidationAddRemovegsComponent",
+            "description": "The HTML template contains a form with input fields and radio buttons. Based on the selected radio button, the required validators for 'firstname', 'lastname', and 'reason' fields are dynamically applied or removed. The form's validation state is displayed below the form using Angular's reactive form features.",
+            "code": `
+            <p>dynamic-validation-add-removegs works!</p>
+            <form [formGroup]='formName'>
+              <input formControlName='inputName'>
+              <div *ngIf="formName.get('inputName').errors && submitted">
+                <span class="error" *ngIf ="formName.get('inputName').errors['required']">This field is required</span>
+              </div>
+              <div>
+                <input type="radio" formControlName='terms&condition' [value]="0"><label>Accept</label>
+                <input type="radio" formControlName='terms&condition' [value]="1"><label>Accept and reason</label>
+                <input type="radio" formControlName='terms&condition' [value]="2"><label>Decline</label>
+                <div *ngIf="formName.get('terms&condition').errors && submitted">
+                  <span class="error" *ngIf ="formName.get('terms&condition').errors['required']">terms & condition is required</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:20px">
+                <div>
+                  <label>First name</label>
+                  <input formControlName='firstname'>
+                  <div *ngIf="formName.get('firstname').errors && submitted">
+                    <span class="error" *ngIf ="formName.get('firstname').errors['required']">This firstname is required</span>
+                  </div>
+                  <br>
+                  <label>Last name</label>
+                  <input formControlName='lastname'>
+                  <div *ngIf="formName.get('lastname').errors && submitted">
+                    <span class="error" *ngIf ="formName.get('lastname').errors['required']">This lastname is required</span>
+                  </div>
+                </div>
+                <div>
+                  <label>Reason</label>
+                  <input formControlName='reason'>
+                  <div *ngIf="formName.get('reason').errors && submitted">
+                    <span class="error" *ngIf ="formName.get('reason').errors['required']">This reason is required</span>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <button (click)="submit()">Submit</button>
+            <p>valid: {{ formName.valid }}</p>
+            <p>invalid: {{ formName.invalid }}</p>
+            <p>value: {{ formName.value | json }}</p>
+            `
+          },
+          {
+            "filename": "dynamic-validation-add-removegs.component.css",
+            "title": "CSS for DynamicValidationAddRemovegsComponent",
+            "description": "Basic CSS for styling the dynamic form layout.",
+            "code": `
+            /* dynamic-validation-add-removegs.component.css */
+            .error {
+              color: red;
+              font-size: 12px;
+            }
+      
+            div {
+              margin-bottom: 10px;
+            }
+      
+            label {
+              display: block;
+              margin-bottom: 5px;
+            }
+      
+            input {
+              margin-bottom: 10px;
+              padding: 5px;
+            }
+            `
+          }
+        ]
+      },            
+      {
+        "title": "Angular Array CRUD Operations",
+        "description": "This example demonstrates how to perform basic CRUD (Create, Read, Update, Delete) operations on an array in Angular.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "array-crud.component.ts",
+            "title": "Array CRUD - Component",
+            "description": "This example shows how to implement CRUD operations on an array in Angular.",
+            "code": `
+              // array-crud.component.ts
+              import { Component } from '@angular/core';  // Importing Angular's Component decorator
+      
+              @Component({
+                selector: 'app-crud', // Defines the selector used in the HTML
+                templateUrl: './crud.component.html', // Points to the component's HTML file
+                styleUrls: ['./crud.component.css'], // Points to the component's CSS file
+              })
+              export class CrudComponent {
+                items = []; // Initialize an empty array to store items
+      
+                // CREATE: Add a new item to the array
+                addItem(newItem: string) { 
+                  this.items.push(newItem); // Adds the new item to the array
+                }
+      
+                // READ: Retrieve all items from the array
+                getItems() {
+                  return this.items; // Returns the array of items
+                }
+      
+                // UPDATE: Update an existing item in the array
+                updateItem(index: number, updatedItem: string) {
+                  this.items[index] = updatedItem; // Replaces the old item with the updated one
+                }
+      
+                // DELETE: Remove an item from the array
+                deleteItem(index: number) {
+                  this.items.splice(index, 1); // Removes the item at the given index
+                }
+              }
+            `
+          },
+          {
+            "filename": "array-crud.component.html",
+            "title": "Array CRUD - Template",
+            "description": "The following code provides the HTML template for CRUD operations on the array.",
+            "code": `
+              <!-- array-crud.component.html -->
+              <div>
+                <!-- Input for new item -->
+                <input #newItemInput type="text" placeholder="Add new item" />
+      
+                <!-- Button to add a new item to the list -->
+                <button (click)="addItem(newItemInput.value)">Add Item</button>
+      
+                <!-- Display the list of items -->
+                <ul>
+                  <li *ngFor="let item of getItems(); let i = index">
+                    <!-- Display item value -->
+                    {{ item }} 
+                    
+                    <!-- Button to update item -->
+                    <button (click)="updateItem(i, 'Updated Item')">Update</button>
+                    
+                    <!-- Button to delete item -->
+                    <button (click)="deleteItem(i)">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            `
+          }
+        ]
+      },      
+      {
+        "title": "Angular Array of Objects CRUD Operations",
+        "description": "This example demonstrates how to perform CRUD (Create, Read, Update, Delete) operations on an array of objects in Angular.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "array-object-crud.component.ts",
+            "title": "Array of Objects CRUD - Component",
+            "description": "The following code shows the TypeScript logic for CRUD operations on an array of objects.",
+            "code": `
+              // array-object-crud.component.ts
+              import { Component } from '@angular/core';  // Importing Angular's Component decorator
+      
+              @Component({
+                selector: 'app-crud', // Defines the selector used in the HTML
+                templateUrl: './crud.component.html', // Points to the component's HTML file
+                styleUrls: ['./crud.component.css'], // Points to the component's CSS file
+              })
+              export class CrudComponent {
+                // Initialize an array of objects, each representing an item with id and name properties
+                items = [
+                  { id: 1, name: 'Item 1' },
+                  { id: 2, name: 'Item 2' },
+                  { id: 3, name: 'Item 3' }
+                ];
+      
+                // CREATE: Add a new object to the array
+                addItem(newItemName: string) {
+                  const newItem = {
+                    id: this.items.length + 1, // Assign a new unique id based on array length
+                    name: newItemName // Assign the new item name
+                  };
+                  this.items.push(newItem); // Add the new object to the array
+                }
+      
+                // READ: Retrieve all objects from the array
+                getItems() {
+                  return this.items; // Returns the array of object items
+                }
+      
+                // UPDATE: Update the name of an existing object in the array
+                updateItem(id: number, updatedName: string) {
+                  const item = this.items.find(i => i.id === id); // Find the object by its id
+                  if (item) {
+                    item.name = updatedName; // Update the object's name property
+                  }
+                }
+      
+                // DELETE: Remove an object from the array
+                deleteItem(id: number) {
+                  this.items = this.items.filter(i => i.id !== id); // Filter out the object with the matching id
+                }
+              }
+            `
+          },
+          {
+            "filename": "array-object-crud.component.html",
+            "title": "Array of Objects CRUD - Template",
+            "description": "The following code provides the HTML template for CRUD operations on the array of objects.",
+            "code": `
+              <!-- array-object-crud.component.html -->
+              <div>
+                <!-- Input for new item name -->
+                <input #newItemInput type="text" placeholder="Add new item" />
+      
+                <!-- Button to add a new object to the list -->
+                <button (click)="addItem(newItemInput.value)">Add Item</button>
+      
+                <!-- Display the list of items (array of objects) -->
+                <ul>
+                  <li *ngFor="let item of getItems()">
+                    <!-- Display item id and name -->
+                    {{ item.id }} - {{ item.name }}
+                    
+                    <!-- Button to update item -->
+                    <button (click)="updateItem(item.id, 'Updated ' + item.name)">Update</button>
+                    
+                    <!-- Button to delete item -->
+                    <button (click)="deleteItem(item.id)">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Angular Array of Objects CRUD with Reactive Forms using FormBuilder",
+        "description": "This example demonstrates how to perform CRUD (Create, Read, Update, Delete) operations on an array of objects with reactive form validation using FormBuilder in Angular.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "array-object-crud-reactive-forms-formbuilder.component.ts",
+            "title": "Array of Objects CRUD - Component",
+            "description": "This example shows how to implement CRUD operations on an array of objects with multiple fields using reactive forms with FormBuilder in Angular.",
+            "code": `
+              // array-object-crud-reactive-forms-formbuilder.component.ts
+              import { Component } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-crud-reactive-forms-fb',
+                templateUrl: './crud-reactive-forms-formbuilder.component.html',
+                styleUrls: ['./crud-reactive-forms-formbuilder.component.css']
+              })
+              export class CrudReactiveFormsFormBuilderComponent {
+                itemForm: FormGroup; // Define the FormGroup for the form
+      
+                // Array of objects to store items
+                items = [
+                  { id: 1, name: 'John Doe', age: 25, email: 'john@example.com' },
+                  { id: 2, name: 'Jane Smith', age: 30, email: 'jane@example.com' }
+                ];
+      
+                constructor(private formBuilder: FormBuilder) {
+                  this.initForm(); // Initialize the form on component creation
+                }
+      
+                // Initialize the reactive form using FormBuilder
+                initForm() {
+                  this.itemForm = this.formBuilder.group({
+                    name: ['', Validators.required],
+                    age: ['', [Validators.required, Validators.min(1)]],
+                    email: ['', [Validators.required, Validators.email]]
+                  });
+                }
+      
+                // CREATE: Add a new object to the array
+                addItem() {
+                  if (this.itemForm.valid) {
+                    const newItem = {
+                      id: this.items.length + 1,
+                      name: this.itemForm.value.name,
+                      age: this.itemForm.value.age,
+                      email: this.itemForm.value.email
+                    };
+                    this.items.push(newItem);
+                    this.itemForm.reset(); // Reset the form after adding
+                  }
+                }
+      
+                // READ: Retrieve all objects
+                getItems() {
+                  return this.items;
+                }
+      
+                // UPDATE: Update an existing object in the array
+                updateItem(index: number) {
+                  const updatedItem = this.items[index];
+                  updatedItem.name = 'Updated ' + updatedItem.name;
+                }
+      
+                // DELETE: Remove an object from the array
+                deleteItem(index: number) {
+                  this.items.splice(index, 1); // Remove the item by index
+                }
+              }
+            `
+          },
+          {
+            "filename": "array-object-crud-reactive-forms-formbuilder.component.html",
+            "title": "Array of Objects CRUD - Template",
+            "description": "The following code provides the HTML template for CRUD operations with reactive form validation using FormBuilder.",
+            "code": `
+              <!-- array-object-crud-reactive-forms-formbuilder.component.html -->
+              <div>
+                <form [formGroup]="itemForm">
+                  <!-- Input for name -->
+                  <input formControlName="name" type="text" placeholder="Name" />
+                  <div *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">
+                    Name is required.
+                  </div>
+      
+                  <!-- Input for age -->
+                  <input formControlName="age" type="number" placeholder="Age" />
+                  <div *ngIf="itemForm.get('age').invalid && itemForm.get('age').touched">
+                    Age is required and must be greater than 0.
+                  </div>
+      
+                  <!-- Input for email -->
+                  <input formControlName="email" type="email" placeholder="Email" />
+                  <div *ngIf="itemForm.get('email').invalid && itemForm.get('email').touched">
+                    Enter a valid email.
+                  </div>
+      
+                  <!-- Button to add a new object -->
+                  <button type="button" (click)="addItem()" [disabled]="itemForm.invalid">Add Item</button>
+                </form>
+      
+                <!-- Display the list of items (array of objects) -->
+                <ul>
+                  <li *ngFor="let item of getItems(); let i = index">
+                    <!-- Display item details -->
+                    {{ item.id }} - Name: {{ item.name }}, Age: {{ item.age }}, Email: {{ item.email }}
+      
+                    <!-- Button to update item -->
+                    <button (click)="updateItem(i)">Update</button>
+      
+                    <!-- Button to delete item -->
+                    <button (click)="deleteItem(i)">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Angular Local Storage and Session Storage CRUD with Reactive Forms",
+        "description": "This example demonstrates how to perform CRUD (Create, Read, Update, Delete) operations on local storage and session storage using reactive forms in Angular.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "local-storage-crud-reactive-forms.component.ts",
+            "title": "Local Storage CRUD - Component",
+            "description": "This example shows how to implement CRUD operations on an array of objects stored in local storage using reactive forms in Angular.",
+            "code": `
+              import { Component, OnInit } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-local-storage-crud',
+                templateUrl: './local-storage-crud.component.html',
+                styleUrls: ['./local-storage-crud.component.css']
+              })
+              export class LocalStorageCrudComponent implements OnInit {
+                itemForm: FormGroup; // Define the FormGroup for the form
+                items: any[] = []; // Array to store items
+      
+                constructor(private formBuilder: FormBuilder) {
+                  this.initForm(); // Initialize the form on component creation
+                }
+      
+                ngOnInit() {
+                  this.loadItems(); // Load items from local storage on init
+                }
+      
+                // Initialize the reactive form using FormBuilder
+                initForm() {
+                  this.itemForm = this.formBuilder.group({
+                    name: ['', Validators.required],
+                    age: ['', [Validators.required, Validators.min(1)]],
+                    email: ['', [Validators.required, Validators.email]]
+                  });
+                }
+      
+                // LOAD: Retrieve all objects from local storage
+                loadItems() {
+                  const storedItems = localStorage.getItem('items');
+                  this.items = storedItems ? JSON.parse(storedItems) : [];
+                }
+      
+                // CREATE: Add a new object to local storage
+                addItem() {
+                  if (this.itemForm.valid) {
+                    const newItem = {
+                      id: this.items.length + 1,
+                      name: this.itemForm.value.name,
+                      age: this.itemForm.value.age,
+                      email: this.itemForm.value.email
+                    };
+                    this.items.push(newItem);
+                    localStorage.setItem('items', JSON.stringify(this.items)); // Save updated items to local storage
+                    this.itemForm.reset(); // Reset the form after adding
+                  }
+                }
+      
+                // UPDATE: Update an existing object in local storage
+                updateItem(index: number) {
+                  const updatedItem = this.items[index];
+                  updatedItem.name = 'Updated ' + updatedItem.name;
+                  localStorage.setItem('items', JSON.stringify(this.items)); // Update local storage
+                }
+      
+                // DELETE: Remove an object from local storage
+                deleteItem(index: number) {
+                  this.items.splice(index, 1); // Remove the item by index
+                  localStorage.setItem('items', JSON.stringify(this.items)); // Update local storage
+                }
+              }
+            `
+          },
+          {
+            "filename": "local-storage-crud-reactive-forms.component.html",
+            "title": "Local Storage CRUD - Template",
+            "description": "The following code provides the HTML template for CRUD operations with local storage using reactive forms.",
+            "code": `
+              <div>
+                <form [formGroup]="itemForm">
+                  <input formControlName="name" type="text" placeholder="Name" />
+                  <div *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">
+                    Name is required.
+                  </div>
+      
+                  <input formControlName="age" type="number" placeholder="Age" />
+                  <div *ngIf="itemForm.get('age').invalid && itemForm.get('age').touched">
+                    Age is required and must be greater than 0.
+                  </div>
+      
+                  <input formControlName="email" type="email" placeholder="Email" />
+                  <div *ngIf="itemForm.get('email').invalid && itemForm.get('email').touched">
+                    Enter a valid email.
+                  </div>
+      
+                  <button type="button" (click)="addItem()" [disabled]="itemForm.invalid">Add Item</button>
+                </form>
+      
+                <ul>
+                  <li *ngFor="let item of items; let i = index">
+                    {{ item.id }} - Name: {{ item.name }}, Age: {{ item.age }}, Email: {{ item.email }}
+                    <button (click)="updateItem(i)">Update</button>
+                    <button (click)="deleteItem(i)">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            "filename": "session-storage-crud-reactive-forms.component.ts",
+            "title": "Session Storage CRUD - Component",
+            "description": "This example shows how to implement CRUD operations on an array of objects stored in session storage using reactive forms in Angular.",
+            "code": `
+              import { Component, OnInit } from '@angular/core';
+              import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      
+              @Component({
+                selector: 'app-session-storage-crud',
+                templateUrl: './session-storage-crud.component.html',
+                styleUrls: ['./session-storage-crud.component.css']
+              })
+              export class SessionStorageCrudComponent implements OnInit {
+                itemForm: FormGroup; // Define the FormGroup for the form
+                items: any[] = []; // Array to store items
+      
+                constructor(private formBuilder: FormBuilder) {
+                  this.initForm(); // Initialize the form on component creation
+                }
+      
+                ngOnInit() {
+                  this.loadItems(); // Load items from session storage on init
+                }
+      
+                // Initialize the reactive form using FormBuilder
+                initForm() {
+                  this.itemForm = this.formBuilder.group({
+                    name: ['', Validators.required],
+                    age: ['', [Validators.required, Validators.min(1)]],
+                    email: ['', [Validators.required, Validators.email]]
+                  });
+                }
+      
+                // LOAD: Retrieve all objects from session storage
+                loadItems() {
+                  const storedItems = sessionStorage.getItem('items');
+                  this.items = storedItems ? JSON.parse(storedItems) : [];
+                }
+      
+                // CREATE: Add a new object to session storage
+                addItem() {
+                  if (this.itemForm.valid) {
+                    const newItem = {
+                      id: this.items.length + 1,
+                      name: this.itemForm.value.name,
+                      age: this.itemForm.value.age,
+                      email: this.itemForm.value.email
+                    };
+                    this.items.push(newItem);
+                    sessionStorage.setItem('items', JSON.stringify(this.items)); // Save updated items to session storage
+                    this.itemForm.reset(); // Reset the form after adding
+                  }
+                }
+      
+                // UPDATE: Update an existing object in session storage
+                updateItem(index: number) {
+                  const updatedItem = this.items[index];
+                  updatedItem.name = 'Updated ' + updatedItem.name;
+                  sessionStorage.setItem('items', JSON.stringify(this.items)); // Update session storage
+                }
+      
+                // DELETE: Remove an object from session storage
+                deleteItem(index: number) {
+                  this.items.splice(index, 1); // Remove the item by index
+                  sessionStorage.setItem('items', JSON.stringify(this.items)); // Update session storage
+                }
+              }
+            `
+          },
+          {
+            "filename": "session-storage-crud-reactive-forms.component.html",
+            "title": "Session Storage CRUD - Template",
+            "description": "The following code provides the HTML template for CRUD operations with session storage using reactive forms.",
+            "code": `
+              <div>
+                <form [formGroup]="itemForm">
+                  <input formControlName="name" type="text" placeholder="Name" />
+                  <div *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">
+                    Name is required.
+                  </div>
+      
+                  <input formControlName="age" type="number" placeholder="Age" />
+                  <div *ngIf="itemForm.get('age').invalid && itemForm.get('age').touched">
+                    Age is required and must be greater than 0.
+                  </div>
+      
+                  <input formControlName="email" type="email" placeholder="Email" />
+                  <div *ngIf="itemForm.get('email').invalid && itemForm.get('email').touched">
+                    Enter a valid email.
+                  </div>
+      
+                  <button type="button" (click)="addItem()" [disabled]="itemForm.invalid">Add Item</button>
+                </form>
+      
+                <ul>
+                  <li *ngFor="let item of items; let i = index">
+                    {{ item.id }} - Name: {{ item.name }}, Age: {{ item.age }}, Email: {{ item.email }}
+                    <button (click)="updateItem(i)">Update</button>
+                    <button (click)="deleteItem(i)">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            `
+          },
+          
+        ]
+      },
+      {
+        "title": "Angular Local Storage CRUD Operations with Reactive Forms",
+        "description": "This example demonstrates how to perform CRUD (Create, Read, Update, Delete) operations on an array of objects with reactive form validation using local storage in Angular.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "local-storage-add.component.ts",
+            "title": "Local Storage Add Component",
+            "description": "This component handles adding and updating items in local storage.",
+            "code": `
+      // local-storage-add.component.ts
+      import { Component, OnInit } from '@angular/core';
+      import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+      import { Router, ActivatedRoute } from '@angular/router';
+      
+      @Component({
+        selector: 'app-local-storage-add',
+        templateUrl: './local-storage-add.component.html',
+        styleUrls: ['./local-storage-add.component.css']
+      })
+      export class LocalStorageAddComponent implements OnInit {
+        itemForm: FormGroup; // FormGroup for the item
+        editMode = false; // To track if in edit mode
+        itemId: number; // To hold the item id when editing
+      
+        constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) {
+          this.initForm(); // Initialize the form
+        }
+      
+        ngOnInit() {
+          // Check if in edit mode
+          this.route.params.subscribe(params => {
+            this.itemId = +params['id']; // Get the item ID from the route
+            if (this.itemId) {
+              this.editMode = true;
+              const item = this.getItemFromLocalStorage(this.itemId); // Get item from local storage
+              if (item) {
+                this.itemForm.patchValue(item); // Populate the form with item data
+              }
+            }
+          });
+        }
+      
+        // Initialize the reactive form using FormBuilder
+        initForm() {
+          this.itemForm = this.formBuilder.group({
+            name: ['', Validators.required],
+            age: ['', [Validators.required, Validators.min(1)]],
+            email: ['', [Validators.required, Validators.email]]
+          });
+        }
+      
+        // Add or update item
+        saveItem() {
+          if (this.itemForm.valid) {
+            const item = {
+              id: this.editMode ? this.itemId : new Date().getTime(),
+              ...this.itemForm.value
+            };
+            this.saveToLocalStorage(item); // Save item to local storage
+            this.router.navigate(['/list']); // Navigate to the list
+          }
+        }
+      
+        // Save item to local storage
+        saveToLocalStorage(item) {
+          let items = JSON.parse(localStorage.getItem('items')) || [];
+          if (this.editMode) {
+            items = items.map(i => (i.id === item.id ? item : i)); // Update item
+          } else {
+            items.push(item); // Add new item
+          }
+          localStorage.setItem('items', JSON.stringify(items)); // Update local storage
+        }
+      
+        // Get item from local storage by id
+        getItemFromLocalStorage(id: number) {
+          const items = JSON.parse(localStorage.getItem('items')) || [];
+          return items.find(item => item.id === id);
+        }
+      }
+            `
+          },
+          {
+            "filename": "local-storage-add.component.html",
+            "title": "Local Storage Add Component Template",
+            "description": "The following code provides the HTML template for adding and updating items in local storage.",
+            "code": `
+      <!-- local-storage-add.component.html -->
+      <div>
+        <form [formGroup]="itemForm" (ngSubmit)="saveItem()">
+          <input formControlName="name" type="text" placeholder="Name" />
+          <div *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">
+            Name is required.
+          </div>
+      
+          <input formControlName="age" type="number" placeholder="Age" />
+          <div *ngIf="itemForm.get('age').invalid && itemForm.get('age').touched">
+            Age is required and must be greater than 0.
+          </div>
+      
+          <input formControlName="email" type="email" placeholder="Email" />
+          <div *ngIf="itemForm.get('email').invalid && itemForm.get('email').touched">
+            Enter a valid email.
+          </div>
+      
+          <button type="submit" [disabled]="itemForm.invalid">Save Item</button>
+        </form>
+      </div>
+            `
+          },
+          {
+            "filename": "local-storage-list.component.ts",
+            "title": "Local Storage List Component",
+            "description": "This component displays the list of items stored in local storage and allows editing and deleting items.",
+            "code": `
+      // local-storage-list.component.ts
+      import { Component, OnInit } from '@angular/core';
+      import { Router } from '@angular/router';
+      
+      @Component({
+        selector: 'app-local-storage-list',
+        templateUrl: './local-storage-list.component.html',
+        styleUrls: ['./local-storage-list.component.css']
+      })
+      export class LocalStorageListComponent implements OnInit {
+        items: any[]; // Array to hold items
+      
+        constructor(private router: Router) {}
+      
+        ngOnInit() {
+          this.getItemsFromLocalStorage(); // Get items from local storage on init
+        }
+      
+        // Get items from local storage
+        getItemsFromLocalStorage() {
+          this.items = JSON.parse(localStorage.getItem('items')) || [];
+        }
+      
+        // Navigate to add item component for editing
+        editItem(id: number) {
+          this.router.navigate(['/add', { id }]); // Navigate to add component with item id
+        }
+      
+        // Delete item from local storage
+        deleteItem(id: number) {
+          let items = JSON.parse(localStorage.getItem('items')) || [];
+          items = items.filter(item => item.id !== id); // Remove item by id
+          localStorage.setItem('items', JSON.stringify(items)); // Update local storage
+          this.getItemsFromLocalStorage(); // Refresh the item list
+        }
+      }
+            `
+          },
+          {
+            "filename": "local-storage-list.component.html",
+            "title": "Local Storage List Component Template",
+            "description": "The following code provides the HTML template for displaying the list of items in local storage.",
+            "code": `
+      <!-- local-storage-list.component.html -->
+      <div>
+        <h2>Items List</h2>
+        <button routerLink="/add">Add New Item</button>
+        <ul>
+          <li *ngFor="let item of items">
+            {{ item.id }} - Name: {{ item.name }}, Age: {{ item.age }}, Email: {{ item.email }}
+            <button (click)="editItem(item.id)">Edit</button>
+            <button (click)="deleteItem(item.id)">Delete</button>
+          </li>
+        </ul>
+      </div>
+            `
+          },
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module",
+            "description": "The routing module for navigating between add and list components.",
+            "code": `
+      // app-routing.module.ts
+      import { NgModule } from '@angular/core';
+      import { RouterModule, Routes } from '@angular/router';
+      import { LocalStorageAddComponent } from './local-storage-add/local-storage-add.component';
+      import { LocalStorageListComponent } from './local-storage-list/local-storage-list.component';
+      
+      const routes: Routes = [
+        { path: 'add', component: LocalStorageAddComponent },
+        { path: 'list', component: LocalStorageListComponent },
+        { path: '', redirectTo: '/list', pathMatch: 'full' } // Redirect to list on load
+      ];
+      
+      @NgModule({
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule]
+      })
+      export class AppRoutingModule { }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component Template",
+            "description": "The main application template with navigation links.",
+            "code": `
+      <!-- app.component.html -->
+      <nav>
+        <a routerLink="/add">Add Item</a>
+        <a routerLink="/list">View Items</a>
+      </nav>
+      <router-outlet></router-outlet> <!-- This will render the routed components -->
+            `
+          }
+        ]
+      },
+      {
+        "title": "Angular CRUD with JSON Placeholder API",
+        "description": "This example demonstrates how to perform CRUD (Create, Read, Update, Delete) operations using a JSON Placeholder API in Angular.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "item.service.ts",
+            "title": "Item Service",
+            "description": "This service handles API calls for CRUD operations using the JSON Placeholder API.",
+            "code": `
+      // item.service.ts
+      import { Injectable } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+      import { Observable } from 'rxjs';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class ItemService {
+        private apiUrl = 'https://jsonplaceholder.typicode.com/users'; // JSON Placeholder API URL
+      
+        constructor(private http: HttpClient) {}
+      
+        // CREATE: Add a new item
+        addItem(item: any): Observable<any> {
+          return this.http.post(this.apiUrl, item);
+        }
+      
+        // READ: Get all items
+        getItems(): Observable<any[]> {
+          return this.http.get<any[]>(this.apiUrl);
+        }
+      
+        // UPDATE: Update an existing item
+        updateItem(item: any): Observable<any> {
+          return this.http.put(\`\${this.apiUrl}/\${item.id}\`, item);
+        }
+      
+        // DELETE: Remove an item
+        deleteItem(id: number): Observable<any> {
+          return this.http.delete(\`\${this.apiUrl}/\${id}\`);
+        }
+      }
+            `
+          },
+          {
+            "filename": "crud.component.ts",
+            "title": "CRUD Component",
+            "description": "This component provides the UI for CRUD operations and uses reactive forms for validation.",
+            "code": `
+      // crud.component.ts
+      import { Component, OnInit } from '@angular/core';
+      import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+      import { ItemService } from './item.service';
+      
+      @Component({
+        selector: 'app-crud',
+        templateUrl: './crud.component.html',
+        styleUrls: ['./crud.component.css']
+      })
+      export class CrudComponent implements OnInit {
+        itemForm: FormGroup; // FormGroup for the form
+        items: any[] = []; // Array to hold items
+        editMode = false; // Flag for edit mode
+        currentItemId: number; // ID of the item currently being edited
+      
+        constructor(private formBuilder: FormBuilder, private itemService: ItemService) {
+          this.initForm(); // Initialize the form
+        }
+      
+        ngOnInit() {
+          this.loadItems(); // Load items on component initialization
+        }
+      
+        // Initialize the reactive form using FormBuilder
+        initForm() {
+          this.itemForm = this.formBuilder.group({
+            name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            age: ['', [Validators.required, Validators.min(1)]]
+          });
+        }
+      
+        // Load items from the service
+        loadItems() {
+          this.itemService.getItems().subscribe(data => {
+            this.items = data; // Populate items with API data
+          });
+        }
+      
+        // Add a new item
+        addItem() {
+          if (this.itemForm.valid) {
+            this.itemService.addItem(this.itemForm.value).subscribe(newItem => {
+              this.items.push(newItem); // Add new item to the local array
+              this.itemForm.reset(); // Reset the form
+            });
+          }
+        }
+      
+        // Prepare to edit an item
+        editItem(item: any) {
+          this.editMode = true; // Set edit mode
+          this.currentItemId = item.id; // Set the ID of the item being edited
+          this.itemForm.patchValue(item); // Populate form with item data
+        }
+      
+        // Update an existing item
+        updateItem() {
+          if (this.itemForm.valid) {
+            this.itemService.updateItem({ ...this.itemForm.value, id: this.currentItemId }).subscribe(updatedItem => {
+              const index = this.items.findIndex(item => item.id === this.currentItemId);
+              this.items[index] = updatedItem; // Update local array
+              this.editMode = false; // Exit edit mode
+              this.itemForm.reset(); // Reset the form
+            });
+          }
+        }
+      
+        // Delete an item
+        deleteItem(id: number) {
+          this.itemService.deleteItem(id).subscribe(() => {
+            this.items = this.items.filter(item => item.id !== id); // Remove item from local array
+          });
+        }
+      }
+            `
+          },
+          {
+            "filename": "crud.component.html",
+            "title": "CRUD Component Template",
+            "description": "The HTML template for CRUD operations with reactive form validation.",
+            "code": `
+      <!-- crud.component.html -->
+      <div>
+        <form [formGroup]="itemForm" (ngSubmit)="editMode ? updateItem() : addItem()">
+          <input formControlName="name" type="text" placeholder="Name" />
+          <div *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">Name is required.</div>
+      
+          <input formControlName="email" type="email" placeholder="Email" />
+          <div *ngIf="itemForm.get('email').invalid && itemForm.get('email').touched">Enter a valid email.</div>
+      
+          <input formControlName="age" type="number" placeholder="Age" />
+          <div *ngIf="itemForm.get('age').invalid && itemForm.get('age').touched">Age is required and must be greater than 0.</div>
+      
+          <button type="submit" [disabled]="itemForm.invalid">{{ editMode ? 'Update' : 'Add' }}</button>
+        </form>
+      
+        <ul>
+          <li *ngFor="let item of items">
+            {{ item.name }} - {{ item.email }} - {{ item.age }}
+            <button (click)="editItem(item)">Edit</button>
+            <button (click)="deleteItem(item.id)">Delete</button>
+          </li>
+        </ul>
+      </div>
+            `
+          },
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module",
+            "description": "The routing module for navigating to the CRUD component.",
+            "code": `
+      // app-routing.module.ts
+      import { NgModule } from '@angular/core';
+      import { RouterModule, Routes } from '@angular/router';
+      import { CrudComponent } from './crud/crud.component';
+      
+      const routes: Routes = [
+        { path: 'crud', component: CrudComponent },
+        { path: '', redirectTo: '/crud', pathMatch: 'full' } // Redirect to CRUD component on load
+      ];
+      
+      @NgModule({
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule]
+      })
+      export class AppRoutingModule { }
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module",
+            "description": "Main module of the Angular application with necessary imports.",
+            "code": `
+      // app.module.ts
+      import { NgModule } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { ReactiveFormsModule } from '@angular/forms';
+      import { HttpClientModule } from '@angular/common/http';
+      import { AppRoutingModule } from './app-routing.module';
+      import { AppComponent } from './app.component';
+      import { CrudComponent } from './crud/crud.component';
+      import { ItemService } from './crud/item.service';
+      
+      @NgModule({
+        declarations: [
+          AppComponent,
+          CrudComponent // Declare CRUD component
+        ],
+        imports: [
+          BrowserModule,
+          ReactiveFormsModule,
+          HttpClientModule,
+          AppRoutingModule // Import routing module
+        ],
+        providers: [ItemService], // Provide the ItemService
+        bootstrap: [AppComponent]
+      })
+      export class AppModule { }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component Template",
+            "description": "Main application template with navigation links.",
+            "code": `
+      <!-- app.component.html -->
+      <nav>
+        <a routerLink="/crud">CRUD Operations</a>
+      </nav>
+      <router-outlet></router-outlet> <!-- This will render the routed components -->
+            `
+          }
+        ]
+      },
+      {
+        "title": "Angular AuthGuard Types and Examples",
+        "description": "This example demonstrates various types of AuthGuard implementations in Angular to protect routes from unauthorized access, including methods for activating and deactivating routes.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "auth.guard.ts",
+            "title": "Basic AuthGuard",
+            "description": "This AuthGuard checks if a user is authenticated before allowing access to a route.",
+            "code": `
+      // auth.guard.ts
+      import { Injectable } from '@angular/core';
+      import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+      import { AuthService } from './auth.service'; // Assume AuthService is implemented
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class AuthGuard implements CanActivate {
+        constructor(private authService: AuthService, private router: Router) {}
+      
+        canActivate(
+          next: ActivatedRouteSnapshot,
+          state: RouterStateSnapshot): boolean {
+          const isAuthenticated = this.authService.isAuthenticated(); // Check authentication status
+          if (!isAuthenticated) {
+            this.router.navigate(['/login']); // Redirect to login if not authenticated
+            return false;
+          }
+          return true; // Allow access if authenticated
+        }
+      }
+      `
+          },
+          {
+            "filename": "auth-child.guard.ts",
+            "title": "CanActivateChild AuthGuard",
+            "description": "This AuthGuard checks if a user is authenticated before allowing access to child routes.",
+            "code": `
+      // auth-child.guard.ts
+      import { Injectable } from '@angular/core';
+      import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+      import { AuthService } from './auth.service';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class AuthChildGuard implements CanActivateChild {
+        constructor(private authService: AuthService, private router: Router) {}
+      
+        canActivateChild(
+          childRoute: ActivatedRouteSnapshot,
+          state: RouterStateSnapshot): boolean {
+          const isAuthenticated = this.authService.isAuthenticated(); // Check authentication status
+          if (!isAuthenticated) {
+            this.router.navigate(['/login']); // Redirect to login if not authenticated
+            return false;
+          }
+          return true; // Allow access if authenticated
+        }
+      }
+      `
+          },
+          {
+            "filename": "can-deactivate.guard.ts",
+            "title": "CanDeactivate AuthGuard",
+            "description": "This AuthGuard checks if a user can leave a route, typically used for forms to prevent unsaved changes.",
+            "code": `
+      // can-deactivate.guard.ts
+      import { Injectable } from '@angular/core';
+      import { CanDeactivate } from '@angular/router';
+      
+      // Define an interface for components that can be deactivated
+      export interface CanComponentDeactivate {
+        canDeactivate: () => boolean; // Method to check if deactivation is allowed
+      }
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+        canDeactivate(
+          component: CanComponentDeactivate
+        ): boolean {
+          return component.canDeactivate ? component.canDeactivate() : true; // Call canDeactivate method if it exists
+        }
+      }
+      `
+          },
+          {
+            "filename": "can-load.guard.ts",
+            "title": "CanLoad AuthGuard",
+            "description": "This AuthGuard prevents a user from loading a module lazily unless they meet certain conditions.",
+            "code": `
+      // can-load.guard.ts
+      import { Injectable } from '@angular/core';
+      import { CanLoad, Route, UrlSegment, Router } from '@angular/router';
+      import { AuthService } from './auth.service';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class CanLoadGuard implements CanLoad {
+        constructor(private authService: AuthService, private router: Router) {}
+      
+        canLoad(
+          route: Route,
+          segments: UrlSegment[]): boolean {
+          const isAuthenticated = this.authService.isAuthenticated(); // Check authentication status
+          if (!isAuthenticated) {
+            this.router.navigate(['/login']); // Redirect to login if not authenticated
+            return false;
+          }
+          return true; // Allow loading if authenticated
+        }
+      }
+      `
+          },
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module with Guards",
+            "description": "This module defines routes and applies AuthGuard, AuthChildGuard, CanDeactivateGuard, and CanLoadGuard to protected routes.",
+            "code": `
+      // app-routing.module.ts
+      import { NgModule } from '@angular/core';
+      import { RouterModule, Routes } from '@angular/router';
+      import { HomeComponent } from './home/home.component';
+      import { LoginComponent } from './login/login.component';
+      import { ProtectedComponent } from './protected/protected.component';
+      import { UnauthorizedComponent } from './unauthorized/unauthorized.component'; // Assume this component exists
+      import { AuthGuard } from './auth.guard';
+      import { AuthChildGuard } from './auth-child.guard';
+      import { CanDeactivateGuard } from './can-deactivate.guard';
+      import { CanLoadGuard } from './can-load.guard';
+      
+      const routes: Routes = [
+        { path: '', component: HomeComponent },
+        { path: 'login', component: LoginComponent },
+        { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] }, // Protecting the route with AuthGuard
+        { path: 'child-protected', component: ChildComponent, canActivateChild: [AuthChildGuard] }, // Protecting child route with AuthChildGuard
+        { path: 'form', component: FormComponent, canDeactivate: [CanDeactivateGuard] }, // Protecting form route with CanDeactivateGuard
+        { path: 'lazy', loadChildren: () => import('./lazy/lazy.module').then(m => m.LazyModule), canLoad: [CanLoadGuard] } // Protecting lazy-loaded module
+      ];
+      
+      @NgModule({
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule]
+      })
+      export class AppRoutingModule {}
+      `
+          },
+          {
+            "filename": "auth.service.ts",
+            "title": "AuthService",
+            "description": "This service manages user authentication status and roles.",
+            "code": `
+      // auth.service.ts
+      import { Injectable } from '@angular/core';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class AuthService {
+        private authenticated: boolean = false; // Default authentication status
+        private role: string = ''; // Default role
+      
+        // Simulate login method
+        login(role: string) {
+          this.authenticated = true; // Set authenticated status to true
+          this.role = role; // Set user role
+        }
+      
+        // Simulate logout method
+        logout() {
+          this.authenticated = false; // Set authenticated status to false
+          this.role = ''; // Clear user role
+        }
+      
+        // Check if user is authenticated
+        isAuthenticated(): boolean {
+          return this.authenticated;
+        }
+      
+        // Get user role
+        getUserRole(): string {
+          return this.role;
+        }
+      }
+      `
+          },
+          {
+            "filename": "login.component.ts",
+            "title": "Login Component",
+            "description": "This component allows users to log in and access protected routes based on roles.",
+            "code": `
+      // login.component.ts
+      import { Component } from '@angular/core';
+      import { AuthService } from '../auth.service';
+      import { Router } from '@angular/router';
+      
+      @Component({
+        selector: 'app-login',
+        templateUrl: './login.component.html',
+        styleUrls: ['./login.component.css'
+      })
+      export class LoginComponent {
+        constructor(private authService: AuthService, private router: Router) {}
+      
+        // Method to log in as admin
+        loginAsAdmin() {
+          this.authService.login('admin'); // Set role as admin
+          this.router.navigate(['/admin']); // Redirect to admin route
+        }
+      
+        // Method to log in as user
+        loginAsUser() {
+          this.authService.login('user'); // Set role as user
+          this.router.navigate(['/protected']); // Redirect to protected route
+        }
+      }
+      `
+          },
+          {
+            "filename": "login.component.html",
+            "title": "Login Component Template",
+            "description": "The HTML template for the login component, offering options for admin and user login.",
+            "code": `
+      <!-- login.component.html -->
+      <div>
+        <h2>Login</h2>
+        <button (click)="loginAsAdmin()">Login as Admin</button>
+        <button (click)="loginAsUser()">Login as User</button>
+      </div>
+      `
+          },
+          {
+            "filename": "unauthorized.component.ts",
+            "title": "Unauthorized Component",
+            "description": "This component displays an unauthorized access message.",
+            "code": `
+      // unauthorized.component.ts
+      import { Component } from '@angular/core';
+      
+      @Component({
+        selector: 'app-unauthorized',
+        templateUrl: './unauthorized.component.html',
+        styleUrls: ['./unauthorized.component.css'
+      })
+      export class UnauthorizedComponent {}
+      `
+          },
+          {
+            "filename": "unauthorized.component.html",
+            "title": "Unauthorized Component Template",
+            "description": "The HTML template for the unauthorized component.",
+            "code": `
+      <!-- unauthorized.component.html -->
+      <div>
+        <h2>Unauthorized Access</h2>
+        <p>You do not have permission to view this page.</p>
+      </div>
+      `
+          },
+          {
+            "filename": "form.component.ts",
+            "title": "Form Component",
+            "description": "This component represents a form that can prompt the user to confirm before leaving.",
+            "code": `
+      // form.component.ts
+      import { Component } from '@angular/core';
+      
+      @Component({
+        selector: 'app-form',
+        templateUrl: './form.component.html',
+        styleUrls: ['./form.component.css'
+      })
+      export class FormComponent implements CanComponentDeactivate {
+        private formDirty: boolean = true; // Track if the form has unsaved changes
+      
+        canDeactivate(): boolean {
+          return confirm('You have unsaved changes. Do you really want to leave?'); // Prompt for confirmation
+        }
+      }
+      `
+          },
+          {
+            "filename": "form.component.html",
+            "title": "Form Component Template",
+            "description": "The HTML template for the form component.",
+            "code": `
+      <!-- form.component.html -->
+      <div>
+        <h2>Form</h2>
+        <form>
+          <!-- Form elements go here -->
+          <input type="text" placeholder="Enter something...">
+        </form>
+      </div>
+      `
+          },
+          {
+            "filename": "child.component.ts",
+            "title": "Child Component",
+            "description": "This component is a child route example, protected by AuthChildGuard.",
+            "code": `
+      // child.component.ts
+      import { Component } from '@angular/core';
+      
+      @Component({
+        selector: 'app-child',
+        templateUrl: './child.component.html',
+        styleUrls: ['./child.component.css'
+      })
+      export class ChildComponent {}
+      `
+          },
+          {
+            "filename": "child.component.html",
+            "title": "Child Component Template",
+            "description": "The HTML template for the child component.",
+            "code": `
+      <!-- child.component.html -->
+      <div>
+        <h2>Child Protected Route</h2>
+        <p>This route is protected by AuthChildGuard.</p>
+      </div>
+      `
+          }
+        ]
+      },
+      {
+        "title": "Simple Angular HTTP Interceptors with Examples",
+        "description": "This example demonstrates the basics of HTTP interceptors in Angular, showing how to modify requests and handle responses easily.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "auth.interceptor.ts",
+            "title": "Auth Interceptor",
+            "description": "Adds an Authorization header to HTTP requests.",
+            "code": `
+      // auth.interceptor.ts
+      import { Injectable } from '@angular/core';
+      import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+      import { Observable } from 'rxjs';
+      
+      @Injectable()
+      export class AuthInterceptor implements HttpInterceptor {
+        intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+          const token = 'your-auth-token'; // Replace with your token logic
+          if (token) {
+            request = request.clone({
+              setHeaders: { Authorization: \`Bearer \${token}\` }
+            });
+          }
+          return next.handle(request); // Send the modified request
+        }
+      }
+      `
+          },
+          {
+            "filename": "error.interceptor.ts",
+            "title": "Error Interceptor",
+            "description": "Handles HTTP errors and logs them.",
+            "code": `
+      // error.interceptor.ts
+      import { Injectable } from '@angular/core';
+      import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+      import { Observable } from 'rxjs';
+      import { catchError } from 'rxjs/operators';
+      
+      @Injectable()
+      export class ErrorInterceptor implements HttpInterceptor {
+        intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+          return next.handle(request).pipe(
+            catchError(error => {
+              console.error('HTTP error occurred:', error); // Log error
+              throw error; // Rethrow the error
+            })
+          );
+        }
+      }
+      `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module with Interceptors",
+            "description": "Registers the interceptors in the app module.",
+            "code": `
+      // app.module.ts
+      import { NgModule } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+      import { AppComponent } from './app.component';
+      import { AuthInterceptor } from './auth.interceptor';
+      import { ErrorInterceptor } from './error.interceptor';
+      
+      @NgModule({
+        declarations: [AppComponent],
+        imports: [BrowserModule, HttpClientModule],
+        providers: [
+          { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+          { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        ],
+        bootstrap: [AppComponent]
+      })
+      export class AppModule {}
+      `
+          },
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "Basic app component for demonstration.",
+            "code": `
+      // app.component.ts
+      import { Component } from '@angular/core';
+      
+      @Component({
+        selector: 'app-root',
+        template: '<h1>Angular Interceptors Example</h1>'
+      })
+      export class AppComponent {}
+      `
+          }
+        ]
+      },
+      {
+        "title": "Using ForkJoin in Angular with Services and JSONPlaceholder API",
+        "description": "This example demonstrates how to use ForkJoin in Angular with services to fetch data from multiple endpoints. It shows how to organize your code for better separation of concerns by using a service to handle HTTP requests.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "data.service.ts",
+            "title": "Data Service",
+            "description": "A service to handle HTTP requests for fetching users and posts from JSONPlaceholder.",
+            "code": `
+      // data.service.ts
+      import { Injectable } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+      import { forkJoin, of } from 'rxjs';
+      import { catchError, map } from 'rxjs/operators';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class DataService {
+        private usersUrl = 'https://jsonplaceholder.typicode.com/users';
+        private postsUrl = 'https://jsonplaceholder.typicode.com/posts';
+      
+        constructor(private http: HttpClient) {}
+      
+        // Method to fetch users and posts using ForkJoin
+        getUsersAndPosts() {
+          const usersRequest = this.http.get(this.usersUrl).pipe(
+            map(data => ({ isError: false, data })),
+            catchError(() => of({ isError: true, data: [] })) // Return standardized error response
+          );
+      
+          const postsRequest = this.http.get(this.postsUrl).pipe(
+            map(data => ({ isError: false, data })),
+            catchError(() => of({ isError: true, data: [] })) // Return standardized error response
+          );
+      
+          return forkJoin([usersRequest, postsRequest]);
+        }
+      }
+      `
+          },
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "The main component that uses the DataService to fetch data with ForkJoin.",
+            "code": `
+      // app.component.ts
+      import { Component, OnInit } from '@angular/core';
+      import { DataService } from './data.service';
+      
+      @Component({
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+        styleUrls: ['./app.component.css']
+      })
+      export class AppComponent implements OnInit {
+        users: any[] = [];
+        posts: any[] = [];
+        userError: boolean = false;
+        postError: boolean = false;
+      
+        constructor(private dataService: DataService) {}
+      
+        ngOnInit() {
+          this.fetchData();
+        }
+      
+        fetchData() {
+          this.dataService.getUsersAndPosts().subscribe(
+            ([usersResponse, postsResponse]) => {
+              if (usersResponse.isError) {
+                this.userError = true; // Handle user error
+                this.users = []; // Clear users
+              } else {
+                this.users = usersResponse.data; // Assign users data
+              }
+      
+              if (postsResponse.isError) {
+                this.postError = true; // Handle post error
+                this.posts = []; // Clear posts
+              } else {
+                this.posts = postsResponse.data; // Assign posts data
+              }
+            },
+            error => {
+              console.error('Error fetching data:', error);
+            }
+          );
+        }
+      }
+      `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component Template",
+            "description": "The HTML template for displaying the fetched users and posts.",
+            "code": `<!-- app.component.html -->
+      <div>
+        <h1>Users</h1>
+        <ul *ngIf="!userError; else userErrorTemplate">
+          <li *ngFor="let user of users">
+            {{ user.name }} ({{ user.email }})
+          </li>
+        </ul>
+        <ng-template #userErrorTemplate>
+          <p>Error fetching users!</p>
+        </ng-template>
+      
+        <h1>Posts</h1>
+        <ul *ngIf="!postError; else postErrorTemplate">
+          <li *ngFor="let post of posts">
+            <strong>{{ post.title }}</strong>: {{ post.body }}
+          </li>
+        </ul>
+        <ng-template #postErrorTemplate>
+          <p>Error fetching posts!</p>
+        </ng-template>
+      </div>
+      `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module",
+            "description": "The main module that imports necessary modules and declares the AppComponent and DataService.",
+            "code": `
+      // app.module.ts
+      import { NgModule } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { HttpClientModule } from '@angular/common/http';
+      import { AppComponent } from './app.component';
+      import { DataService } from './data.service';
+      
+      @NgModule({
+        declarations: [AppComponent],
+        imports: [BrowserModule, HttpClientModule],
+        providers: [DataService],
+        bootstrap: [AppComponent]
+      })
+      export class AppModule {}
+      `
+          },
+          {
+            "filename": "app.component.css",
+            "title": "App Component Styles",
+            "description": "Basic styles for the AppComponent.",
+            "code": `/* app.component.css */
+      h1 {
+        color: #4a4a4a;
+      }
+      
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      
+      li {
+        margin: 5px 0;
+      }
+      `
+          }
+        ]
+      }
+      ,
+      {
+        "title": "Using ForkJoin in Angular with JSONPlaceholder API",
+        "description": "This example demonstrates how to use ForkJoin to make multiple HTTP requests in Angular. It shows how to retrieve data from the JSONPlaceholder API by combining multiple requests and handling the results effectively.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "The main component that utilizes ForkJoin to fetch data from multiple endpoints.",
+            "code": `
+      // app.component.ts
+      import { Component, OnInit } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+      import { forkJoin, of } from 'rxjs';
+      import { catchError, map } from 'rxjs/operators';
+      
+      @Component({
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+        styleUrls: ['./app.component.css']
+      })
+      export class AppComponent implements OnInit {
+        users: any[] = [];
+        posts: any[] = [];
+        userError: boolean = false;
+        postError: boolean = false;
+      
+        constructor(private http: HttpClient) {}
+      
+        ngOnInit() {
+          this.fetchData();
+        }
+      
+        fetchData() {
+          const usersRequest = this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
+            map(data => ({ isError: false, data })),
+            catchError(() => of({ isError: true, data: [] })) // Return standardized error response
+          );
+      
+          const postsRequest = this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
+            map(data => ({ isError: false, data })),
+            catchError(() => of({ isError: true, data: [] })) // Return standardized error response
+          );
+      
+          forkJoin([usersRequest, postsRequest]).subscribe(
+            ([usersResponse, postsResponse]) => {
+              if (usersResponse.isError) {
+                this.userError = true; // Handle user error
+                this.users = []; // Clear users
+              } else {
+                this.users = usersResponse.data; // Assign users data
+              }
+      
+              if (postsResponse.isError) {
+                this.postError = true; // Handle post error
+                this.posts = []; // Clear posts
+              } else {
+                this.posts = postsResponse.data; // Assign posts data
+              }
+            },
+            error => {
+              console.error('Error fetching data:', error);
+            }
+          );
+        }
+      }
+      `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component Template",
+            "description": "The HTML template for displaying the fetched users and posts.",
+            "code": `<!-- app.component.html -->
+      <div>
+        <h1>Users</h1>
+        <ul *ngIf="!userError; else userErrorTemplate">
+          <li *ngFor="let user of users">
+            {{ user.name }} ({{ user.email }})
+          </li>
+        </ul>
+        <ng-template #userErrorTemplate>
+          <p>Error fetching users!</p>
+        </ng-template>
+      
+        <h1>Posts</h1>
+        <ul *ngIf="!postError; else postErrorTemplate">
+          <li *ngFor="let post of posts">
+            <strong>{{ post.title }}</strong>: {{ post.body }}
+          </li>
+        </ul>
+        <ng-template #postErrorTemplate>
+          <p>Error fetching posts!</p>
+        </ng-template>
+      </div>
+      `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module",
+            "description": "The main module that imports necessary modules and declares the AppComponent.",
+            "code": `
+      // app.module.ts
+      import { NgModule } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { HttpClientModule } from '@angular/common/http';
+      import { AppComponent } from './app.component';
+      
+      @NgModule({
+        declarations: [AppComponent],
+        imports: [BrowserModule, HttpClientModule],
+        providers: [],
+        bootstrap: [AppComponent]
+      })
+      export class AppModule {}
+      `
+          },
+          {
+            "filename": "app.component.css",
+            "title": "App Component Styles",
+            "description": "Basic styles for the AppComponent.",
+            "code": `/* app.component.css */
+      h1 {
+        color: #4a4a4a;
+      }
+      
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      
+      li {
+        margin: 5px 0;
+      }
+      `
+          }
+        ]
+      },
+      {
+        "title": "Using CombineLatest in Angular with Services and JSONPlaceholder API",
+        "description": "This example demonstrates how to use CombineLatest in Angular with services to fetch data from multiple endpoints. The CombineLatest operator allows you to subscribe to multiple observables and receive the latest values from each whenever any observable emits a new value. It is useful when you need to combine multiple data sources that may change independently.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "data.service.ts",
+            "title": "Data Service",
+            "description": "A service to handle HTTP requests for fetching users and posts from JSONPlaceholder.",
+            "code": `
+            // data.service.ts
+            import { Injectable } from '@angular/core';
+            import { HttpClient } from '@angular/common/http';
+            import { combineLatest } from 'rxjs';
+            
+            @Injectable({
+              providedIn: 'root'
+            })
+            export class DataService {
+              private usersUrl = 'https://jsonplaceholder.typicode.com/users';
+              private postsUrl = 'https://jsonplaceholder.typicode.com/posts';
+            
+              constructor(private http: HttpClient) {}
+            
+              // Method to fetch users and posts using CombineLatest
+              getUsersAndPosts() {
+                const usersRequest = this.http.get(this.usersUrl);
+                const postsRequest = this.http.get(this.postsUrl);
+            
+                return combineLatest([usersRequest, postsRequest]);
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "The main component that uses the DataService to fetch data with CombineLatest.",
+            "code": `
+            // app.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { DataService } from './data.service';
+            
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css']
+            })
+            export class AppComponent implements OnInit {
+              users: any[] = [];
+              posts: any[] = [];
+              isError: boolean = false;
+            
+              constructor(private dataService: DataService) {}
+            
+              ngOnInit() {
+                this.fetchData();
+              }
+            
+              fetchData() {
+                this.dataService.getUsersAndPosts().subscribe(
+                  ([users, posts]) => {
+                    this.users = users;
+                    this.posts = posts;
+                    this.isError = false; // Reset error status on success
+                  },
+                  error => {
+                    console.error('Error fetching data:', error);
+                    this.isError = true; // Set error status on failure
+                    this.users = []; // Reset users
+                    this.posts = []; // Reset posts
+                  }
+                );
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component Template",
+            "description": "The HTML template for displaying the fetched users and posts.",
+            "code": `<!-- app.component.html -->
+            <div>
+              <h1 *ngIf="!isError">Users</h1>
+              <ul *ngIf="!isError">
+                <li *ngFor="let user of users">
+                  {{ user.name }} ({{ user.email }})
+                </li>
+              </ul>
+              
+              <h1 *ngIf="!isError">Posts</h1>
+              <ul *ngIf="!isError">
+                <li *ngFor="let post of posts">
+                  <strong>{{ post.title }}</strong>: {{ post.body }}
+                </li>
+              </ul>
+      
+              <p *ngIf="isError" style="color: red;">Error fetching data. Please try again later.</p>
+            </div>
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module",
+            "description": "The main module that imports necessary modules and declares the AppComponent and DataService.",
+            "code": `
+            // app.module.ts
+            import { NgModule } from '@angular/core';
+            import { BrowserModule } from '@angular/platform-browser';
+            import { HttpClientModule } from '@angular/common/http';
+            import { AppComponent } from './app.component';
+            import { DataService } from './data.service';
+            
+            @NgModule({
+              declarations: [AppComponent],
+              imports: [BrowserModule, HttpClientModule],
+              providers: [DataService],
+              bootstrap: [AppComponent]
+            })
+            export class AppModule {}
+            `
+          },
+          {
+            "filename": "app.component.css",
+            "title": "App Component Styles",
+            "description": "Basic styles for the AppComponent.",
+            "code": `/* app.component.css */
+            h1 {
+              color: #4a4a4a;
+            }
+            
+            ul {
+              list-style-type: none;
+              padding: 0;
+            }
+            
+            li {
+              margin: 5px 0;
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Using CombineLatest in Angular without Services and JSONPlaceholder API",
+        "description": "This example demonstrates how to use CombineLatest in an Angular component to fetch data from multiple endpoints without a dedicated service. Each API call is tracked with individual flags for error handling, allowing precise identification of any failed requests.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "The main component that uses HttpClient to fetch data with CombineLatest.",
+            "code": `
+            // app.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { HttpClient } from '@angular/common/http';
+            import { combineLatest, of } from 'rxjs';
+            import { catchError } from 'rxjs/operators';
+      
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css']
+            })
+            export class AppComponent implements OnInit {
+              users: any[] = [];
+              posts: any[] = [];
+              errorInfo: {
+                isError: boolean;
+                usersError: boolean;
+                postsError: boolean;
+                data: { users?: string; posts?: string };
+              } = {
+                isError: false,
+                usersError: false,
+                postsError: false,
+                data: {}
+              };
+      
+              constructor(private http: HttpClient) {}
+      
+              ngOnInit() {
+                this.fetchData();
+              }
+      
+              fetchData() {
+                const usersRequest = this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
+                  catchError(error => {
+                    console.error('Error fetching users:', error);
+                    this.errorInfo.usersError = true; // Set error flag for users
+                    this.errorInfo.data.users = 'Failed to fetch users'; // Indicate the specific API that failed
+                    return of([]); // Return an empty array on error
+                  })
+                );
+      
+                const postsRequest = this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
+                  catchError(error => {
+                    console.error('Error fetching posts:', error);
+                    this.errorInfo.postsError = true; // Set error flag for posts
+                    this.errorInfo.data.posts = 'Failed to fetch posts'; // Indicate the specific API that failed
+                    return of([]); // Return an empty array on error
+                  })
+                );
+      
+                combineLatest([usersRequest, postsRequest]).subscribe(
+                  ([users, posts]) => {
+                    this.users = users;
+                    this.posts = posts;
+                    this.errorInfo.isError = this.errorInfo.usersError || this.errorInfo.postsError; // Set overall error status based on individual errors
+                  },
+                  error => {
+                    console.error('Error combining data:', error);
+                    this.errorInfo.isError = true; // Set error status for combining
+                  }
+                );
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component Template",
+            "description": "The HTML template for displaying the fetched users and posts.",
+            "code": `<!-- app.component.html -->
+            <div>
+              <h1 *ngIf="!errorInfo.isError">Users</h1>
+              <ul *ngIf="!errorInfo.isError">
+                <li *ngFor="let user of users">
+                  {{ user.name }} ({{ user.email }})
+                </li>
+              </ul>
+      
+              <h1 *ngIf="!errorInfo.isError">Posts</h1>
+              <ul *ngIf="!errorInfo.isError">
+                <li *ngFor="let post of posts">
+                  <strong>{{ post.title }}</strong>: {{ post.body }}
+                </li>
+              </ul>
+      
+              <div *ngIf="errorInfo.isError" style="color: red;">
+                <p *ngIf="errorInfo.data.users">{{ errorInfo.data.users }}</p>
+                <p *ngIf="errorInfo.data.posts">{{ errorInfo.data.posts }}</p>
+                <p>Error fetching data. Please try again later.</p>
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module",
+            "description": "The main module that imports necessary modules and declares the AppComponent.",
+            "code": `
+            // app.module.ts
+            import { NgModule } from '@angular/core';
+            import { BrowserModule } from '@angular/platform-browser';
+            import { HttpClientModule } from '@angular/common/http';
+            import { AppComponent } from './app.component';
+      
+            @NgModule({
+              declarations: [AppComponent],
+              imports: [BrowserModule, HttpClientModule],
+              bootstrap: [AppComponent]
+            })
+            export class AppModule {}
+            `
+          },
+          {
+            "filename": "app.component.css",
+            "title": "App Component Styles",
+            "description": "Basic styles for the AppComponent.",
+            "code": `/* app.component.css */
+            h1 {
+              color: #4a4a4a;
+            }
+      
+            ul {
+              list-style-type: none;
+              padding: 0;
+            }
+      
+            li {
+              margin: 5px 0;
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Three Methods of Injecting Services in Angular",
+        "description": "This example explores three methods for injecting services in Angular: Root Level Injection, Component Level Injection, and Module Level Injection. Each method serves different use cases and impacts the scope and lifetime of the service differently.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.ts",
+            "title": "App Component using Root Level Injection",
+            "description": "In this example, the DataService is provided at the root level, making it a singleton throughout the application. It can be injected into any component or service without needing to declare it in the providers array of those components.",
+            "code": `
+            // app.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { DataService } from './data.service';
+      
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css']
+            })
+            export class AppComponent implements OnInit {
+              data: any;
+      
+              constructor(private dataService: DataService) {}
+      
+              ngOnInit() {
+                this.data = this.dataService.getData();
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.component.ts",
+            "title": "App Component using Component Level Injection",
+            "description": "In this example, the DataService is declared in the providers array of the AppComponent. This means a new instance of DataService is created for every instance of AppComponent, making it suitable for component-specific data management.",
+            "code": `
+            // app.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { DataService } from './data.service';
+      
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css'],
+              providers: [DataService] // Component level injection
+            })
+            export class AppComponent implements OnInit {
+              data: any;
+      
+              constructor(private dataService: DataService) {}
+      
+              ngOnInit() {
+                this.data = this.dataService.getData();
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module using Module Level Injection",
+            "description": "In this example, the DataService is provided in the providers array of the AppModule. This approach makes the service available to all components within that module. It is useful for services that should be shared across multiple components in a specific module.",
+            "code": `
+            // app.module.ts
+            import { NgModule } from '@angular/core';
+            import { BrowserModule } from '@angular/platform-browser';
+            import { AppComponent } from './app.component';
+            import { DataService } from './data.service';
+      
+            @NgModule({
+              declarations: [AppComponent],
+              imports: [BrowserModule],
+              providers: [DataService], // Module level injection
+              bootstrap: [AppComponent]
+            })
+            export class AppModule {}
+            `
+          },
+          {
+            "filename": "data.service.ts",
+            "title": "Data Service",
+            "description": "A simple service that provides some data for demonstration purposes. This service can be injected using any of the above methods depending on the required scope.",
+            "code": `
+            // data.service.ts
+            import { Injectable } from '@angular/core';
+      
+            @Injectable({
+              providedIn: 'root' // This ensures the service is a singleton
+            })
+            export class DataService {
+              getData() {
+                return 'Hello from DataService!';
+              }
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Checkbox Examples in Angular with ngModel",
+        "description": "This document presents several checkbox examples in Angular using ngModel for two-way binding, showcasing various functionalities including standard checkbox usage, select all, select all with disabled, and managing maximum selections.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "checkbox-basic.component.ts",
+            "title": "Basic Checkbox Example",
+            "description": "This example demonstrates the basic usage of checkboxes in Angular without a select all option.",
+            "code": `
+            // checkbox-basic.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-basic',
+              templateUrl: './checkbox-basic.component.html',
+              styleUrls: ['./checkbox-basic.component.css']
+            })
+            export class CheckboxBasicComponent {
+              options = [
+                { label: 'Option 1', isChecked: false },
+                { label: 'Option 2', isChecked: false },
+                { label: 'Option 3', isChecked: false }
+              ];
+            }
+            `
+          },
+          {
+            "filename": "checkbox-basic.component.html",
+            "title": "Basic Checkbox Template",
+            "description": "The HTML template for the basic checkbox example using ngModel for two-way binding.",
+            "code": `
+            <!-- checkbox-basic.component.html -->
+            <div>
+              <h2>Basic Checkbox Example</h2>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [(ngModel)]="option.isChecked">
+                {{ option.label }}
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "checkbox-select-all.component.ts",
+            "title": "Checkbox with Select All",
+            "description": "This example includes a select all checkbox that can check or uncheck all individual checkboxes using ngModel.",
+            "code": `
+            // checkbox-select-all.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-select-all',
+              templateUrl: './checkbox-select-all.component.html',
+              styleUrls: ['./checkbox-select-all.component.css']
+            })
+            export class CheckboxSelectAllComponent {
+              options = [
+                { label: 'Option 1', isChecked: false },
+                { label: 'Option 2', isChecked: false },
+                { label: 'Option 3', isChecked: false }
+              ];
+      
+              selectAll = false;
+      
+              toggleSelectAll() {
+                this.selectAll = !this.selectAll;
+                this.options.forEach(option => option.isChecked = this.selectAll);
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-select-all.component.html",
+            "title": "Checkbox with Select All Template",
+            "description": "The HTML template for the checkbox with select all functionality using ngModel.",
+            "code": `
+            <!-- checkbox-select-all.component.html -->
+            <div>
+              <h2>Checkbox with Select All</h2>
+              <label>
+                <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
+                Select All
+              </label>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [(ngModel)]="option.isChecked">
+                {{ option.label }}
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "checkbox-select-all-disabled.component.ts",
+            "title": "Checkbox with Select All and Disabled Options",
+            "description": "This example demonstrates a select all checkbox with individual options that can be disabled using ngModel.",
+            "code": `
+            // checkbox-select-all-disabled.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-select-all-disabled',
+              templateUrl: './checkbox-select-all-disabled.component.html',
+              styleUrls: ['./checkbox-select-all-disabled.component.css']
+            })
+            export class CheckboxSelectAllDisabledComponent {
+              options = [
+                { label: 'Option 1', isChecked: false, isDisabled: false },
+                { label: 'Option 2', isChecked: false, isDisabled: true },
+                { label: 'Option 3', isChecked: false, isDisabled: false }
+              ];
+      
+              selectAll = false;
+      
+              toggleSelectAll() {
+                this.selectAll = !this.selectAll;
+                this.options.forEach(option => {
+                  if (!option.isDisabled) {
+                    option.isChecked = this.selectAll;
+                  }
+                });
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-select-all-disabled.component.html",
+            "title": "Checkbox with Select All and Disabled Template",
+            "description": "The HTML template for the checkbox with select all functionality and disabled options using ngModel.",
+            "code": `
+            <!-- checkbox-select-all-disabled.component.html -->
+            <div>
+              <h2>Checkbox with Select All and Disabled Options</h2>
+              <label>
+                <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
+                Select All
+              </label>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [(ngModel)]="option.isChecked" [disabled]="option.isDisabled">
+                {{ option.label }}
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "checkbox-max-selection.component.ts",
+            "title": "Checkbox with Maximum Selection",
+            "description": "This example limits the maximum number of checkboxes that can be selected to three using ngModel.",
+            "code": `
+            // checkbox-max-selection.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-max-selection',
+              templateUrl: './checkbox-max-selection.component.html',
+              styleUrls: ['./checkbox-max-selection.component.css']
+            })
+            export class CheckboxMaxSelectionComponent {
+              options = [
+                { label: 'Option 1', isChecked: false },
+                { label: 'Option 2', isChecked: false },
+                { label: 'Option 3', isChecked: false },
+                { label: 'Option 4', isChecked: false },
+                { label: 'Option 5', isChecked: false }
+              ];
+      
+              maxSelection = 3;
+      
+              toggleCheckbox(option: any) {
+                const checkedCount = this.options.filter(o => o.isChecked).length;
+      
+                if (option.isChecked && checkedCount >= this.maxSelection) {
+                  option.isChecked = false; // Prevent checking if maximum is reached
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-max-selection.component.html",
+            "title": "Checkbox with Maximum Selection Template",
+            "description": "The HTML template for the checkbox with a maximum selection limit using ngModel.",
+            "code": `
+            <!-- checkbox-max-selection.component.html -->
+            <div>
+              <h2>Checkbox with Maximum Selection</h2>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [(ngModel)]="option.isChecked" (change)="toggleCheckbox(option)">
+                {{ option.label }}
+              </div>
+              <p *ngIf="options.filter(o => o.isChecked).length >= maxSelection">Maximum of {{ maxSelection }} selections allowed.</p>
+            </div>
+            `
+          }
+        ]
+      },      
+      {
+        "title": "Checkbox Examples in Angular",
+        "description": "This document presents several checkbox examples in Angular, showcasing various functionalities including standard checkbox usage, select all, select all with disabled, and managing maximum selections.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "checkbox-basic.component.ts",
+            "title": "Basic Checkbox Example",
+            "description": "This example demonstrates the basic usage of checkboxes in Angular without a select all option.",
+            "code": `
+            // checkbox-basic.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-basic',
+              templateUrl: './checkbox-basic.component.html',
+              styleUrls: ['./checkbox-basic.component.css']
+            })
+            export class CheckboxBasicComponent {
+              options = [
+                { label: 'Option 1', isChecked: false },
+                { label: 'Option 2', isChecked: false },
+                { label: 'Option 3', isChecked: false }
+              ];
+      
+              toggleCheckbox(option: any) {
+                option.isChecked = !option.isChecked;
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-basic.component.html",
+            "title": "Basic Checkbox Template",
+            "description": "The HTML template for the basic checkbox example.",
+            "code": `
+            <!-- checkbox-basic.component.html -->
+            <div>
+              <h2>Basic Checkbox Example</h2>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [checked]="option.isChecked" (change)="toggleCheckbox(option)">
+                {{ option.label }}
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "checkbox-select-all.component.ts",
+            "title": "Checkbox with Select All",
+            "description": "This example includes a select all checkbox that can check or uncheck all individual checkboxes.",
+            "code": `
+            // checkbox-select-all.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-select-all',
+              templateUrl: './checkbox-select-all.component.html',
+              styleUrls: ['./checkbox-select-all.component.css']
+            })
+            export class CheckboxSelectAllComponent {
+              options = [
+                { label: 'Option 1', isChecked: false },
+                { label: 'Option 2', isChecked: false },
+                { label: 'Option 3', isChecked: false }
+              ];
+      
+              selectAll = false;
+      
+              toggleSelectAll() {
+                this.selectAll = !this.selectAll;
+                this.options.forEach(option => option.isChecked = this.selectAll);
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-select-all.component.html",
+            "title": "Checkbox with Select All Template",
+            "description": "The HTML template for the checkbox with select all functionality.",
+            "code": `
+            <!-- checkbox-select-all.component.html -->
+            <div>
+              <h2>Checkbox with Select All</h2>
+              <label>
+                <input type="checkbox" [checked]="selectAll" (change)="toggleSelectAll()">
+                Select All
+              </label>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [checked]="option.isChecked" (change)="option.isChecked = !option.isChecked">
+                {{ option.label }}
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "checkbox-select-all-disabled.component.ts",
+            "title": "Checkbox with Select All and Disabled Options",
+            "description": "This example demonstrates a select all checkbox with individual options that can be disabled.",
+            "code": `
+            // checkbox-select-all-disabled.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-select-all-disabled',
+              templateUrl: './checkbox-select-all-disabled.component.html',
+              styleUrls: ['./checkbox-select-all-disabled.component.css']
+            })
+            export class CheckboxSelectAllDisabledComponent {
+              options = [
+                { label: 'Option 1', isChecked: false, isDisabled: false },
+                { label: 'Option 2', isChecked: false, isDisabled: true },
+                { label: 'Option 3', isChecked: false, isDisabled: false }
+              ];
+      
+              selectAll = false;
+      
+              toggleSelectAll() {
+                this.selectAll = !this.selectAll;
+                this.options.forEach(option => {
+                  if (!option.isDisabled) {
+                    option.isChecked = this.selectAll;
+                  }
+                });
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-select-all-disabled.component.html",
+            "title": "Checkbox with Select All and Disabled Template",
+            "description": "The HTML template for the checkbox with select all functionality and disabled options.",
+            "code": `
+            <!-- checkbox-select-all-disabled.component.html -->
+            <div>
+              <h2>Checkbox with Select All and Disabled Options</h2>
+              <label>
+                <input type="checkbox" [checked]="selectAll" (change)="toggleSelectAll()">
+                Select All
+              </label>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [checked]="option.isChecked" [disabled]="option.isDisabled" (change)="option.isChecked = !option.isChecked">
+                {{ option.label }}
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "checkbox-max-selection.component.ts",
+            "title": "Checkbox with Maximum Selection",
+            "description": "This example limits the maximum number of checkboxes that can be selected to three.",
+            "code": `
+            // checkbox-max-selection.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-checkbox-max-selection',
+              templateUrl: './checkbox-max-selection.component.html',
+              styleUrls: ['./checkbox-max-selection.component.css']
+            })
+            export class CheckboxMaxSelectionComponent {
+              options = [
+                { label: 'Option 1', isChecked: false },
+                { label: 'Option 2', isChecked: false },
+                { label: 'Option 3', isChecked: false },
+                { label: 'Option 4', isChecked: false },
+                { label: 'Option 5', isChecked: false }
+              ];
+      
+              maxSelection = 3;
+      
+              toggleCheckbox(option: any) {
+                const checkedCount = this.options.filter(o => o.isChecked).length;
+      
+                if (option.isChecked && checkedCount >= this.maxSelection) {
+                  option.isChecked = false; // Prevent checking if maximum is reached
+                } else {
+                  option.isChecked = !option.isChecked;
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkbox-max-selection.component.html",
+            "title": "Checkbox with Maximum Selection Template",
+            "description": "The HTML template for the checkbox with a maximum selection limit.",
+            "code": `
+            <!-- checkbox-max-selection.component.html -->
+            <div>
+              <h2>Checkbox with Maximum Selection</h2>
+              <div *ngFor="let option of options">
+                <input type="checkbox" [checked]="option.isChecked" (change)="toggleCheckbox(option)">
+                {{ option.label }}
+              </div>
+              <p *ngIf="options.filter(o => o.isChecked).length >= maxSelection">Maximum of {{ maxSelection }} selections allowed.</p>
+            </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Parent-Child-Grandchild Checkbox Structure with ngModel, Partial Check, and isPartial Flag in Angular",
+        "description": "This example demonstrates how to create a parent component with child checkboxes, including nested checkboxes for grandchild items. The parent checkbox is checked if all children are checked, partially checked if any child is checked, and uses ngModel.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "parent-checkbox.component.ts",
+            "title": "ParentCheckboxComponent",
+            "description": "The parent component that manages the state of child and grandchild checkboxes, including isPartial flag.",
+            "code": `
+      import { Component } from '@angular/core';
+      
+      interface Child {
+        id: number;
+        name: string;
+        isChecked: boolean;
+        isPartial?: boolean; // Optional flag for partial selection
+        childrens?: Child[]; // Optional property for nested children
+      }
+      
+      @Component({
+        selector: 'app-parent-checkbox',
+        templateUrl: './parent-checkbox.component.html',
+        styleUrls: ['./parent-checkbox.component.css']
+      })
+      export class ParentCheckboxComponent {
+        selectedData: Child[] = [];
+        
+        children: Child[] = [
+          {
+            id: 1,
+            name: 'Child 1',
+            isChecked: false,
+            isPartial: false,
+            childrens: [
+              { id: 11, name: 'Grandchild 1-1', isChecked: false },
+              { id: 12, name: 'Grandchild 1-2', isChecked: false }
+            ]
+          },
+          { id: 2, name: 'Child 2', isChecked: false },
+          { id: 3, name: 'Child 3', isChecked: false }
+        ];
+      
+        updateSelectedData(): void {
+          // Reset selected data
+          this.selectedData = [];
+          
+          // Filter the first-level children
+          this.children.forEach(child => {
+            // Add child to selected data if checked
+            if (child.isChecked || (child.isPartial && child.childrens)) {
+              this.selectedData.push(child);
+            }
+            
+            // Check if any grandchildren are checked
+            if (child.childrens) {
+              const selectedGrandchildren = child.childrens.filter(gc => gc.isChecked);
+              
+              // Update parent's isChecked and isPartial based on grandchildren's state
+              child.isChecked = selectedGrandchildren.length === child.childrens.length; // All grandchildren checked
+              child.isPartial = selectedGrandchildren.length > 0; // At least one grandchild checked
+      
+              // Add selected grandchildren to selected data
+              this.selectedData.push(...selectedGrandchildren);
+            }
+          });
+        }
+      }
+            `
+          },
+          {
+            "filename": "parent-checkbox.component.html",
+            "title": "ParentCheckboxComponent Template",
+            "description": "The HTML template for the parent component displaying child and grandchild checkboxes.",
+            "code": `
+      <div>
+        <h2>Parent Checkbox</h2>
+        <div *ngFor="let child of children; let i = index">
+          <input
+            type="checkbox"
+            [(ngModel)]="child.isChecked"
+            (ngModelChange)="updateSelectedData()"
+          />
+          {{ child.name }}
+          <span *ngIf="child.isPartial">(Partial)</span> <!-- Display partial status -->
+          
+          <div *ngIf="child.childrens && child.childrens.length > 0" style="margin-left: 20px;">
+            <h4>Grandchildren</h4>
+            <div *ngFor="let grandchild of child.childrens">
+              <input
+                type="checkbox"
+                [(ngModel)]="grandchild.isChecked"
+                (ngModelChange)="updateSelectedData()"
+              />
+              {{ grandchild.name }}
+            </div>
+          </div>
+        </div>
+        
+        <h3>Selected Data:</h3>
+        <pre>{{ selectedData | json }}</pre>
+      </div>
+            `
+          },
+          {
+            "filename": "parent-checkbox.component.css",
+            "title": "ParentCheckboxComponent Styles",
+            "description": "Styles for the ParentCheckboxComponent.",
+            "code": `
+      h2 {
+        color: #4a4a4a;
+      }
+      
+      h3 {
+        margin-top: 20px;
+      }
+      
+      h4 {
+        margin-top: 10px;
+      }
+            `
+          }
+        ]
+      },      
+      {
+        "title": "Image Upload Examples in Angular with Validations",
+        "description": "This document provides examples for handling image uploads in Angular with validations for file name, size, and allowed file types.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "single-image-upload.component.ts",
+            "title": "Single Image Upload Component",
+            "description": "This component demonstrates the functionality for uploading a single image with validations.",
+            "code": `
+            // single-image-upload.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-single-image-upload',
+              templateUrl: './single-image-upload.component.html',
+              styleUrls: ['./single-image-upload.component.css']
+            })
+            export class SingleImageUploadComponent {
+              selectedImage: File | null = null;
+              imagePreview: string | null = null;
+              errorMessage: string = '';
+      
+              private readonly MAX_SIZE_MB = 2; // 2 MB
+              private readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+      
+              onImageSelected(event: any) {
+                const file = event.target.files[0];
+                this.errorMessage = '';
+                
+                if (file) {
+                  if (!this.isValidFile(file)) {
+                    this.errorMessage = 'Invalid file. Please upload a JPEG, PNG, or GIF image under 2 MB.';
+                    this.selectedImage = null;
+                    this.imagePreview = null;
+                    return;
+                  }
+      
+                  this.selectedImage = file;
+                  const reader = new FileReader();
+                  reader.onload = () => {
+                    this.imagePreview = reader.result as string;
+                  };
+                  reader.readAsDataURL(this.selectedImage);
+                }
+              }
+      
+              private isValidFile(file: File): boolean {
+                const isValidSize = file.size <= this.MAX_SIZE_MB * 1024 * 1024; // Convert MB to bytes
+                const isValidType = this.ALLOWED_TYPES.includes(file.type);
+                return isValidSize && isValidType;
+              }
+      
+              removeImage() {
+                this.selectedImage = null;
+                this.imagePreview = null;
+              }
+      
+              uploadImage() {
+                if (this.selectedImage) {
+                  const formData = new FormData();
+                  formData.append('image', this.selectedImage);
+                  // Here, you would typically send the formData to your server using HttpClient.
+                  console.log('Image uploaded:', this.selectedImage);
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "single-image-upload.component.html",
+            "title": "Single Image Upload Template",
+            "description": "The HTML template for the single image upload component with validations.",
+            "code": `
+            <!-- single-image-upload.component.html -->
+            <div>
+              <h2>Single Image Upload</h2>
+              <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+              <button (click)="uploadImage()" [disabled]="!selectedImage">Upload</button>
+              <button (click)="removeImage()" [disabled]="!selectedImage">Remove</button>
+              <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+              <div *ngIf="imagePreview">
+                <h3>Image Preview:</h3>
+                <img [src]="imagePreview" alt="Image Preview" width="200" />
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "multiple-image-upload.component.ts",
+            "title": "Multiple Image Upload Component",
+            "description": "This component demonstrates the functionality for uploading multiple images with validations.",
+            "code": `
+            // multiple-image-upload.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-multiple-image-upload',
+              templateUrl: './multiple-image-upload.component.html',
+              styleUrls: ['./multiple-image-upload.component.css']
+            })
+            export class MultipleImageUploadComponent {
+              selectedImages: File[] = [];
+              imagePreviews: string[] = [];
+              errorMessage: string = '';
+      
+              private readonly MAX_SIZE_MB = 2; // 2 MB
+              private readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+      
+              onImagesSelected(event: any) {
+                const files = event.target.files;
+                this.errorMessage = '';
+                this.selectedImages = [];
+                this.imagePreviews = [];
+      
+                for (let file of files) {
+                  if (this.isValidFile(file)) {
+                    this.selectedImages.push(file);
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      this.imagePreviews.push(reader.result as string);
+                    };
+                    reader.readAsDataURL(file);
+                  } else {
+                    this.errorMessage = 'Invalid file. Please upload JPEG, PNG, or GIF images under 2 MB.';
+                  }
+                }
+              }
+      
+              private isValidFile(file: File): boolean {
+                const isValidSize = file.size <= this.MAX_SIZE_MB * 1024 * 1024; // Convert MB to bytes
+                const isValidType = this.ALLOWED_TYPES.includes(file.type);
+                return isValidSize && isValidType;
+              }
+      
+              removeImage(index: number) {
+                this.selectedImages.splice(index, 1);
+                this.imagePreviews.splice(index, 1);
+              }
+      
+              uploadImages() {
+                const formData = new FormData();
+                this.selectedImages.forEach(image => {
+                  formData.append('images', image);
+                });
+                // Here, you would typically send the formData to your server using HttpClient.
+                console.log('Images uploaded:', this.selectedImages);
+              }
+            }
+            `
+          },
+          {
+            "filename": "multiple-image-upload.component.html",
+            "title": "Multiple Image Upload Template",
+            "description": "The HTML template for the multiple image upload component with validations.",
+            "code": `
+            <!-- multiple-image-upload.component.html -->
+            <div>
+              <h2>Multiple Image Upload</h2>
+              <input type="file" (change)="onImagesSelected($event)" accept="image/*" multiple />
+              <button (click)="uploadImages()" [disabled]="selectedImages.length === 0">Upload</button>
+              <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+              <div *ngFor="let imagePreview of imagePreviews; let i = index">
+                <h3>Image Preview {{ i + 1 }}:</h3>
+                <img [src]="imagePreview" alt="Image Preview" width="200" />
+                <button (click)="removeImage(i)">Remove</button>
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "base64-image-upload.component.ts",
+            "title": "Base64 Image Upload Component",
+            "description": "This component demonstrates the conversion of an uploaded image to base64 with validations.",
+            "code": `
+            // base64-image-upload.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-base64-image-upload',
+              templateUrl: './base64-image-upload.component.html',
+              styleUrls: ['./base64-image-upload.component.css']
+            })
+            export class Base64ImageUploadComponent {
+              selectedImage: File | null = null;
+              base64Image: string | null = null;
+              errorMessage: string = '';
+      
+              private readonly MAX_SIZE_MB = 2; // 2 MB
+              private readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+      
+              onImageSelected(event: any) {
+                const file = event.target.files[0];
+                this.errorMessage = '';
+                
+                if (file) {
+                  if (!this.isValidFile(file)) {
+                    this.errorMessage = 'Invalid file. Please upload a JPEG, PNG, or GIF image under 2 MB.';
+                    this.selectedImage = null;
+                    this.base64Image = null;
+                    return;
+                  }
+      
+                  this.selectedImage = file;
+                  const reader = new FileReader();
+                  reader.onload = () => {
+                    this.base64Image = reader.result as string;
+                  };
+                  reader.readAsDataURL(this.selectedImage);
+                }
+              }
+      
+              private isValidFile(file: File): boolean {
+                const isValidSize = file.size <= this.MAX_SIZE_MB * 1024 * 1024; // Convert MB to bytes
+                const isValidType = this.ALLOWED_TYPES.includes(file.type);
+                return isValidSize && isValidType;
+              }
+      
+              removeImage() {
+                this.selectedImage = null;
+                this.base64Image = null;
+              }
+      
+              uploadImage() {
+                if (this.base64Image) {
+                  // Here, you would typically send the base64 string to your server.
+                  console.log('Base64 Image:', this.base64Image);
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "base64-image-upload.component.html",
+            "title": "Base64 Image Upload Template",
+            "description": "The HTML template for the base64 image upload component with validations.",
+            "code": `
+            <!-- base64-image-upload.component.html -->
+            <div>
+              <h2>Base64 Image Upload</h2>
+              <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+              <button (click)="uploadImage()" [disabled]="!base64Image">Upload</button>
+              <button (click)="removeImage()" [disabled]="!base64Image">Remove</button>
+              <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+              <div *ngIf="base64Image">
+                <h3>Base64 Image:</h3>
+                <img [src]="base64Image" alt="Base64 Image" width="200" />
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "formdata-image-upload.component.ts",
+            "title": "FormData Image Upload Component",
+            "description": "This component demonstrates the use of FormData for uploading images with validations.",
+            "code": `
+            // formdata-image-upload.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-formdata-image-upload',
+              templateUrl: './formdata-image-upload.component.html',
+              styleUrls: ['./formdata-image-upload.component.css']
+            })
+            export class FormDataImageUploadComponent {
+              selectedImage: File | null = null;
+              errorMessage: string = '';
+      
+              private readonly MAX_SIZE_MB = 2; // 2 MB
+              private readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+      
+              onImageSelected(event: any) {
+                const file = event.target.files[0];
+                this.errorMessage = '';
+                
+                if (file) {
+                  if (!this.isValidFile(file)) {
+                    this.errorMessage = 'Invalid file. Please upload a JPEG, PNG, or GIF image under 2 MB.';
+                    this.selectedImage = null;
+                    return;
+                  }
+      
+                  this.selectedImage = file;
+                }
+              }
+      
+              private isValidFile(file: File): boolean {
+                const isValidSize = file.size <= this.MAX_SIZE_MB * 1024 * 1024; // Convert MB to bytes
+                const isValidType = this.ALLOWED_TYPES.includes(file.type);
+                return isValidSize && isValidType;
+              }
+      
+              uploadImage() {
+                if (this.selectedImage) {
+                  const formData = new FormData();
+                  formData.append('image', this.selectedImage);
+                  // Here, you would typically send the formData to your server using HttpClient.
+                  console.log('FormData Image uploaded:', this.selectedImage);
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "formdata-image-upload.component.html",
+            "title": "FormData Image Upload Template",
+            "description": "The HTML template for the FormData image upload component with validations.",
+            "code": `
+            <!-- formdata-image-upload.component.html -->
+            <div>
+              <h2>FormData Image Upload</h2>
+              <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+              <button (click)="uploadImage()" [disabled]="!selectedImage">Upload</button>
+              <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+            </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "File Upload Examples in Angular with Validations",
+        "description": "This document provides examples for handling file uploads in Angular with validations for file name, size, and allowed file types.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "single-file-upload.component.ts",
+            "title": "Single File Upload Component",
+            "description": "This component demonstrates the functionality for uploading a single file with validations.",
+            "code": `
+            // single-file-upload.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-single-file-upload',
+              templateUrl: './single-file-upload.component.html',
+              styleUrls: ['./single-file-upload.component.css']
+            })
+            export class SingleFileUploadComponent {
+              selectedFile: File | null = null;
+              errorMessage: string = '';
+      
+              private readonly MAX_SIZE_MB = 5; // 5 MB
+              private readonly ALLOWED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      
+              onFileSelected(event: any) {
+                const file = event.target.files[0];
+                this.errorMessage = '';
+      
+                if (file) {
+                  if (!this.isValidFile(file)) {
+                    this.errorMessage = 'Invalid file. Please upload a PDF or Word document under 5 MB.';
+                    this.selectedFile = null;
+                    return;
+                  }
+      
+                  this.selectedFile = file;
+                }
+              }
+      
+              private isValidFile(file: File): boolean {
+                const isValidSize = file.size <= this.MAX_SIZE_MB * 1024 * 1024; // Convert MB to bytes
+                const isValidType = this.ALLOWED_TYPES.includes(file.type);
+                return isValidSize && isValidType;
+              }
+      
+              removeFile() {
+                this.selectedFile = null;
+              }
+      
+              uploadFile() {
+                if (this.selectedFile) {
+                  const formData = new FormData();
+                  formData.append('file', this.selectedFile);
+                  // Here, you would typically send the formData to your server using HttpClient.
+                  console.log('File uploaded:', this.selectedFile);
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "single-file-upload.component.html",
+            "title": "Single File Upload Template",
+            "description": "The HTML template for the single file upload component with validations.",
+            "code": `
+            <!-- single-file-upload.component.html -->
+            <div>
+              <h2>Single File Upload</h2>
+              <input type="file" (change)="onFileSelected($event)" />
+              <button (click)="uploadFile()" [disabled]="!selectedFile">Upload</button>
+              <button (click)="removeFile()" [disabled]="!selectedFile">Remove</button>
+              <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+            </div>
+            `
+          },
+          {
+            "filename": "multiple-file-upload.component.ts",
+            "title": "Multiple File Upload Component",
+            "description": "This component demonstrates the functionality for uploading multiple files with validations.",
+            "code": `
+            // multiple-file-upload.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-multiple-file-upload',
+              templateUrl: './multiple-file-upload.component.html',
+              styleUrls: ['./multiple-file-upload.component.css']
+            })
+            export class MultipleFileUploadComponent {
+              selectedFiles: File[] = [];
+              errorMessage: string = '';
+      
+              private readonly MAX_SIZE_MB = 5; // 5 MB
+              private readonly ALLOWED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      
+              onFilesSelected(event: any) {
+                const files = event.target.files;
+                this.errorMessage = '';
+                this.selectedFiles = [];
+      
+                for (let i = 0; i < files.length; i++) {
+                  if (this.isValidFile(files[i])) {
+                    this.selectedFiles.push(files[i]);
+                  } else {
+                    this.errorMessage += \`Invalid file: \${files[i].name}. Please upload PDF or Word documents under 5 MB.\\n\`;
+                  }
+                }
+              }
+      
+              private isValidFile(file: File): boolean {
+                const isValidSize = file.size <= this.MAX_SIZE_MB * 1024 * 1024; // Convert MB to bytes
+                const isValidType = this.ALLOWED_TYPES.includes(file.type);
+                return isValidSize && isValidType;
+              }
+      
+              removeFile(index: number) {
+                this.selectedFiles.splice(index, 1);
+              }
+      
+              uploadFiles() {
+                if (this.selectedFiles.length > 0) {
+                  const formData = new FormData();
+                  this.selectedFiles.forEach(file => {
+                    formData.append('files', file);
+                  });
+                  // Here, you would typically send the formData to your server using HttpClient.
+                  console.log('Files uploaded:', this.selectedFiles);
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "multiple-file-upload.component.html",
+            "title": "Multiple File Upload Template",
+            "description": "The HTML template for the multiple file upload component with validations.",
+            "code": `
+            <!-- multiple-file-upload.component.html -->
+            <div>
+              <h2>Multiple File Upload</h2>
+              <input type="file" (change)="onFilesSelected($event)" multiple />
+              <button (click)="uploadFiles()" [disabled]="selectedFiles.length === 0">Upload</button>
+              <div *ngFor="let file of selectedFiles; let i = index">
+                <p>{{ file.name }} <button (click)="removeFile(i)">Remove</button></p>
+              </div>
+              <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+            </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Passing Values through Routing in Angular",
+        "description": "This document outlines different methods to pass values through Angular routing, including route parameters, query parameters, and snapshots, with examples for subscribing to these values.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module",
+            "description": "The routing module that sets up routes with parameters and query parameters.",
+            "code": `
+            // app-routing.module.ts
+            import { NgModule } from '@angular/core';
+            import { RouterModule, Routes } from '@angular/router';
+            import { HomeComponent } from './home/home.component';
+            import { DetailComponent } from './detail/detail.component';
+      
+            const routes: Routes = [
+              { path: '', component: HomeComponent },
+              { path: 'detail/:id', component: DetailComponent }, // Route parameter
+              { path: 'search', component: DetailComponent } // Query parameter
+            ];
+      
+            @NgModule({
+              imports: [RouterModule.forRoot(routes)],
+              exports: [RouterModule]
+            })
+            export class AppRoutingModule {}
+            `
+          },
+          {
+            "filename": "home.component.ts",
+            "title": "Home Component",
+            "description": "This component demonstrates how to navigate to another route with route parameters and query parameters.",
+            "code": `
+            // home.component.ts
+            import { Component } from '@angular/core';
+            import { Router } from '@angular/router';
+      
+            @Component({
+              selector: 'app-home',
+              templateUrl: './home.component.html',
+              styleUrls: ['./home.component.css']
+            })
+            export class HomeComponent {
+              constructor(private router: Router) {}
+      
+              navigateWithRouteParam() {
+                const id = 1; // Example ID
+                this.router.navigate(['/detail', id]); // Navigate with route parameter
+              }
+      
+              navigateWithQueryParam() {
+                this.router.navigate(['/search'], { queryParams: { term: 'Angular', page: 1 }}); // Navigate with query parameters
+              }
+            }
+            `
+          },
+          {
+            "filename": "home.component.html",
+            "title": "Home Component Template",
+            "description": "The HTML template for the Home component with buttons to navigate.",
+            "code": `
+            <!-- home.component.html -->
+            <div>
+              <h2>Home Component</h2>
+              <button (click)="navigateWithRouteParam()">Go to Detail with Route Param</button>
+              <button (click)="navigateWithQueryParam()">Go to Search with Query Param</button>
+            </div>
+            `
+          },
+          {
+            "filename": "detail.component.ts",
+            "title": "Detail Component",
+            "description": "This component demonstrates how to retrieve route parameters and query parameters.",
+            "code": `
+            // detail.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { ActivatedRoute } from '@angular/router';
+      
+            @Component({
+              selector: 'app-detail',
+              templateUrl: './detail.component.html',
+              styleUrls: ['./detail.component.css']
+            })
+            export class DetailComponent implements OnInit {
+              routeParam: string | null = '';
+              queryParam: any = {};
+      
+              constructor(private route: ActivatedRoute) {}
+      
+              ngOnInit() {
+                // Using route parameters
+                this.route.paramMap.subscribe(params => {
+                  this.routeParam = params.get('id');
+                });
+      
+                // Using query parameters
+                this.route.queryParams.subscribe(params => {
+                  this.queryParam = params;
+                });
+      
+                // Using snapshot
+                const snapshotParam = this.route.snapshot.paramMap.get('id');
+                console.log('Snapshot Route Param:', snapshotParam);
+              }
+            }
+            `
+          },
+          {
+            "filename": "detail.component.html",
+            "title": "Detail Component Template",
+            "description": "The HTML template for the Detail component displaying parameters.",
+            "code": `
+            <!-- detail.component.html -->
+            <div>
+              <h2>Detail Component</h2>
+              <p>Route Parameter: {{ routeParam }}</p>
+              <p>Query Parameters: {{ queryParam | json }}</p>
+            </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Different Ways to Provide Services in Angular",
+        "description": "This document outlines the three primary ways to provide services in Angular: at the root level, in a specific module, and at the component level. It includes examples for each method and explains their use cases and implications.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "service-root.ts",
+            "title": "Providing a Service at the Root Level",
+            "description": `
+              1) Providing a service at the root level makes it a singleton across the entire application.
+              2) The service will be available everywhere without needing to import it in every module.
+              3) It is ideal for services that need to be reused globally (e.g., authentication or user services).
+              4) To provide a service at the root level, we use the 'providedIn' property in the @Injectable decorator.
+            `,
+            "code": `
+            // service-root.ts
+            import { Injectable } from '@angular/core';
+      
+            @Injectable({
+              providedIn: 'root' // Service provided at the root level
+            })
+            export class RootService {
+              logMessage() {
+                console.log('Service provided at root level.');
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "Providing a Service at the Module Level",
+            "description": `
+              1) Providing a service at the module level makes it available only to components that are declared in that module.
+              2) This method is useful when the service is only needed by a subset of your application.
+              3) To provide a service at the module level, include it in the 'providers' array in the module's decorator.
+            `,
+            "code": `
+            // app.module.ts
+            import { NgModule } from '@angular/core';
+            import { BrowserModule } from '@angular/platform-browser';
+            import { AppComponent } from './app.component';
+            import { ModuleService } from './module.service';
+      
+            @NgModule({
+              declarations: [AppComponent],
+              imports: [BrowserModule],
+              providers: [ModuleService], // Service provided at the module level
+              bootstrap: [AppComponent]
+            })
+            export class AppModule {}
+            `
+          },
+          {
+            "filename": "module.service.ts",
+            "title": "Module Service",
+            "description": `
+              1) This is the service provided at the module level (in app.module.ts).
+              2) This service will only be available to components declared in the same module.
+            `,
+            "code": `
+            // module.service.ts
+            import { Injectable } from '@angular/core';
+      
+            @Injectable()
+            export class ModuleService {
+              logMessage() {
+                console.log('Service provided at module level.');
+              }
+            }
+            `
+          },
+          {
+            "filename": "component-level.ts",
+            "title": "Providing a Service at the Component Level",
+            "description": `
+              1) Providing a service at the component level ensures that a new instance of the service is created for each instance of the component.
+              2) This is useful for services that should not be shared across the entire application but rather be component-specific.
+              3) To provide a service at the component level, include it in the 'providers' array in the component's decorator.
+            `,
+            "code": `
+            // component-level.ts
+            import { Component } from '@angular/core';
+            import { ComponentService } from './component.service';
+      
+            @Component({
+              selector: 'app-component',
+              template: '<h1>Component with its own service</h1>',
+              providers: [ComponentService] // Service provided at the component level
+            })
+            export class ComponentLevelComponent {
+              constructor(private componentService: ComponentService) {
+                componentService.logMessage();
+              }
+            }
+            `
+          },
+          {
+            "filename": "component.service.ts",
+            "title": "Component Service",
+            "description": `
+              1) This is the service provided at the component level (in component-level.ts).
+              2) This service will only be available to this specific component and its children, creating a separate instance for each.
+            `,
+            "code": `
+            // component.service.ts
+            import { Injectable } from '@angular/core';
+      
+            @Injectable()
+            export class ComponentService {
+              logMessage() {
+                console.log('Service provided at component level.');
+              }
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Inbuilt Change Detection Methods in Angular",
+        "description": "This document explains Angular's inbuilt methods for manually triggering change detection, including markForCheck, detectChanges, detach, reattach, and checkNoChanges. These methods are used to control the Angular change detection mechanism and improve performance in specific scenarios.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "markForCheck-example.component.ts",
+            "title": "Using markForCheck",
+            "description": `
+              1) The markForCheck() method is used in OnPush strategy components to manually mark a component for change detection.
+              2) Even if the component uses OnPush change detection, calling markForCheck() will force Angular to check the component and its ancestors in the next detection cycle.
+              3) Useful in scenarios where a change in the state occurs outside Angular's zone (e.g., when using setTimeout or third-party libraries).
+            `,
+            "code": `
+            // markForCheck-example.component.ts
+            import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+      
+            @Component({
+              selector: 'app-mark-for-check-example',
+              template: \`
+                <div>
+                  <h2>Mark For Check Example</h2>
+                  <p>Counter: {{ counter }}</p>
+                  <button (click)="updateCounter()">Update Counter</button>
+                </div>
+              \`,
+              changeDetection: ChangeDetectionStrategy.OnPush // Using OnPush strategy
+            })
+            export class MarkForCheckExampleComponent {
+              counter = 0;
+      
+              constructor(private cdr: ChangeDetectorRef) {}
+      
+              updateCounter() {
+                setTimeout(() => {
+                  this.counter++;
+                  this.cdr.markForCheck(); // Manually trigger change detection
+                }, 1000);
+              }
+            }
+            `
+          },
+          {
+            "filename": "detectChanges-example.component.ts",
+            "title": "Using detectChanges",
+            "description": `
+              1) The detectChanges() method triggers change detection immediately for the current component and its children.
+              2) This method is useful in scenarios where you need immediate updates to the DOM without waiting for Angular’s next change detection cycle.
+              3) It's often used in combination with markForCheck() or in cases where an immediate update is required, such as after a manual DOM update.
+            `,
+            "code": `
+            // detectChanges-example.component.ts
+            import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+      
+            @Component({
+              selector: 'app-detect-changes-example',
+              template: \`
+                <div>
+                  <h2>Detect Changes Example</h2>
+                  <p>Counter: {{ counter }}</p>
+                  <button (click)="forceUpdate()">Force Update</button>
+                </div>
+              \`,
+              changeDetection: ChangeDetectionStrategy.OnPush
+            })
+            export class DetectChangesExampleComponent {
+              counter = 0;
+      
+              constructor(private cdr: ChangeDetectorRef) {}
+      
+              forceUpdate() {
+                this.counter++;
+                this.cdr.detectChanges(); // Immediately trigger change detection
+              }
+            }
+            `
+          },
+          {
+            "filename": "detach-and-reattach.component.ts",
+            "title": "Using detach and reattach",
+            "description": `
+              1) The detach() method allows you to detach the component from Angular's change detection system, meaning Angular will no longer automatically check the component for changes.
+              2) This method is useful for performance optimization when the component doesn't need frequent updates.
+              3) The reattach() method can be called to re-enable change detection for the detached component.
+            `,
+            "code": `
+            // detach-and-reattach.component.ts
+            import { Component, ChangeDetectorRef } from '@angular/core';
+      
+            @Component({
+              selector: 'app-detach-reattach-example',
+              template: \`
+                <div>
+                  <h2>Detach and Reattach Example</h2>
+                  <p>Counter: {{ counter }}</p>
+                  <button (click)="detachChangeDetection()">Detach</button>
+                  <button (click)="increment()">Increment Counter</button>
+                  <button (click)="reattachChangeDetection()">Reattach</button>
+                </div>
+              \`
+            })
+            export class DetachReattachExampleComponent {
+              counter = 0;
+      
+              constructor(private cdr: ChangeDetectorRef) {}
+      
+              increment() {
+                this.counter++;
+              }
+      
+              detachChangeDetection() {
+                this.cdr.detach(); // Detach change detection
+              }
+      
+              reattachChangeDetection() {
+                this.cdr.reattach(); // Reattach change detection
+                this.cdr.detectChanges(); // Trigger detection immediately after reattaching
+              }
+            }
+            `
+          },
+          {
+            "filename": "checkNoChanges-example.component.ts",
+            "title": "Using checkNoChanges",
+            "description": `
+              1) The checkNoChanges() method ensures that the model has not changed since the last change detection check.
+              2) This method is used for debugging purposes, particularly in development mode, to verify that the component’s model is not modified incorrectly between checks.
+              3) In production mode, this method is ignored to avoid performance degradation.
+            `,
+            "code": `
+            // checkNoChanges-example.component.ts
+            import { Component, ChangeDetectorRef } from '@angular/core';
+      
+            @Component({
+              selector: 'app-check-no-changes-example',
+              template: \`
+                <div>
+                  <h2>Check No Changes Example</h2>
+                  <p>Counter: {{ counter }}</p>
+                  <button (click)="increment()">Increment Counter</button>
+                  <button (click)="checkNoChanges()">Check No Changes</button>
+                </div>
+              \`
+            })
+            export class CheckNoChangesExampleComponent {
+              counter = 0;
+      
+              constructor(private cdr: ChangeDetectorRef) {}
+      
+              increment() {
+                this.counter++;
+              }
+      
+              checkNoChanges() {
+                this.cdr.checkNoChanges(); // Ensure no changes between detection cycles
+              }
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Add and Remove Objects between Two Arrays in Angular",
+        "description": "This example demonstrates how to move objects between two arrays, left and right, in Angular. When an item is clicked on the left, it is added to the right side. When an item is clicked on the right, it is removed from the right and added back to the left. Additionally, the example shows how to print the JSON data of selected items and their IDs in the template.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "This is the main TypeScript file where we manage two arrays of objects (leftData and rightData). The component handles the add and remove logic between the two arrays and also tracks the selectedData and selectedIds.",
+            "code": `
+            // app.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css']
+            })
+            export class AppComponent {
+              leftData = [
+                { id: 1, name: 'Item 1' },
+                { id: 2, name: 'Item 2' },
+                { id: 3, name: 'Item 3' }
+              ];
+              rightData: any[] = [];
+      
+              selectedData = [];
+              selectedIds = [];
+      
+              addToRight(item: any) {
+                this.leftData = this.leftData.filter(data => data.id !== item.id);
+                this.rightData.push(item);
+                this.updateSelection();
+              }
+      
+              removeFromRight(item: any) {
+                this.rightData = this.rightData.filter(data => data.id !== item.id);
+                this.leftData.push(item);
+                this.updateSelection();
+              }
+      
+              updateSelection() {
+                this.selectedData = this.rightData.map(data => data.name);
+                this.selectedIds = this.rightData.map(data => data.id);
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component HTML Template",
+            "description": "This HTML template displays the leftData and rightData arrays. Clicking on an item on the left adds it to the right, and clicking an item on the right removes it from the right and adds it back to the left. Additionally, it prints the selectedData and selectedIds using the JSON pipe.",
+            "code": `
+            <!-- app.component.html -->
+            <div class="container">
+              <div class="row">
+                <!-- Left side data -->
+                <div class="col-6">
+                  <h3>Left Side</h3>
+                  <ul>
+                    <li *ngFor="let item of leftData" (click)="addToRight(item)">
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
+      
+                <!-- Right side data -->
+                <div class="col-6">
+                  <h3>Right Side</h3>
+                  <ul>
+                    <li *ngFor="let item of rightData" (click)="removeFromRight(item)">
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+      
+              <div class="mt-3">
+                <h3>Selected Data and IDs:</h3>
+                <p>{{ selectedData | json }} - {{ selectedIds | json }}</p>
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "app.component.css",
+            "title": "App Component CSS",
+            "description": "This is an optional CSS file where you can style the layout of the left and right sides for better visual separation.",
+            "code": `
+            /* app.component.css */
+            ul {
+              list-style-type: none;
+              padding: 0;
+            }
+      
+            li {
+              cursor: pointer;
+              padding: 5px;
+              border: 1px solid #ccc;
+              margin-bottom: 5px;
+            }
+      
+            li:hover {
+              background-color: #f0f0f0;
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Add and Remove Objects between Two Arrays with Search Functionality in Angular",
+        "description": "This example demonstrates how to move objects between two arrays in Angular, with an additional search functionality for filtering the left-side array before adding items to the right. It displays the selected data and their IDs using the JSON pipe.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.ts",
+            "title": "App Component",
+            "description": "This TypeScript code manages two arrays of objects (leftData and rightData) and handles the add/remove logic between the arrays. It also implements a search feature that filters the leftData array based on a search term entered by the user.",
+            "code": `
+            // app.component.ts
+            import { Component } from '@angular/core';
+      
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css']
+            })
+            export class AppComponent {
+              leftData = [
+                { id: 1, name: 'Item 1' },
+                { id: 2, name: 'Item 2' },
+                { id: 3, name: 'Item 3' },
+                { id: 4, name: 'Item 4' },
+                { id: 5, name: 'Item 5' }
+              ];
+              rightData: any[] = [];
+      
+              selectedData = [];
+              selectedIds = [];
+      
+              searchTerm: string = ''; // Used for filtering leftData
+              filteredLeftData = [...this.leftData]; // Holds the filtered data
+      
+              addToRight(item: any) {
+                this.leftData = this.leftData.filter(data => data.id !== item.id);
+                this.rightData.push(item);
+                this.filterLeftData();
+                this.updateSelection();
+              }
+      
+              removeFromRight(item: any) {
+                this.rightData = this.rightData.filter(data => data.id !== item.id);
+                this.leftData.push(item);
+                this.filterLeftData();
+                this.updateSelection();
+              }
+      
+              updateSelection() {
+                this.selectedData = this.rightData.map(data => data.name);
+                this.selectedIds = this.rightData.map(data => data.id);
+              }
+      
+              // Filter leftData based on search term
+              filterLeftData() {
+                this.filteredLeftData = this.leftData.filter(item =>
+                  item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+                );
+              }
+            }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "App Component HTML Template",
+            "description": "This HTML template displays the left and right arrays. It includes an input field to filter the left-side data based on a search term. Clicking an item on the left adds it to the right side, and clicking an item on the right removes it from the right side and adds it back to the left.",
+            "code": `
+            <!-- app.component.html -->
+            <div class="container">
+              <div class="row">
+                <!-- Search Input for Left Side -->
+                <div class="col-6">
+                  <h3>Left Side</h3>
+                  <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterLeftData()" />
+                  <ul>
+                    <li *ngFor="let item of filteredLeftData" (click)="addToRight(item)">
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
+      
+                <!-- Right side data -->
+                <div class="col-6">
+                  <h3>Right Side</h3>
+                  <ul>
+                    <li *ngFor="let item of rightData" (click)="removeFromRight(item)">
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+      
+              <div class="mt-3">
+                <h3>Selected Data and IDs:</h3>
+                <p>{{ selectedData | json }} - {{ selectedIds | json }}</p>
+              </div>
+            </div>
+            `
+          },
+          {
+            "filename": "app.component.css",
+            "title": "App Component CSS",
+            "description": "This CSS styles the layout for the left and right data, as well as the input field for search functionality.",
+            "code": `
+            /* app.component.css */
+            ul {
+              list-style-type: none;
+              padding: 0;
+            }
+      
+            li {
+              cursor: pointer;
+              padding: 5px;
+              border: 1px solid #ccc;
+              margin-bottom: 5px;
+            }
+      
+            li:hover {
+              background-color: #f0f0f0;
+            }
+      
+            input {
+              margin-bottom: 10px;
+              width: 100%;
+              padding: 5px;
+              border-radius: 4px;
+              border: 1px solid #ccc;
+            }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Scroll into Invalid Field Form in Angular",
+        "description": "This example demonstrates how to create a reactive form in Angular that scrolls to the first invalid field upon submission. The form includes fields for email, password, first name, last name, and reason, all with required validation.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "scroll-into-invalid-field-form.component.ts",
+            "title": "ScrollIntoInvalidFieldForm Component",
+            "description": "The component that implements the reactive form and scrolls to the first invalid field.",
+            "code": `
+      import { Component, OnInit } from '@angular/core';
+      import { FormBuilder, Validators } from '@angular/forms';
+      
+      @Component({
+        selector: 'app-scroll-into-invalid-field-form',
+        templateUrl: './scroll-into-invalid-field-form.component.html',
+        styleUrls: ['./scroll-into-invalid-field-form.component.css']
+      })
+      export class ScrollIntoInvalidFieldFormComponent implements OnInit {
+        submitted: boolean = false;
+        
+        formName = this.fb.group({
+          inputName: ['', Validators.required],
+          'terms&condition': ['', Validators.required],
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+          reason: ['', Validators.required],
+        });
+      
+        constructor(private fb: FormBuilder) {}
+      
+        ngOnInit() {}
+      
+        submit() {
+          this.submitted = true;
+          if (!this.formName.valid) {
+            this.scrollToError();
+          }
+        }
+      
+        scrollTo(el: any): void {
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      
+        scrollToError(): void {
+          const firstElementWithError = document.querySelector('.ng-invalid[formControlName]');
+          this.scrollTo(firstElementWithError);
+        }
+      }
+            `
+          },
+          {
+            "filename": "scroll-into-invalid-field-form.component.html",
+            "title": "ScrollIntoInvalidFieldForm Component Template",
+            "description": "The HTML template for the reactive form, including validation messages.",
+            "code": `
+      <form style="width:50%" [formGroup]='formName'>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" formControlName='inputName' class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          <div *ngIf="formName.get('inputName').errors && submitted">
+            <span class="error" *ngIf="formName.get('inputName')?.errors['required']">This field is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="termsCondition">Terms & Condition</label>
+          <input type="password" formControlName='terms&condition' class="form-control" id="termsCondition" placeholder="Password">
+          <div *ngIf="formName.get('terms&condition').errors && submitted">
+            <span class="error" *ngIf="formName.get('terms&condition')?.errors['required']">Terms & condition is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" formControlName="firstname" class="form-control" id="firstname" placeholder="First Name">
+          <div *ngIf="formName.get('firstname').errors && submitted">
+            <span class="error" *ngIf="formName.get('firstname').errors['required']">This firstname is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" formControlName="lastname" class="form-control" id="lastname" placeholder="Last Name">
+          <div *ngIf="formName.get('lastname').errors && submitted">
+            <span class="error" *ngIf="formName.get('lastname').errors['required']">This lastname is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason</label>
+          <input type="text" formControlName="reason" class="form-control" id="reason" placeholder="Reason">
+          <div *ngIf="formName.get('reason').errors && submitted">
+            <span class="error" *ngIf="formName.get('reason').errors['required']">This reason is required</span>
+          </div>
+        </div>
+        <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
+      </form>
+      <p>Valid: {{ formName.valid }}</p>
+      <p>Invalid: {{ formName.invalid }}</p>
+      <p>Value: {{ formName.value | json }}</p>
+            `
+          },
+          {
+            "filename": "scroll-into-invalid-field-form.component.css",
+            "title": "ScrollIntoInvalidFieldForm Component Styles",
+            "description": "Basic styles for the ScrollIntoInvalidFieldForm component.",
+            "code": `
+      .error {
+        color: red;
+      }
+            `
+          }
+        ]
+      },
+      {
+        "title": "Cache API Calls Service",
+        "description": "This service handles API calls with caching functionality. It fetches data from the provided URL and uses a cache service to store and retrieve responses.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "cache-api-calls.service.ts",
+            "title": "Cache API Calls Service",
+            "description": "Service to manage API calls with caching using an external cache service.",
+            "code": `
+      import { Injectable } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+      import { Observable, of } from 'rxjs';
+      import { catchError, tap } from 'rxjs/operators';
+      import { MultipleCacheServiceService } from '../../../../shared/services/multiple-api-cache/multiple-cache-service.service';
+      
+      @Injectable()
+      export class CacheApiCallsService {
+        constructor(private http: HttpClient, private cacheService: MultipleCacheServiceService) {}
+      
+        // Fetch data with cache handling
+        fetchData(url: string, isRefresh: boolean = false): Observable<any> {
+          const cachedData = this.cacheService.get<any>(url);
+          
+          return (cachedData !== null && !isRefresh)
+            ? of(cachedData)
+            : this.http.get(url).pipe(
+                tap(data => this.cacheService.set(url, data)), // Cache the data
+                catchError(error => {
+                  console.error('Error fetching data:', error);
+                  throw error;
+                })
+              );
+        }
+      
+        // Fetch specific data with cache handling
+        fetchDataParticular(url: string, isRefresh: boolean = false): Observable<any> {
+          const cachedData = this.cacheService.get<any>(url);
+          
+          return (cachedData !== null && !isRefresh)
+            ? of(cachedData)
+            : this.http.get(url).pipe(
+                tap(data => this.cacheService.set(url, data)), // Cache the data
+                catchError(error => {
+                  console.error('Error fetching data:', error);
+                  throw error;
+                })
+              );
+        }
+      }
+            `
+          },
+          {
+            "filename": "cache-service-consume-multiple-calls.component.ts",
+            "title": "Cache Service Consume Multiple Calls Component",
+            "description": "Component to demonstrate usage of the CacheApiCallsService, including refresh functionality.",
+            "code": `
+      import { Component } from '@angular/core';
+      import { CommonModule } from '@angular/common';
+      import { HttpClientModule } from '@angular/common/http';
+      import { MultipleCacheServiceService } from '../../../shared/services/multiple-api-cache/multiple-cache-service.service';
+      import { CacheApiCallsService } from './service/cache-api-calls.service';
+      import { ButtonComponent } from '../../../shared/component/button/button.component';
+      
+      @Component({
+        selector: 'app-cache-service-consume-multiple-calls',
+        standalone: true,
+        imports: [ButtonComponent, CommonModule, HttpClientModule],
+        providers: [MultipleCacheServiceService, CacheApiCallsService],
+        templateUrl: './cache-service-consume-multiple-calls.component.html',
+        styleUrls: ['./cache-service-consume-multiple-calls.component.scss']
+      })
+      export class CacheServiceConsumeMultipleCallsComponent {
+        data: any[] = [];
+        detail: any = {};
+      
+        constructor(private cacheApiService: CacheApiCallsService) {}
+      
+        // Refresh data with optional cache bypass
+        refreshData(isRefresh: boolean): void {
+          this.data = [];
+          this.cacheApiService.fetchData('https://jsonplaceholder.typicode.com/todos', isRefresh).subscribe((response: any) => {
+            this.data = response;
+          });
+        }
+      
+        // Refresh specific data with optional cache bypass
+        refreshDataDetail(isRefresh: boolean): void {
+          this.detail = {};
+          this.cacheApiService.fetchDataParticular('https://jsonplaceholder.typicode.com/todos/1', isRefresh).subscribe((response: any) => {
+            this.detail = response;
+          });
+        }
+      }
+            `
+          },
+          {
+            "filename": "cache-service-consume-multiple-calls.component.html",
+            "title": "Cache Service Consume Multiple Calls Component Template",
+            "description": "HTML template for the CacheServiceConsumeMultipleCallsComponent, providing buttons for fetching cached and refreshed data.",
+            "code": `
+      <app-button [text]="'Get Cache'" [btnClass]="'btn-sm btn-primary'" (onBtnClick)="refreshData(false)"></app-button>
+      <app-button [text]="'Refresh Data'" [btnClass]="'btn-sm btn-success'" (onBtnClick)="refreshData(true)"></app-button>
+      
+      <div *ngIf="data.length">
+        Total Todos: {{ data.length }}
+      </div>
+      
+      <app-button [text]="'Get Cache For Detail'" [btnClass]="'btn-sm btn-primary'" (onBtnClick)="refreshDataDetail(false)"></app-button>
+      <app-button [text]="'Refresh Data'" [btnClass]="'btn-sm btn-success'" (onBtnClick)="refreshDataDetail(true)"></app-button>
+      
+      <div *ngIf="detail">
+        Detail: {{ detail | json }}
+      </div>
+            `
+          }
+        ]
+      }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+            
+           
+      
            
       
     ]

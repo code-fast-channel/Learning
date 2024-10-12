@@ -15,7 +15,7 @@ import { CodeFormatterComponent } from '../code-formatter/code-formatter.compone
 export class DetailComponent implements OnInit {
   
   selectedListData: any = {};
-  selectedValue = null;
+  selectedValue = '1';
   listData: any = [];
   framPerList = [
     {
