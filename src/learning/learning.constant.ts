@@ -8566,7 +8566,7 @@ export class DynamicValidationAddRemovegsComponent implements OnInit {
       <app-button [text]="'Refresh Data'" [btnClass]="'btn-sm btn-success'" (onBtnClick)="refreshDataDetail(true)"></app-button>
       
       <div *ngIf="detail">
-        Detail: {{ detail | json }}
+        Details: {{ detail | json }}
       </div>
             `
           }
