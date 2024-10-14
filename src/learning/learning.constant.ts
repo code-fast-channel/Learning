@@ -8571,7 +8571,1452 @@ export class DynamicValidationAddRemovegsComponent implements OnInit {
             `
           }
         ]
+      },
+      {
+        "title": "ng-bootstrap Modal Popup Without Service",
+        "description": "This example demonstrates how to pass values to an ng-bootstrap modal popup without a service, directly from the parent component.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "parent-component.ts",
+            "title": "Parent Component",
+            "description": "Parent component that opens the modal and receives the result data when the modal is closed.",
+            "code": `
+      import { Component } from '@angular/core';
+      import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+      import { ModalContentComponent } from './modal-content.component';
+      
+      @Component({
+        selector: 'app-parent-component',
+        templateUrl: './parent-component.html'
+      })
+      export class ParentComponent {
+        resultData: any;
+      
+        constructor(private modalService: NgbModal) {}
+      
+        openModal() {
+          const modalRef = this.modalService.open(ModalContentComponent);
+          modalRef.componentInstance.data = { name: 'John', age: 30 }; // Passing data to the modal
+      
+          modalRef.result.then((result: any) => {
+            this.resultData = result; // Data received from the modal
+          }).catch((error: any) => {
+            console.error('Modal dismissed:', error);
+          });
+        }
       }
+            `
+          },
+          {
+            "filename": "parent-component.html",
+            "title": "Parent Component Template",
+            "description": "HTML template for the parent component that triggers the modal and displays the result.",
+            "code": `
+      <button class="btn btn-primary" (click)="openModal()">Open Modal</button>
+      
+      <div *ngIf="resultData">
+        <h3>Modal Result</h3>
+        <p>Name: {{ resultData?.name }}</p>
+        <p>Age: {{ resultData?.age }}</p>
+      </div>
+            `
+          },
+          {
+            "filename": "modal-content.component.ts",
+            "title": "Modal Content Component",
+            "description": "The content component that will be displayed in the modal, receiving data from the parent and sending data back.",
+            "code": `
+      import { Component, Input } from '@angular/core';
+      import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+      
+      @Component({
+        selector: 'app-modal-content',
+        templateUrl: './modal-content.component.html'
+      })
+      export class ModalContentComponent {
+        @Input() data: any; // Data received from the parent component
+      
+        constructor(public activeModal: NgbActiveModal) {}
+      
+        closeModal() {
+          this.activeModal.close({ name: 'Jane', age: 25 }); // Sending data back when modal closes
+        }
+      
+        dismissModal() {
+          this.activeModal.dismiss('Modal dismissed');
+        }
+      }
+            `
+          },
+          {
+            "filename": "modal-content.component.html",
+            "title": "Modal Content Component Template",
+            "description": "HTML template for the modal content component that displays the received data and provides options to close or dismiss the modal.",
+            "code": `
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dismissModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Received Name: {{ data?.name }}</p>
+        <p>Received Age: {{ data?.age }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="dismissModal()">Dismiss</button>
+        <button type="button" class="btn btn-primary" (click)="closeModal()">Close with Data</button>
+      </div>
+            `
+          }
+        ]
+      },      
+      {
+        "title": "ng-bootstrap Modal Popup",
+        "description": "This example demonstrates how to pass values to an ng-bootstrap modal popup and how to send data back from the modal component.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "modal-service.ts",
+            "title": "Modal Service",
+            "description": "Service to open the modal and handle data passing to/from the modal component.",
+            "code": `
+      import { Injectable } from '@angular/core';
+      import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+      import { ModalContentComponent } from './modal-content.component';
+      
+      @Injectable()
+      export class ModalService {
+        constructor(private modalService: NgbModal) {}
+      
+        openModal(data: any): Promise<any> {
+          const modalRef = this.modalService.open(ModalContentComponent);
+          modalRef.componentInstance.data = data; // Passing data to the modal
+      
+          return modalRef.result
+            .then(result => {
+              console.log('Modal closed with:', result);
+              return result; // Sending data back from the modal
+            })
+            .catch(reason => {
+              console.error('Modal dismissed:', reason);
+            });
+        }
+      }
+            `
+          },
+          {
+            "filename": "parent-component.ts",
+            "title": "Parent Component",
+            "description": "Parent component that opens the modal and receives the result data when the modal is closed.",
+            "code": `
+      import { Component } from '@angular/core';
+      import { ModalService } from './modal-service';
+      
+      @Component({
+        selector: 'app-parent-component',
+        templateUrl: './parent-component.html',
+        providers: [ModalService]
+      })
+      export class ParentComponent {
+        resultData: any;
+      
+        constructor(private modalService: ModalService) {}
+      
+        openModal() {
+          const dataToSend = { name: 'John', age: 30 };
+          
+          this.modalService.openModal(dataToSend).then(result => {
+            this.resultData = result; // Data received from the modal
+          });
+        }
+      }
+            `
+          },
+          {
+            "filename": "parent-component.html",
+            "title": "Parent Component Template",
+            "description": "HTML template for the parent component that triggers the modal and displays the result.",
+            "code": `
+      <button class="btn btn-primary" (click)="openModal()">Open Modal</button>
+      
+      <div *ngIf="resultData">
+        <h3>Modal Result</h3>
+        <p>Name: {{ resultData?.name }}</p>
+        <p>Age: {{ resultData?.age }}</p>
+      </div>
+            `
+          },
+          {
+            "filename": "modal-content.component.ts",
+            "title": "Modal Content Component",
+            "description": "The content component that will be displayed in the modal, receiving data from the parent and sending data back.",
+            "code": `
+      import { Component, Input } from '@angular/core';
+      import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+      
+      @Component({
+        selector: 'app-modal-content',
+        templateUrl: './modal-content.component.html'
+      })
+      export class ModalContentComponent {
+        @Input() data: any; // Data received from the parent component
+      
+        constructor(public activeModal: NgbActiveModal) {}
+      
+        closeModal() {
+          this.activeModal.close({ name: 'Jane', age: 25 }); // Sending data back when modal closes
+        }
+      
+        dismissModal() {
+          this.activeModal.dismiss('Modal dismissed');
+        }
+      }
+            `
+          },
+          {
+            "filename": "modal-content.component.html",
+            "title": "Modal Content Component Template",
+            "description": "HTML template for the modal content component that displays the received data and provides options to close or dismiss the modal.",
+            "code": `
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="dismissModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Received Name: {{ data?.name }}</p>
+        <p>Received Age: {{ data?.age }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="dismissModal()">Dismiss</button>
+        <button type="button" class="btn btn-primary" (click)="closeModal()">Close with Data</button>
+      </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "ng-bootstrap Modal Popup with ngModel in Same Component",
+        "description": "This example demonstrates how to open, close, and pass values using ngModel in an ng-bootstrap modal within the same component.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "modal-in-same-component.ts",
+            "title": "Component with Modal Logic",
+            "description": "This component contains the logic to open and close the modal, and uses ngModel for data binding.",
+            "code": `
+      import { Component } from '@angular/core';
+      import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+      
+      @Component({
+        selector: 'app-modal-in-same-component',
+        templateUrl: './modal-in-same-component.html'
+      })
+      export class ModalInSameComponent {
+        modalRef: NgbModalRef | null = null;
+        data = { name: '', age: null }; // ngModel binding object
+      
+        constructor(private modalService: NgbModal) {}
+      
+        openModal(content: any) {
+          this.modalRef = this.modalService.open(content);
+        }
+      
+        closeModal() {
+          if (this.modalRef) {
+            this.modalRef.close(); // Close the modal programmatically
+          }
+        }
+      
+        dismissModal() {
+          if (this.modalRef) {
+            this.modalRef.dismiss(); // Dismiss the modal programmatically
+          }
+        }
+      
+        // This method is triggered when the modal is closed
+        onModalSubmit() {
+          // You can handle form submission or any other logic here
+          console.log('Submitted Data:', this.data);
+          this.closeModal();
+        }
+      }
+            `
+          },
+          {
+            "filename": "modal-in-same-component.html",
+            "title": "Template with Modal and Form Binding",
+            "description": "HTML template that contains the modal structure and binds form fields using ngModel.",
+            "code": `
+      <button class="btn btn-primary" (click)="openModal(modalContent)">Open Modal</button>
+      
+      <!-- Modal content -->
+      <ng-template #modalContent let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Title</h4>
+          <button type="button" class="close" aria-label="Close" (click)="dismissModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input id="name" type="text" class="form-control" [(ngModel)]="data.name" name="name" />
+            </div>
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input id="age" type="number" class="form-control" [(ngModel)]="data.age" name="age" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="dismissModal()">Dismiss</button>
+          <button type="button" class="btn btn-primary" (click)="onModalSubmit()">Submit</button>
+        </div>
+      </ng-template>
+      
+      <!-- Display submitted data -->
+      <div *ngIf="data.name || data.age">
+        <h3>Submitted Data</h3>
+        <p>Name: {{ data.name }}</p>
+        <p>Age: {{ data.age }}</p>
+      </div>
+            `
+          }
+        ]
+      },{
+        "title": "TypeScript Concepts in Angular",
+        "description": "This group contains Angular examples demonstrating the use of model, interface, extends, typeof, constant, readonly constant, and enum in an Angular context.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "user.model.ts",
+            "title": "Model Example in Angular",
+            "description": "This example shows how to create and use a User model class in an Angular component.",
+            "code": `
+      export class User {
+        constructor(
+          public id: number,
+          public name: string,
+          public email: string
+        ) {}
+      }
+      
+      // In a component:
+      import { Component } from '@angular/core';
+      import { User } from './user.model';
+      
+      @Component({
+        selector: 'app-user',
+        template: '<p>{{ user.name }} ({{ user.email }})</p>'
+      })
+      export class UserComponent {
+        user: User = new User(1, 'John Doe', 'john.doe@example.com');
+      }
+            `
+          },
+          {
+            "filename": "user.interface.ts",
+            "title": "Interface Example in Angular",
+            "description": "An interface defining the structure of a User object and its use in a service.",
+            "code": `
+      export interface IUser {
+        id: number;
+        name: string;
+        email: string;
+      }
+      
+      // In a service:
+      import { Injectable } from '@angular/core';
+      import { IUser } from './user.interface';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class UserService {
+        getUser(): IUser {
+          return { id: 1, name: 'John Doe', email: 'john.doe@example.com' };
+        }
+      }
+      
+      // In a component:
+      import { Component } from '@angular/core';
+      import { UserService } from './user.service';
+      import { IUser } from './user.interface';
+      
+      @Component({
+        selector: 'app-user-info',
+        template: '<p>{{ user?.name }} ({{ user?.email }})</p>'
+      })
+      export class UserInfoComponent {
+        user: IUser;
+      
+        constructor(private userService: UserService) {
+          this.user = this.userService.getUser();
+        }
+      }
+            `
+          },
+          {
+            "filename": "admin.model.ts",
+            "title": "Extends Example in Angular",
+            "description": "The Admin model extends the User model to add additional properties and usage in an Angular component.",
+            "code": `
+      import { User } from './user.model';
+      
+      export class Admin extends User {
+        constructor(
+          id: number,
+          name: string,
+          email: string,
+          public adminLevel: number
+        ) {
+          super(id, name, email);
+        }
+      }
+      
+      // In a component:
+      import { Component } from '@angular/core';
+      import { Admin } from './admin.model';
+      
+      @Component({
+        selector: 'app-admin',
+        template: '<p>{{ admin.name }} is Admin Level: {{ admin.adminLevel }}</p>'
+      })
+      export class AdminComponent {
+        admin: Admin = new Admin(1, 'Admin User', 'admin@example.com', 5);
+      }
+            `
+          },
+          {
+            "filename": "typeof-example.ts",
+            "title": "Typeof Example in Angular",
+            "description": "This example demonstrates how to use typeof to infer types in an Angular component.",
+            "code": `
+      const user = {
+        id: 1,
+        name: 'John Doe',
+        email: 'john.doe@example.com'
+      };
+      
+      type UserType = typeof user;
+      
+      @Component({
+        selector: 'app-user-card',
+        template: '<p>{{ newUser.name }} ({{ newUser.email }})</p>'
+      })
+      export class UserCardComponent {
+        newUser: UserType = {
+          id: 2,
+          name: 'Jane Doe',
+          email: 'jane.doe@example.com'
+        };
+      }
+            `
+          },
+          {
+            "filename": "constant-example.ts",
+            "title": "Constant Example in Angular",
+            "description": "This example demonstrates how to declare and use a constant in Angular.",
+            "code": `
+      export const API_URL = 'https://api.example.com';
+      
+      // In a service:
+      import { Injectable } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+      import { API_URL } from './constants';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class ApiService {
+        constructor(private http: HttpClient) {}
+      
+        fetchData() {
+          return this.http.get(API_URL + '/data');
+        }
+      }
+            `
+          },
+          {
+            "filename": "readonly-constant-example.ts",
+            "title": "Read-only Constant Example in Angular",
+            "description": "This example demonstrates how to declare and use a read-only constant in an Angular service.",
+            "code": `
+      export class Config {
+        public readonly API_KEY = '12345-ABCDE';
+      }
+      
+      // In a service:
+      import { Injectable } from '@angular/core';
+      import { Config } from './config';
+      
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class ConfigService {
+        constructor(private config: Config) {}
+      
+        getApiKey() {
+          return this.config.API_KEY;
+        }
+      }
+            `
+          },
+          {
+            "filename": "enum-example.ts",
+            "title": "Enum Example in Angular",
+            "description": "This example demonstrates how to use an enum in Angular and pass it to a component.",
+            "code": `
+      export enum UserRole {
+        Admin = 'Admin',
+        User = 'User',
+        Guest = 'Guest'
+      }
+      
+      // In a component:
+      import { Component } from '@angular/core';
+      import { UserRole } from './user-role.enum';
+      
+      @Component({
+        selector: 'app-user-role',
+        template: '<p>The current user role is {{ currentUserRole }}</p>'
+      })
+      export class UserRoleComponent {
+        currentUserRole: UserRole = UserRole.Admin;
+      }
+            `
+          }
+        ]
+      },
+      {
+        "title": "MaxLength Directive in Angular",
+        "description": "This example demonstrates how to create and use a custom MaxLength directive in Angular to limit the length of input fields.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "maxlength.directive.ts",
+            "title": "MaxLength Directive Code",
+            "description": "This custom directive limits the maximum length of input fields.",
+            "code": `
+      import { Directive, HostListener, Input } from '@angular/core';
+      import { NgControl } from '@angular/forms';
+      
+      @Directive({
+        selector: '[appMaxLength]'
+      })
+      export class MaxLengthDirective {
+        @Input() appMaxLength!: number;
+      
+        constructor(private control: NgControl) {}
+      
+        @HostListener('input', ['$event'])
+        onInputChange(event: Event): void {
+          const input = event.target as HTMLInputElement;
+          const currentValue = input.value;
+      
+          if (currentValue.length > this.appMaxLength) {
+            this.control.control?.setValue(currentValue.substring(0, this.appMaxLength));
+          }
+        }
+      }
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "Module Registration",
+            "description": "This example shows how to declare the MaxLength directive in the Angular module.",
+            "code": `
+      import { NgModule } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { FormsModule } from '@angular/forms';
+      import { AppComponent } from './app.component';
+      import { MaxLengthDirective } from './maxlength.directive';
+      
+      @NgModule({
+        declarations: [
+          AppComponent,
+          MaxLengthDirective
+        ],
+        imports: [
+          BrowserModule,
+          FormsModule
+        ],
+        providers: [],
+        bootstrap: [AppComponent]
+      })
+      export class AppModule { }
+            `
+          },
+          {
+            "filename": "app.component.ts",
+            "title": "Component Using MaxLength Directive",
+            "description": "This component uses the custom MaxLength directive to limit the input field length.",
+            "code": `
+      import { Component } from '@angular/core';
+      
+      @Component({
+        selector: 'app-root',
+        template: \`
+          <div>
+            <label for="name">Name (Max 10 characters): </label>
+            <input id="name" type="text" [(ngModel)]="name" appMaxLength="10" />
+            <p>Entered Name: {{ name }}</p>
+          </div>
+        \`,
+      })
+      export class AppComponent {
+        name: string = '';
+      }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "HTML Template with MaxLength Directive",
+            "description": "This HTML template shows the use of the MaxLength directive on an input field.",
+            "code": `
+      <div>
+        <label for="name">Name (Max 10 characters): </label>
+        <input id="name" type="text" [(ngModel)]="name" appMaxLength="10" />
+        <p>Entered Name: {{ name }}</p>
+      </div>
+            `
+          }
+        ]
+      },
+      {
+        "title": "Angular Inbuilt Pipes and String Functions with Sample Outputs",
+        "description": "This example covers Angular inbuilt pipes like DatePipe, DecimalPipe, PercentPipe, CurrencyPipe, and string functions like uppercase, lowercase, slice, and splice. Each example shows its usage and formatted outputs.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.html",
+            "title": "HTML Example for Inbuilt Pipes and String Functions",
+            "description": "This template includes Angular pipes and string functions for handling date formatting, numbers, and string manipulations like uppercase, lowercase, slice, and more.",
+            "code": `
+      <!-- Date Pipe Examples -->
+      <h3>DatePipe</h3>
+      <p>Short Date: {{ today | date:'short' }}</p>
+      <p>Long Date: {{ today | date:'longDate' }}</p>
+      <p>Custom Date (MM-dd-yyyy): {{ today | date:'MM-dd-yyyy' }}</p>
+      <p>Full DateTime: {{ today | date:'full' }}</p>
+      
+      <!-- Decimal Pipe Examples -->
+      <h3>DecimalPipe</h3>
+      <p>Default Decimal: {{ piValue | number }}</p>
+      <p>1 Decimal Place: {{ piValue | number:'1.0-1' }}</p>
+      <p>2 Decimal Places: {{ piValue | number:'1.0-2' }}</p>
+      <p>Large Number with Commas: {{ largeNumber | number:'1.0-0' }}</p>
+      
+      <!-- Percent Pipe Examples -->
+      <h3>PercentPipe</h3>
+      <p>Basic Percent: {{ decimalValue | percent }}</p>
+      
+      <!-- Currency Pipe Examples -->
+      <h3>CurrencyPipe</h3>
+      <p>USD Currency: {{ moneyValue | currency:'USD' }}</p>
+      
+      <!-- String Manipulations -->
+      <h3>String Functions</h3>
+      <p>Original Text: {{ text }}</p>
+      <p>Uppercase: {{ text | uppercase }}</p>
+      <p>Lowercase: {{ text | lowercase }}</p>
+      <p>Sliced Text (0-5): {{ text | slice:0:5 }}</p>
+      <p>Splice Example: {{ spliceText }}</p>
+            `
+          },
+          {
+            "filename": "app.component.ts",
+            "title": "Component Setup for Inbuilt Pipe and String Function Examples",
+            "description": "This component initializes data for various Angular pipe examples and string manipulations like uppercase, lowercase, slice, and splice.",
+            "code": `
+      import { Component } from '@angular/core';
+      
+      @Component({
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+      })
+      export class AppComponent {
+        today: Date = new Date();
+        piValue: number = 3.14159;
+        decimalValue: number = 0.6789;
+        largeNumber: number = 123456789;
+        moneyValue: number = 2500.50;
+        text: string = 'Angular Example String';
+        spliceText: string = this.spliceExample('Angular Example String', 7, 7, 'Modified');
+      
+        // Function to demonstrate 'splice'
+        spliceExample(original: string, start: number, deleteCount: number, ...items: string[]): string {
+          const strArray = original.split('');
+          strArray.splice(start, deleteCount, ...items);
+          return strArray.join('');
+        }
+      }
+            `
+          },
+          {
+            "filename": "string-pipe-output.txt",
+            "title": "Sample Output for String Manipulations",
+            "description": "Sample output for string manipulations like uppercase, lowercase, slice, and splice showing transformed strings.",
+            "code": `
+      Original Text: Angular Example String
+      
+      Uppercase: ANGULAR EXAMPLE STRING
+      Lowercase: angular example string
+      Sliced Text (0-5): Angul
+      Splice Example: AngularModifiedString
+            `
+          },
+          {
+            "filename": "date-pipe-output.txt",
+            "title": "Sample Output for DatePipe",
+            "description": "Sample output for various DatePipe formats, showing how dates are transformed.",
+            "code": `
+      Today: 2024-10-12 (for example)
+      
+      Short Date: 10/12/24
+      Long Date: October 12, 2024
+      Custom Date (MM-dd-yyyy): 10-12-2024
+      Full DateTime: Saturday, October 12, 2024 at 12:00:00 AM GMT+5:30
+            `
+          },
+          {
+            "filename": "decimal-pipe-output.txt",
+            "title": "Sample Output for DecimalPipe",
+            "description": "Sample output for various DecimalPipe formats, showing how numbers are rounded and formatted.",
+            "code": `
+      Pi Value: 3.14159
+      
+      Default Decimal: 3.142
+      1 Decimal Place: 3.1
+      2 Decimal Places: 3.14
+      Large Number with Commas: 123,456,789
+            `
+          },
+          {
+            "filename": "percent-pipe-output.txt",
+            "title": "Sample Output for PercentPipe",
+            "description": "Sample output for PercentPipe, showing how decimal values are converted into percentage format.",
+            "code": `
+      Decimal Value: 0.6789
+      
+      Basic Percent: 67.89%
+            `
+          },
+          {
+            "filename": "currency-pipe-output.txt",
+            "title": "Sample Output for CurrencyPipe",
+            "description": "Sample output for CurrencyPipe, showing how money values are formatted in different currencies.",
+            "code": `
+      Money Value: 2500.50
+      
+      USD Currency: $2,500.50
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "Module Setup for Pipes and String Functions",
+            "description": "Module setup for HttpClientModule (if needed for API calls) and importing required Angular modules.",
+            "code": `
+      import { NgModule } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { AppComponent } from './app.component';
+      
+      @NgModule({
+        declarations: [AppComponent],
+        imports: [BrowserModule],
+        bootstrap: [AppComponent],
+      })
+      export class AppModule {}
+            `
+          }
+        ]
+      },
+      {
+        "title": "RxJS Operators in Angular with Full Examples",
+        "description": "This example covers RxJS operators like switchMap, mergeMap, concatMap, exhaustMap, and inbuilt operators such as map, filter, tap, catchError, retry, etc. Each concept is explained with examples using a single .ts and .html file, including sample outputs.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app.component.ts",
+            "title": "Component Setup for RxJS Operators",
+            "description": `
+            1) switchMap: This operator switches to a new observable whenever a new emission occurs, canceling previous inner observables. Useful for HTTP requests where only the latest result matters. 
+            2) mergeMap: This operator maps each value to an observable and flattens them concurrently without canceling previous ones. Useful for parallel processing.
+            3) concatMap: This operator waits for each observable to complete before subscribing to the next. Useful for ensuring that observables are handled sequentially.
+            4) exhaustMap: This operator ignores new emissions until the current observable completes. Useful for ignoring duplicate API calls while a request is in progress.
+            5) map: Transforms each value from the source observable based on a provided function. Useful for transforming data on the fly.
+            6) filter: Filters values emitted by the source observable based on a condition. Useful for removing unwanted values.
+            7) tap: Intercepts emissions to perform side-effects without modifying them. Often used for logging or debugging.
+            8) retry: Automatically retries the source observable in case of an error. Useful for network requests that may fail intermittently.
+            9) catchError: Catches errors and returns a new observable. Useful for handling errors gracefully in streams.
+            `,
+            "code": `
+      import { Component } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+      import { of, from, interval, Observable } from 'rxjs';
+      import { map, filter, tap, catchError, retry, switchMap, mergeMap, concatMap, exhaustMap, take } from 'rxjs/operators';
+      
+      @Component({
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+      })
+      export class AppComponent {
+        data: any = [];
+        apiData: any = [];
+        operatorResults: any = {
+          switchMap: [],
+          mergeMap: [],
+          concatMap: [],
+          exhaustMap: []
+        };
+        
+        constructor(private http: HttpClient) {}
+      
+        // Example using switchMap
+        switchMapExample() {
+          const numbers$ = from([1, 2, 3]);
+          numbers$.pipe(
+            switchMap((id) => this.fetchData(id))
+          ).subscribe(result => {
+            this.operatorResults.switchMap.push(result);
+          });
+        }
+      
+        // Example using mergeMap
+        mergeMapExample() {
+          const numbers$ = from([1, 2, 3]);
+          numbers$.pipe(
+            mergeMap((id) => this.fetchData(id))
+          ).subscribe(result => {
+            this.operatorResults.mergeMap.push(result);
+          });
+        }
+      
+        // Example using concatMap
+        concatMapExample() {
+          const numbers$ = from([1, 2, 3]);
+          numbers$.pipe(
+            concatMap((id) => this.fetchData(id))
+          ).subscribe(result => {
+            this.operatorResults.concatMap.push(result);
+          });
+        }
+      
+        // Example using exhaustMap
+        exhaustMapExample() {
+          const numbers$ = from([1, 2, 3]);
+          numbers$.pipe(
+            exhaustMap((id) => this.fetchData(id))
+          ).subscribe(result => {
+            this.operatorResults.exhaustMap.push(result);
+          });
+        }
+      
+        // Helper function to simulate an API call
+        fetchData(id: number): Observable<any> {
+          return this.http.get(\`https://jsonplaceholder.typicode.com/posts/\${id}\`);
+        }
+      
+        // Example of map operator
+        mapExample() {
+          const numbers$ = of(1, 2, 3, 4);
+          numbers$.pipe(
+            map(value => value * 10)
+          ).subscribe(result => {
+            console.log('Map Result:', result);
+          });
+        }
+      
+        // Example of filter operator
+        filterExample() {
+          const numbers$ = of(1, 2, 3, 4, 5, 6);
+          numbers$.pipe(
+            filter(value => value % 2 === 0)
+          ).subscribe(result => {
+            console.log('Filter Result:', result);
+          });
+        }
+      
+        // Example of tap operator
+        tapExample() {
+          const numbers$ = of(1, 2, 3);
+          numbers$.pipe(
+            tap(value => console.log('Before Multiply:', value)),
+            map(value => value * 2),
+            tap(value => console.log('After Multiply:', value))
+          ).subscribe();
+        }
+      
+        // Example of retry and catchError
+        retryExample() {
+          this.http.get('https://jsonplaceholder.typicode.com/invalid-url').pipe(
+            retry(3),
+            catchError(error => {
+              console.error('Error:', error);
+              return of('Error occurred');
+            })
+          ).subscribe(result => {
+            console.log('Retry Result:', result);
+          });
+        }
+      
+        // Trigger all operator examples
+        runAllExamples() {
+          this.switchMapExample();
+          this.mergeMapExample();
+          this.concatMapExample();
+          this.exhaustMapExample();
+          this.mapExample();
+          this.filterExample();
+          this.tapExample();
+          this.retryExample();
+        }
+      }
+            `
+          },
+          {
+            "filename": "app.component.html",
+            "title": "HTML Example for Displaying RxJS Operator Results",
+            "description": "This template shows how the results of various RxJS operator examples are displayed, along with API data being fetched dynamically.",
+            "code": `
+      <div>
+        <h2>RxJS Operator Examples</h2>
+        <button (click)="runAllExamples()">Run All Examples</button>
+      
+        <h3>1) switchMap</h3>
+        <pre>{{ operatorResults.switchMap | json }}</pre>
+      
+        <h3>2) mergeMap</h3>
+        <pre>{{ operatorResults.mergeMap | json }}</pre>
+      
+        <h3>3) concatMap</h3>
+        <pre>{{ operatorResults.concatMap | json }}</pre>
+      
+        <h3>4) exhaustMap</h3>
+        <pre>{{ operatorResults.exhaustMap | json }}</pre>
+      
+        <h3>5) Map Operator</h3>
+        <p>Check the console for 'Map Result'.</p>
+      
+        <h3>6) Filter Operator</h3>
+        <p>Check the console for 'Filter Result'.</p>
+      
+        <h3>7) Tap Operator</h3>
+        <p>Check the console for 'Tap Operator' output.</p>
+      
+        <h3>8) Retry and CatchError</h3>
+        <p>Check the console for 'Retry Result' after multiple attempts.</p>
+      </div>
+            `
+          },
+          {
+            "filename": "rxjs-operator-output.txt",
+            "title": "Sample Output for RxJS Operators",
+            "description": "This file contains a sample output for switchMap, mergeMap, concatMap, and exhaustMap operator results.",
+            "code": `
+      switchMap Result: [
+        { userId: 1, id: 1, title: 'Sample Title 1', body: 'Sample Body 1' },
+        { userId: 1, id: 2, title: 'Sample Title 2', body: 'Sample Body 2' },
+        { userId: 1, id: 3, title: 'Sample Title 3', body: 'Sample Body 3' }
+      ]
+      
+      mergeMap Result: [
+        { userId: 1, id: 1, title: 'Sample Title 1', body: 'Sample Body 1' },
+        { userId: 1, id: 2, title: 'Sample Title 2', body: 'Sample Body 2' },
+        { userId: 1, id: 3, title: 'Sample Title 3', body: 'Sample Body 3' }
+      ]
+      
+      concatMap Result: [
+        { userId: 1, id: 1, title: 'Sample Title 1', body: 'Sample Body 1' },
+        { userId: 1, id: 2, title: 'Sample Title 2', body: 'Sample Body 2' },
+        { userId: 1, id: 3, title: 'Sample Title 3', body: 'Sample Body 3' }
+      ]
+      
+      exhaustMap Result: [
+        { userId: 1, id: 1, title: 'Sample Title 1', body: 'Sample Body 1' },
+        { userId: 1, id: 2, title: 'Sample Title 2', body: 'Sample Body 2' },
+        { userId: 1, id: 3, title: 'Sample Title 3', body: 'Sample Body 3' }
+      ]
+            `
+          }]
+        },
+        {
+          "title": "Reusable Alert Message Component with Classes and Click Event",
+          "description": "This example demonstrates how to create a reusable alert message component in Angular. The component accepts dynamic classes, message content, and emits an event when clicked.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "alert-message.component.ts",
+              "title": "Reusable Alert Message Component",
+              "description": `
+              1) Create a reusable alert component that accepts inputs for message, alert classes, and close event.
+              2) Use @Input() to dynamically accept alert message and class names.
+              3) Emit an event when the alert is clicked.
+              `,
+              "code": `
+        import { Component, Input, Output, EventEmitter } from '@angular/core';
+        
+        @Component({
+          selector: 'app-alert-message',
+          template: \`
+            <div 
+              [ngClass]="alertClasses"
+              (click)="onAlertClick()"
+              role="alert"
+              class="alert"
+            >
+              {{ message }}
+            </div>
+          \`
+        })
+        export class AlertMessageComponent {
+          @Input() message: string = 'This is an alert message!';
+          @Input() alertClasses: string[] = ['alert-primary'];
+          @Output() alertClick = new EventEmitter<void>();
+        
+          onAlertClick() {
+            this.alertClick.emit();
+          }
+        }
+              `
+            },
+            {
+              "filename": "app.component.ts",
+              "title": "Parent Component Using Reusable Alert",
+              "description": `
+              1) The parent component uses the reusable alert component, passing dynamic inputs for the message and alert classes.
+              2) A click event handler is added to handle the alert click action.
+              `,
+              "code": `
+        import { Component } from '@angular/core';
+        
+        @Component({
+          selector: 'app-root',
+          templateUrl: './app.component.html',
+        })
+        export class AppComponent {
+          alertMessage: string = 'This is a warning alert!';
+          alertClasses: string[] = ['alert-warning'];
+        
+          onAlertClicked() {
+            console.log('Alert was clicked!');
+          }
+        }
+              `
+            },
+            {
+              "filename": "app.component.html",
+              "title": "HTML for Parent Component",
+              "description": `
+              1) The parent component renders the reusable alert component, passing in the dynamic alert message and alert classes via [message] and [alertClasses] inputs.
+              2) The alertClick event is handled by the (alertClick) output, executing the click handler in the parent.
+              `,
+              "code": `
+        <div class="container">
+          <h2>Reusable Alert Example</h2>
+          <app-alert-message
+            [message]="alertMessage"
+            [alertClasses]="alertClasses"
+            (alertClick)="onAlertClicked()"
+          ></app-alert-message>
+        </div>
+              `
+            },
+            {
+              "filename": "app.component.css",
+              "title": "Custom CSS for Alerts",
+              "description": "Custom CSS for different alert types, using Bootstrap's alert styles for demonstration. These can be extended with additional classes.",
+              "code": `
+        .alert {
+          padding: 15px;
+          margin-bottom: 20px;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        .alert-primary {
+          background-color: #cce5ff;
+          border-color: #b8daff;
+          color: #004085;
+        }
+        
+        .alert-warning {
+          background-color: #fff3cd;
+          border-color: #ffeeba;
+          color: #856404;
+        }
+        
+        .alert-danger {
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+          color: #721c24;
+        }
+              `
+            },
+            {
+              "filename": "app.module.ts",
+              "title": "Module Setup for Reusable Alert",
+              "description": "Module setup for the reusable alert message component, importing Angular modules and declaring the component.",
+              "code": `
+        import { NgModule } from '@angular/core';
+        import { BrowserModule } from '@angular/platform-browser';
+        import { AppComponent } from './app.component';
+        import { AlertMessageComponent } from './alert-message/alert-message.component';
+        
+        @NgModule({
+          declarations: [
+            AppComponent,
+            AlertMessageComponent
+          ],
+          imports: [
+            BrowserModule
+          ],
+          providers: [],
+          bootstrap: [AppComponent]
+        })
+        export class AppModule { }
+              `
+            },
+            {
+              "filename": "output-example.txt",
+              "title": "Sample Output for Reusable Alert",
+              "description": "The output will display an alert box. Clicking on the alert will trigger the console log message 'Alert was clicked!'.",
+              "code": `
+        Sample output:
+        - A warning alert with the message "This is a warning alert!" is displayed.
+        - Clicking on the alert prints "Alert was clicked!" in the console.
+              `
+            }
+          ]
+        },
+        {
+          "title": "Reusable Filter Component with Enum for Sorting",
+          "description": "This example demonstrates how to create a reusable filter component using an enum for sorting options.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "sort.enums.ts",
+              "title": "Enum for Sort Options",
+              "description": `
+              1) Define an enum to represent sorting options in a type-safe way.
+              2) Each option corresponds to a specific sorting behavior.
+              `,
+              "code": `
+        export enum SortOption {
+          Ascending = 'ascending',
+          Descending = 'descending',
+          NoSort = 'noSort'
+        }
+              `
+            },
+            {
+              "filename": "sort.constants.ts",
+              "title": "Constant File for Sort Options",
+              "description": `
+              1) Define a constant array of sorting options using the SortOption enum.
+              2) Each object contains a label and a corresponding value for sorting.
+              `,
+              "code": `
+        import { SortOption } from './sort.enums';
+        
+        export const SORT_OPTIONS = [
+          { label: 'Ascending', value: SortOption.Ascending },
+          { label: 'Descending', value: SortOption.Descending },
+          { label: 'No Sort', value: SortOption.NoSort }
+        ];
+              `
+            },
+            {
+              "filename": "filter.component.ts",
+              "title": "Reusable Filter Component",
+              "description": `
+              1) Import the constant sorting options and loop through them to create radio buttons.
+              2) Emit the selected sorting option back to the parent component.
+              `,
+              "code": `
+        import { Component, Output, EventEmitter } from '@angular/core';
+        import { SORT_OPTIONS } from './sort.constants';
+        import { SortOption } from './sort.enums';
+        
+        @Component({
+          selector: 'app-filter',
+          template: \`
+            <div>
+              <button (click)="toggleFilter()">
+                {{ showFilter ? 'Hide' : 'Show' }} Filter Options
+              </button>
+              <div *ngIf="showFilter">
+                <h4>Sort By:</h4>
+                <label *ngFor="let option of sortOptions">
+                  <input
+                    type="radio"
+                    name="sort"
+                    [value]="option.value"
+                    (change)="onFilterChange(option.value)"
+                    [checked]="selectedFilter === option.value"
+                  />
+                  {{ option.label }}
+                </label>
+              </div>
+            </div>
+          \`
+        })
+        export class FilterComponent {
+          @Output() filterChange = new EventEmitter<SortOption>();
+        
+          showFilter = false;
+          selectedFilter: SortOption = SortOption.NoSort;
+          sortOptions = SORT_OPTIONS;
+        
+          toggleFilter() {
+            this.showFilter = !this.showFilter;
+          }
+        
+          onFilterChange(value: SortOption) {
+            this.selectedFilter = value;
+            this.filterChange.emit(value);
+          }
+        }
+              `
+            },
+            {
+              "filename": "app.component.ts",
+              "title": "Parent Component Using Reusable Filter",
+              "description": `
+              1) The parent component uses the reusable filter component and handles the emitted sorting option.
+              2) It logs the selected sorting option to the console.
+              `,
+              "code": `
+        import { Component } from '@angular/core';
+        import { SortOption } from './sort.enums';
+        
+        @Component({
+          selector: 'app-root',
+          templateUrl: './app.component.html',
+        })
+        export class AppComponent {
+          selectedFilter: SortOption = SortOption.NoSort;
+        
+          onFilterSelected(value: SortOption) {
+            this.selectedFilter = value;
+            console.log('Selected filter:', value);
+          }
+        }
+              `
+            },
+            {
+              "filename": "app.component.html",
+              "title": "HTML for Parent Component",
+              "description": `
+              1) The parent component renders the reusable filter component.
+              2) It listens for the filter change event to update the selected filter.
+              `,
+              "code": `
+        <div class="container">
+          <h2>Filter Example</h2>
+          <app-filter (filterChange)="onFilterSelected($event)"></app-filter>
+        
+          <div *ngIf="selectedFilter">
+            <h3>Selected Filter: {{ selectedFilter }}</h3>
+          </div>
+        </div>
+              `
+            },
+            {
+              "filename": "app.component.css",
+              "title": "CSS for Parent Component",
+              "description": "Basic styles for the filter component.",
+              "code": `
+        .container {
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        
+        h2 {
+          margin-bottom: 10px;
+        }
+        
+        h4 {
+          margin: 10px 0;
+        }
+              `
+            },
+            {
+              "filename": "app.module.ts",
+              "title": "Module Setup for Reusable Filter",
+              "description": "Module setup for the reusable filter component, importing Angular modules and declaring the component.",
+              "code": `
+        import { NgModule } from '@angular/core';
+        import { BrowserModule } from '@angular/platform-browser';
+        import { AppComponent } from './app.component';
+        import { FilterComponent } from './filter/filter.component';
+        
+        @NgModule({
+          declarations: [
+            AppComponent,
+            FilterComponent
+          ],
+          imports: [
+            BrowserModule
+          ],
+          providers: [],
+          bootstrap: [AppComponent]
+        })
+        export class AppModule { }
+              `
+            },
+            {
+              "filename": "output-example.txt",
+              "title": "Sample Output for Reusable Filter",
+              "description": "The output will display a button to show/hide filter options. When options are visible, radio buttons for ascending, descending, and no sort will be shown. Selecting any option will display the selected filter below.",
+              "code": `
+        Sample output:
+        - Button to Show Filter Options.
+        - Filter options are displayed with radio buttons for Ascending, Descending, and No Sort.
+        - Selecting an option updates the displayed selected filter.
+              `
+            }
+          ]
+        },
+        {
+          "title": "Reusable Blocks Using ng-template and ngTemplateOutlet",
+          "description": "This example demonstrates how to reuse blocks of code in an Angular component using ng-template and ngTemplateOutlet.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "app.component.ts",
+              "title": "Main Component with Reusable Templates",
+              "description": `
+              1) Import necessary Angular core components.
+              2) Define a component that includes reusable templates using ng-template.
+              3) Use ngTemplateOutlet to render templates dynamically in the component.
+              `,
+              "code": `
+        import { Component } from '@angular/core';
+        
+        @Component({
+          selector: 'app-root',
+          templateUrl: './app.component.html',
+          styleUrls: ['./app.component.scss']
+        })
+        export class AppComponent {
+          items = ['Item 1', 'Item 2', 'Item 3'];
+        
+          // Method to display a message for each item
+          getMessage(item: string): string {
+            return \`You selected \${item}\`;
+          }
+        }
+              `
+            },
+            {
+              "filename": "app.component.html",
+              "title": "HTML Template for Main Component",
+              "description": `
+              1) Use ng-template to define reusable blocks of code.
+              2) Utilize ngTemplateOutlet to insert the template in multiple locations.
+              `,
+              "code": `
+        <div class="container">
+          <h2>Reusable Template Example</h2>
+          
+          <!-- Define a reusable template -->
+          <ng-template #itemTemplate let-item="item">
+            <div class="item">
+              <h4>{{ item }}</h4>
+              <p>{{ getMessage(item) }}</p>
+            </div>
+          </ng-template>
+          
+          <!-- Use ngTemplateOutlet to render the template for each item -->
+          <div *ngFor="let item of items">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+          </div>
+        
+          <hr />
+        
+          <!-- Render the same template in a different context -->
+          <h3>Selected Items</h3>
+          <div *ngFor="let item of items">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+          </div>
+        </div>
+              `
+            },
+            {
+              "filename": "app.component.scss",
+              "title": "Styles for Main Component",
+              "description": "Basic styles for the reusable template.",
+              "code": `
+        .container {
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        
+        .item {
+          margin-bottom: 10px;
+        }
+        
+        h2 {
+          margin-bottom: 10px;
+        }
+        
+        h4 {
+          margin: 5px 0;
+        }
+              `
+            },
+            {
+              "filename": "output-example.txt",
+              "title": "Sample Output for Reusable Blocks",
+              "description": "The output will show a list of items along with their respective messages. The same template is reused in two different sections of the component.",
+              "code": `
+        Sample output:
+        - Heading "Reusable Template Example"
+        - List of items displayed with their messages.
+        - A horizontal rule followed by another section "Selected Items" that reuses the same item template.
+              `
+            },
+            {
+              "filename": "app.module.ts",
+              "title": "Module Setup for the Component",
+              "description": "Module setup to include the main component.",
+              "code": `
+        import { NgModule } from '@angular/core';
+        import { BrowserModule } from '@angular/platform-browser';
+        import { AppComponent } from './app.component';
+        
+        @NgModule({
+          declarations: [
+            AppComponent
+          ],
+          imports: [
+            BrowserModule
+          ],
+          providers: [],
+          bootstrap: [AppComponent]
+        })
+        export class AppModule { }
+              `
+            }
+          ]
+        }
+        
+                
+      
+      
+      
+      
+      
+      
       
       
       
