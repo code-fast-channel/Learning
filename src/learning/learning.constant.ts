@@ -68,7 +68,8 @@ export const learningList = [
             filename: 'find.js',
             title: 'Array Find example',
             description: `
-            1) Find returns the value of the first element in the array that satisfies the provided testing function
+            1) Find returns the value of the first element in the array that satisfies the provided testing function.
+            2) if condition satisfies it will return value otherwise it will return undefined.
             `,
             code: `
                   let arr = [5, 6, 8, 9, 33]; // new array
@@ -85,6 +86,8 @@ export const learningList = [
             title: 'Array Find Last example',
             description: `
             1) Find Last returns the value of the last element in the array that satisfies the provided testing function
+            2) if condition satisfies it will return index otherwise it will return -1.
+
             `,
             code: `
                   let arr = [5, 6, 8, 9, 33]; // new array
@@ -111,6 +114,7 @@ export const learningList = [
             title: 'Array Find Index example',
             description: `
             1) Find Index returns the index of the first element in the array that satisfies the provided testing function
+            2) if condition satisfies it will return value otherwise it will return undefined.
             `,
             code: `
                   let arr = [5, 6, 8, 9, 33]; // new array
@@ -127,6 +131,7 @@ export const learningList = [
             title: 'Array Find Last Index example',
             description: `
             1) Find Last Index returns the index of the last element in the array that satisfies the provided testing function
+            2) if condition satisfies it will return index otherwise it will return -1.
             `,
             code: `
                   let arr = [5, 6, 8, 9, 33]; // new array
@@ -3092,6 +3097,94 @@ export const learningList = [
         ]
       },
       {
+        "title": "Preloading, Eager Loading, and Lazy Loading in Angular",
+        "description": "This document demonstrates how to implement and understand different module loading strategies in Angular, specifically Preloading, Eager Loading, and Lazy Loading. These strategies help optimize application performance by controlling when feature modules are loaded. Preloading improves navigation by loading in the background, eager loading is used for essential modules loaded at the application start, and lazy loading defers module loading until it's necessary, reducing the initial bundle size.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module with Lazy Loading",
+            "description": "Lazy Loading is a strategy where modules are loaded only when needed, i.e., when the user navigates to the route that requires that module. It reduces the initial bundle size, making the application load faster. In this example, the 'Home' and 'About' feature modules are loaded lazily. The loadChildren property dynamically imports the module when the respective route is activated.",
+            "code": `
+            import { NgModule } from '@angular/core';
+            import { RouterModule, Routes } from '@angular/router';
+      
+            const routes: Routes = [
+              { path: '', redirectTo: '/home', pathMatch: 'full' },
+              { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+              { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
+              { path: '**', redirectTo: '/home' }
+            ];
+      
+            @NgModule({
+              imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+              exports: [RouterModule]
+            })
+            export class AppRoutingModule { }
+            `
+          },
+          {
+            "filename": "preload-strategy.ts",
+            "title": "Custom Preloading Strategy",
+            "description": "Preloading is a strategy to load modules in the background after the application has been initialized, which helps improve navigation without impacting the initial load time significantly. In this example, a custom preloading strategy is implemented. The preload method determines whether a module should be preloaded based on the 'preload' data property defined in the route configuration. This offers more fine-grained control over which modules are preloaded and when.",
+            "code": `
+            import { PreloadingStrategy, Route } from '@angular/router';
+            import { Observable, of } from 'rxjs';
+      
+            export class CustomPreloadStrategy implements PreloadingStrategy {
+              preload(route: Route, load: () => Observable<any>): Observable<any> {
+                return route.data && route.data['preload'] ? load() : of(null);
+              }
+            }
+            `
+          },
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module with Custom Preloading",
+            "description": "This example shows how to use the custom preloading strategy. In the routes configuration, we can specify the 'preload' property in the data object of certain routes. For instance, the 'Home' route is set to preload. The CustomPreloadStrategy will ensure that modules with the 'preload: true' flag are loaded in the background after the initial application load, enhancing performance without increasing the startup time.",
+            "code": `
+            import { NgModule } from '@angular/core';
+            import { RouterModule, Routes } from '@angular/router';
+            import { CustomPreloadStrategy } from './preload-strategy';
+      
+            const routes: Routes = [
+              { path: '', redirectTo: '/home', pathMatch: 'full' },
+              { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), data: { preload: true } },
+              { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
+              { path: '**', redirectTo: '/home' }
+            ];
+      
+            @NgModule({
+              imports: [RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadStrategy })],
+              exports: [RouterModule]
+            })
+            export class AppRoutingModule { }
+            `
+          },
+          {
+            "filename": "eager-loading.module.ts",
+            "title": "Eager Loading Feature Module",
+            "description": "Eager Loading is a strategy where modules are loaded immediately when the application starts. This is commonly used for core modules that are necessary for the initial application state. While eager loading can increase the initial load time, it ensures that essential modules are available as soon as the app is initialized. In this example, the 'EagerComponent' is eagerly loaded as part of the 'EagerLoadingModule', making it available immediately when the application starts.",
+            "code": `
+            import { NgModule } from '@angular/core';
+            import { CommonModule } from '@angular/common';
+            import { RouterModule, Routes } from '@angular/router';
+            import { EagerComponent } from './eager.component';
+      
+            const routes: Routes = [
+              { path: 'eager', component: EagerComponent }
+            ];
+      
+            @NgModule({
+              declarations: [EagerComponent],
+              imports: [CommonModule, RouterModule.forChild(routes)]
+            })
+            export class EagerLoadingModule { }
+            `
+          }
+        ]
+      },      
+      {
         "title": "Lazy Loading Modules in Angular",
         "isGroup": true,
         "description": "Lazy loading is a design pattern in Angular that allows you to load modules only when they are required. This helps in optimizing the performance of your application by reducing the initial loading time.",
@@ -5498,6 +5591,7 @@ export class DynamicValidationAddRemovegsComponent implements OnInit {
         deleteItem(id: number) {
           this.itemService.deleteItem(id).subscribe(() => {
             this.items = this.items.filter(item => item.id !== id); // Remove item from local array
+            this.loadItems(); // Once delete completed we need to call api and get latest data.
           });
         }
       }
@@ -5601,6 +5695,266 @@ export class DynamicValidationAddRemovegsComponent implements OnInit {
           }
         ]
       },
+      {
+        "title": "Angular CRUD with JSON Placeholder API - Add/Edit Component",
+        "description": "This example demonstrates how to perform both adding and editing items in a single Add/Edit component using a JSON Placeholder API.",
+        "isGroup": true,
+        "codeLists": [
+          {
+            "filename": "item.service.ts",
+            "title": "Item Service",
+            "description": "This service handles API calls for CRUD operations using the JSON Placeholder API.",
+            "code": `
+            // item.service.ts
+            import { Injectable } from '@angular/core';
+            import { HttpClient } from '@angular/common/http';
+            import { Observable } from 'rxjs';
+            
+            @Injectable({
+              providedIn: 'root'
+            })
+            export class ItemService {
+              private apiUrl = 'https://jsonplaceholder.typicode.com/users'; // JSON Placeholder API URL
+            
+              constructor(private http: HttpClient) {}
+            
+              // CREATE: Add a new item
+              addItem(item: any): Observable<any> {
+                return this.http.post(this.apiUrl, item);
+              }
+            
+              // READ: Get all items
+              getItems(): Observable<any[]> {
+                return this.http.get<any[]>(this.apiUrl);
+              }
+            
+              // UPDATE: Update an existing item
+              updateItem(item: any): Observable<any> {
+                return this.http.put(\`\${this.apiUrl}/\${item.id}\`, item);
+              }
+            
+              // DELETE: Remove an item
+              deleteItem(id: number): Observable<any> {
+                return this.http.delete(\`\${this.apiUrl}/\${id}\`);
+              }
+            }
+            `
+          },
+          {
+            "filename": "list.component.ts",
+            "title": "List Component",
+            "description": "This component displays the list of items and allows editing and deleting.",
+            "code": `
+            // list.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { ItemService } from './item.service';
+            import { Router } from '@angular/router';
+            
+            @Component({
+              selector: 'app-list',
+              templateUrl: './list.component.html',
+              styleUrls: ['./list.component.css']
+            })
+            export class ListComponent implements OnInit {
+              items: any[] = []; // Array to hold items
+            
+              constructor(private itemService: ItemService, private router: Router) {}
+            
+              ngOnInit() {
+                this.loadItems(); // Load items on component initialization
+              }
+            
+              // Load items from the service
+              loadItems() {
+                this.itemService.getItems().subscribe(data => {
+                  this.items = data; // Populate items with API data
+                });
+              }
+            
+              // Navigate to the Add/Edit component for editing
+              editItem(item: any) {
+                this.router.navigate(['/add', item.id]); // Navigate to Add component with item ID
+              }
+            
+              // Delete an item
+              deleteItem(id: number) {
+                this.itemService.deleteItem(id).subscribe(() => {
+                  this.items = this.items.filter(item => item.id !== id); // Remove item from local array
+                  this.loadItems(); // Refresh the list
+                });
+              }
+            }
+            `
+          },
+          {
+            "filename": "list.component.html",
+            "title": "List Component Template",
+            "description": "The HTML template for displaying the list of items.",
+            "code": `
+            <!-- list.component.html -->
+            <ul>
+              <li *ngFor="let item of items">
+                {{ item.name }} - {{ item.email }} - {{ item.age }}
+                <button (click)="editItem(item)">Edit</button>
+                <button (click)="deleteItem(item.id)">Delete</button>
+              </li>
+            </ul>
+            `
+          },
+          {
+            "filename": "add-edit.component.ts",
+            "title": "Add/Edit Component",
+            "description": "This component handles both adding a new item and editing an existing item.",
+            "code": `
+            // add-edit.component.ts
+            import { Component, OnInit } from '@angular/core';
+            import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+            import { ItemService } from './item.service';
+            import { ActivatedRoute, Router } from '@angular/router';
+            
+            @Component({
+              selector: 'app-add-edit',
+              templateUrl: './add-edit.component.html',
+              styleUrls: ['./add-edit.component.css']
+            })
+            export class AddEditComponent implements OnInit {
+              itemForm: FormGroup; // FormGroup for the form
+              currentItemId: number | null = null; // ID of the item currently being edited
+            
+              constructor(private formBuilder: FormBuilder, private itemService: ItemService, private route: ActivatedRoute, private router: Router) {
+                this.initForm(); // Initialize the form
+              }
+            
+              ngOnInit() {
+                this.route.params.subscribe(params => {
+                  this.currentItemId = +params['id']; // Get the item ID from route parameters
+                  if (this.currentItemId) {
+                    this.loadItem(); // Load the item details for editing
+                  }
+                });
+              }
+            
+              // Initialize the reactive form using FormBuilder
+              initForm() {
+                this.itemForm = this.formBuilder.group({
+                  name: ['', Validators.required],
+                  email: ['', [Validators.required, Validators.email]],
+                  age: ['', [Validators.required, Validators.min(1)]]
+                });
+              }
+            
+              // Load the item details for the given ID
+              loadItem() {
+                this.itemService.getItems().subscribe(items => {
+                  const item = items.find(i => i.id === this.currentItemId);
+                  if (item) {
+                    this.itemForm.patchValue(item); // Populate the form with the item data
+                  }
+                });
+              }
+            
+              // Handle form submission for both adding and updating
+              submitForm() {
+                if (this.itemForm.valid) {
+                  if (this.currentItemId) {
+                    // Update the existing item
+                    this.itemService.updateItem({ ...this.itemForm.value, id: this.currentItemId }).subscribe(() => {
+                      this.router.navigate(['/list']); // Navigate to the List page after updating
+                    });
+                  } else {
+                    // Add a new item
+                    this.itemService.addItem(this.itemForm.value).subscribe(() => {
+                      this.router.navigate(['/list']); // Navigate to the List page after adding
+                    });
+                  }
+                }
+              }
+            }
+            `
+          },
+          {
+            "filename": "add-edit.component.html",
+            "title": "Add/Edit Component Template",
+            "description": "The HTML template for adding or editing items with reactive form validation.",
+            "code": `
+            <!-- add-edit.component.html -->
+            <form [formGroup]="itemForm" (ngSubmit)="submitForm()">
+              <input formControlName="name" type="text" placeholder="Name" />
+              <div *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">Name is required.</div>
+        
+              <input formControlName="email" type="email" placeholder="Email" />
+              <div *ngIf="itemForm.get('email').invalid && itemForm.get('email').touched">Enter a valid email.</div>
+        
+              <input formControlName="age" type="number" placeholder="Age" />
+              <div *ngIf="itemForm.get('age').invalid && itemForm.get('age').touched">Age is required and must be greater than 0.</div>
+        
+              <button type="submit" [disabled]="itemForm.invalid">{{ currentItemId ? 'Update' : 'Add' }}</button>
+            </form>
+            `
+          },
+          {
+            "filename": "app-routing.module.ts",
+            "title": "App Routing Module",
+            "description": "The routing module for navigating to the CRUD components, including add/edit functionality.",
+            "code": `
+            // app-routing.module.ts
+            import { NgModule } from '@angular/core';
+            import { RouterModule, Routes } from '@angular/router';
+            import { ListComponent } from './list/list.component';
+            import { AddEditComponent } from './add-edit/add-edit.component'; // Import AddEdit component
+        
+            const routes: Routes = [
+              { path: 'list', component: ListComponent },
+              { path: 'add/:id', component: AddEditComponent }, // Route for adding/editing with ID parameter
+              { path: 'add', component: AddEditComponent }, // Route for adding without ID
+              { path: '', redirectTo: '/list', pathMatch: 'full' } // Redirect to List component on load
+            ];
+        
+            @NgModule({
+              imports: [RouterModule.forRoot(routes)],
+              exports: [RouterModule]
+            })
+            export class AppRoutingModule { }
+            `
+          },
+          {
+            "filename": "app.module.ts",
+            "title": "App Module",
+            "description": "Main module of the Angular application with necessary imports.",
+            "code": `
+            // app.module.ts
+            import { NgModule } from '@angular/core';
+            import { BrowserModule } from '@angular/platform-browser';
+            import { ReactiveFormsModule } from '@angular/forms';
+            import { HttpClientModule } from '@angular/common/http';
+            import { AppRoutingModule } from './app-routing.module';
+            import { AppComponent } from './app.component';
+            import { ListComponent } from './list/list.component';
+            import { AddEditComponent } from './add-edit/add-edit.component';
+            import { ItemService } from './item.service';
+            
+            @NgModule({
+              declarations: [
+                AppComponent,
+                ListComponent,
+                AddEditComponent // Declare AddEdit component
+              ],
+              imports: [
+                BrowserModule,
+                ReactiveFormsModule,
+                HttpClientModule,
+                AppRoutingModule
+              ],
+              providers: [ItemService],
+              bootstrap: [AppComponent]
+            })
+            export class AppModule { }
+            `
+          }
+        ]
+      },
+      
+      
       {
         "title": "Angular AuthGuard Types and Examples",
         "description": "This example demonstrates various types of AuthGuard implementations in Angular to protect routes from unauthorized access, including methods for activating and deactivating routes.",
@@ -10008,7 +10362,652 @@ export class DynamicValidationAddRemovegsComponent implements OnInit {
               `
             }
           ]
+        },
+        {
+          "title": "Dynamic Element Disabling Directive in Angular",
+          "description": "This document illustrates how to create a custom directive that disables form elements based on a condition and applies styles dynamically, including cursor and opacity settings.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "app.component.html",
+              "title": "App Component HTML",
+              "description": "The template for the AppComponent demonstrating how to use the disable-elements directive with a configuration object.",
+              "code": `
+              
+<!-- Method 1 -->
+<!-- <div
+  disable-elements
+  [isDisable]="isDisabled"
+  [cursor]="'not-allowed'"
+>
+  <input type="text" placeholder="Enter text" (keyup)="ab()" />
+  <button (click)="ab()">Submit</button>
+  <select>
+    <option>Option 1</option>
+    <option>Option 2</option>
+  </select>
+</div> -->
+
+<!-- Method 2 -->
+
+<div disable-elements [config]="{ isDisable: isDisabled, cursor: 'default', opacity: '1.0' }">
+  <input type="text" (keyup)="ab()"/>
+  <button  (click)="ab()">Submit</button>
+  <select>
+    <option>Option 1</option>
+    <option>Option 2</option>
+  </select>
+</div>
+
+              `
+            },
+            {
+              "filename": "app.component.ts",
+              "title": "App Component TypeScript",
+              "description": "This component includes logic for enabling/disabling elements and handles input events.",
+              "code": `
+              import { Component, VERSION } from '@angular/core';
+        
+              @Component({
+                selector: 'my-app',
+                templateUrl: './app.component.html',
+                styleUrls: ['./app.component.css']
+              })
+              export class AppComponent {
+                name = 'Angular ' + VERSION.major;
+                isDisabled = false;
+        
+                ab() {
+                  console.log('click function');
+                }
+              }
+              `
+            },
+            {
+              "filename": "disable.directive.ts",
+              "title": "Disable Directive TypeScript",
+              "description": `
+              1) The directive that manages the enabling/disabling of input elements based on the provided configuration.
+              2) Add directive name in <b>declaration: [DisableDirective]</b> in corresponding module`,
+              "code": `
+              // <!-- Method 1 -->
+
+// import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+// @Directive({
+//   selector: '[disable-elements]'
+// })
+// export class DisableDirective implements OnChanges {
+//   @Input() isDisable = false;  // Accepts disable state
+//   @Input() cursor = 'not-allowed';  // Accepts custom cursor style
+
+//   constructor(private _el: ElementRef) {}
+
+//   ngOnChanges(): void {
+//     if(this.isDisable) {
+//       const elements = this._el.nativeElement.querySelectorAll('input, select, button');
+//       this.updateElements(elements);
+//     }
+//   }
+
+//   updateElements(elements: NodeListOf<HTMLElement>) {
+//     elements.forEach((element: any) => {
+//       element.disabled = this.isDisable;
+//       element.style.opacity = '0.9';
+//       element.style.cursor = this.isDisable ? this.cursor : 'pointer'; // Default to 'pointer' when enabled
+//     });
+//   }
+// }
+
+
+// <!-- Method 2 -->
+
+import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+@Directive({
+  selector: '[disable-elements]'
+})
+export class DisableDirective implements OnChanges {
+  @Input() config: { isDisable: boolean; cursor?: string; opacity?: string } = { isDisable: false };
+
+  constructor(private _el: ElementRef) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { isDisable = false, cursor = 'not-allowed', opacity = '0.9' } = this.config;
+    if(isDisable) {
+      const elements = this._el.nativeElement.querySelectorAll('input, select, button');
+      elements.forEach((element: any) => {
+        element.disabled = isDisable;
+        element.style.cursor = cursor;
+        element.style.opacity = opacity;
+      });
+    }
+  }
+}
+
+              `
+            }
+          ]
+        },
+        {
+          "title": "JIT, AOT, Production Build, Development Build, and Build Optimizer in Angular",
+          "description": "This document covers key concepts of Angular builds and compilation methods: Just-In-Time (JIT) and Ahead-Of-Time (AOT) compilation, along with the differences between Production and Development builds, and the Build Optimizer's role in enhancing performance in production builds. Each topic is explained with clear examples, benefits, and use cases.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "jit-compilation.ts",
+              "title": "JIT Compilation (Just-In-Time)",
+              "description": `
+              1. **On-the-fly Compilation**: JIT compiles the Angular templates in the browser when the app is run, as opposed to before running the application. This makes it convenient for development as you can immediately see changes reflected without needing a build process.2. **Faster Development Builds**: The absence of a pre-compilation step means that builds are faster during development, allowing for a quick feedback loop.
+              3. **Larger Initial Load Time**: Since the code is compiled during runtime in the browser, the initial load time of the application is longer, which is not ideal for production. 
+              4. **Ideal for Development**: JIT is commonly used in local development environments, where rapid iteration is required, and performance is less of a concern.
+              5. **No AOT Advantages**: JIT lacks the benefits of AOT, such as early error detection and smaller bundles, which make it less suitable for production use.`,
+              "code": `
+              // To use JIT compilation, Angular builds without the AOT flag.
+              // Run the following command:
+              ng serve
+        
+              // Or to explicitly disable AOT in production:
+              ng build --aot=false
+        
+              // JIT is typically used during development since it compiles code at runtime.
+              `
+            },
+            {
+              "filename": "aot-compilation.ts",
+              "title": "AOT Compilation (Ahead-Of-Time)",
+              "description": `
+              1. **Pre-compilation at Build Time**: AOT compiles the Angular templates and components during the build process. This leads to faster application load times since the code is pre-compiled before the browser runs it.
+              2. **Error Detection**: AOT catches template and binding errors at build time rather than at runtime, helping developers identify issues earlier in the development process.
+              3. **Improved Security**: AOT removes the need for the Angular compiler in the browser, reducing the attack surface by eliminating the runtime compiler.
+              4. **Smaller Bundle Size**: AOT can reduce the bundle size by removing unused code and optimizing the final build. This is achieved through tree-shaking, resulting in more efficient code.
+              5. **Recommended for Production**: Due to its advantages in performance, security, and error detection, AOT is typically used in production builds.`,
+              "code": `
+              // To use AOT compilation, enable the AOT flag:
+              ng build --aot
+        
+              // AOT compiles Angular templates and components at build time.
+              // This improves the initial load performance by eliminating the need for in-browser compilation.
+              `
+            },
+            {
+              "filename": "production-build.ts",
+              "title": "Production Build",
+              "description": `
+              1. **Optimized for Performance**: A production build applies several optimizations such as AOT compilation, minification, and tree-shaking to ensure the final application is fast and efficient. These optimizations lead to a significant reduction in load time and memory usage.
+              2. **Minification and Compression**: Production builds minify JavaScript, HTML, and CSS files to reduce their size. This reduces the overall file size, improving the download time for users.
+              3. **Tree-shaking**: Production builds automatically remove unused code (dead code) from the final bundle through a process called tree-shaking. This ensures only the necessary code is shipped.
+              4. **Error-Free Deployment**: The AOT compilation used in production helps catch errors during the build process, ensuring that the deployed app is less likely to contain template-related bugs.
+              5. **Build Optimizer for Further Refinement**: The Build Optimizer, which is enabled by default in production builds, improves the generated code by removing unnecessary Angular decorators, reducing the code's overall size.`,
+              "code": `
+              // To create a production build with Angular:
+              ng build --prod
+        
+              // The --prod flag enables multiple optimizations:
+              // 1. AOT compilation.
+              // 2. Minification of HTML, CSS, and JavaScript.
+              // 3. Tree-shaking to remove unused code.
+              // 4. Build Optimizer, which removes unnecessary parts of Angular’s codebase.
+              `
+            },
+            {
+              "filename": "development-build.ts",
+              "title": "Development Build",
+              "description": `
+              1. **Used During Development**: Development builds are used during the local development phase when performance is less of a priority, and faster build times are required. These builds include helpful debugging tools, such as source maps, and are not optimized for speed or size. 
+              2. **JIT Compilation**: Typically, development builds rely on JIT compilation, allowing for rapid iterations. The code is compiled at runtime in the browser, leading to faster build times but slower load times. 
+              3. **No Minification or Optimization**: Development builds do not include minification, compression, or tree-shaking, which means that the generated bundles are larger. This makes debugging easier but sacrifices performance. 
+              4. **Source Maps for Debugging**: Development builds include source maps, which allow developers to map the compiled code back to the original TypeScript code, making it easier to debug issues. 
+              5. **Quick Feedback Loop**: Development builds are designed to provide immediate feedback by compiling and reloading the app as changes are made.`,
+              "code": `
+              // To create a development build, use:
+              ng serve
+        
+              // This command starts the Angular development server with:
+              // - JIT compilation.
+              // - Source maps for debugging.
+              // - No minification or optimizations, which allows for faster builds but larger bundle sizes.
+              `
+            },
+            {
+              "filename": "build-optimizer.ts",
+              "title": "Build Optimizer",
+              "description": `
+              1. **Enhances Production Builds**: The Build Optimizer is a tool that works in tandem with AOT to improve the performance of production builds by making the bundles smaller and faster. 
+              2. **Tree-shaking and Dead Code Removal**: It marks Angular decorators as 'pure' functions, allowing tree-shakers to remove unnecessary code, which helps minimize the final bundle size. 
+              3. **Improved Minification**: By optimizing the generated code, the Build Optimizer enables better minification, which further reduces the size of the final JavaScript files. 
+              4. **Enabled by Default in Production**: The Build Optimizer is automatically enabled in production builds, and it plays a crucial role in ensuring that the deployed app is optimized for speed and efficiency. 
+              5. **Code Optimization for Better Performance**: The tool not only reduces the code size but also ensures that the application runs more efficiently by optimizing how Angular’s code is executed in the browser.`,
+              "code": `
+              // The Build Optimizer is enabled by default in production builds:
+              ng build --prod
+        
+              // You can explicitly enable or disable the Build Optimizer with:
+              ng build --prod --build-optimizer=true
+        
+              // It reduces the size of the generated bundles by:
+              // - Removing unnecessary Angular decorators.
+              // - Marking classes as 'pure' for better minification.
+              `
+            }
+          ]
+        },
+        {
+          "title": "Change Detection Strategy Methods in Angular",
+          "description": "This document provides an in-depth explanation of Angular's change detection strategies, including the Default and OnPush strategies, and key methods such as markForCheck() and detectChanges(). Each strategy and method is discussed in detail, explaining their impact on rendering and performance.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "default-change-detection.ts",
+              "title": "Default Change Detection Strategy",
+              "description": `
+                1) **Automatic Change Detection**: Angular automatically checks the entire component tree for changes whenever an event (such as user input, HTTP response, or timer) occurs. This is the default behavior in Angular.
+                2) **Deep Check Across Components**: The default strategy checks every component and sub-component in the tree, which can be computationally expensive, especially in large applications.
+                3) **Re-render on Every Event**: With the default strategy, components re-render whenever any change happens, regardless of whether the change affects them directly.
+                4) **No Manual Control**: The developer doesn't need to manually trigger change detection in this mode, but it can lead to performance issues when too many checks are happening.
+                5) **Ideal for Small Applications**: This strategy works well for small to medium-sized applications where performance is less of a concern.
+              `,
+              "code": `
+              import { Component } from '@angular/core';
+        
+              @Component({
+                selector: 'app-default-change-detection',
+                template: \`
+                  <button (click)="increment()">Increment</button>
+                  <p>{{ counter }}</p>
+                \`,
+                changeDetection: ChangeDetectionStrategy.Default // Default strategy is applied
+              })
+              export class DefaultChangeDetectionComponent {
+                counter = 0;
+        
+                increment() {
+                  this.counter++;
+                }
+              }
+        
+              // In the Default strategy, Angular automatically triggers change detection
+              // on all components in the component tree whenever an event occurs.
+              `
+            },
+            {
+              "filename": "onpush-change-detection.ts",
+              "title": "OnPush Change Detection Strategy",
+              "description": `
+                1) **Manual Change Detection**: With the OnPush strategy, Angular only checks a component for changes when the input properties of the component change or an event explicitly triggers change detection.
+                2) **Improved Performance**: Since Angular skips change detection for components where inputs haven’t changed, this strategy can significantly improve performance in large applications.
+                3) **Immutable Data Handling**: OnPush works best when using immutable objects because it relies on reference changes to trigger updates. If the reference to the input object changes, Angular will detect the change and re-render the component.
+                4) **Requires Developer Control**: The developer may need to manually trigger change detection using \`markForCheck()\` or \`detectChanges()\` when working with non-input changes.
+                5) **Suitable for Large Applications**: OnPush is ideal for performance optimization in large, complex applications where full change detection would be too costly.
+              `,
+              "code": `
+              import { Component, ChangeDetectionStrategy } from '@angular/core';
+        
+              @Component({
+                selector: 'app-onpush-change-detection',
+                template: \`
+                  <button (click)="increment()">Increment</button>
+                  <p>{{ counter }}</p>
+                \`,
+                changeDetection: ChangeDetectionStrategy.OnPush // OnPush strategy is applied
+              })
+              export class OnPushChangeDetectionComponent {
+                counter = 0;
+        
+                increment() {
+                  this.counter++;
+                }
+              }
+        
+              // In OnPush, Angular skips this component unless an @Input property changes
+              // or you explicitly call change detection methods.
+              `
+            },
+            {
+              "filename": "markforcheck.ts",
+              "title": "markForCheck() Method",
+              "description": `
+                1) **Manually Trigger Change Detection**: The \`markForCheck()\` method allows you to manually mark a component for checking in the next change detection cycle, bypassing OnPush's default behavior of skipping change detection.
+                2) **Useful with OnPush**: When using the OnPush strategy, this method is essential if you need to update the UI based on non-input changes (such as observables or events).
+                3) **Propagates Up the Tree**: \`markForCheck()\` marks not only the component but also its ancestors for change detection, allowing changes to propagate up the component tree.
+                4) **Performance Consideration**: While this method ensures updates are reflected in the UI, it should be used cautiously to avoid unnecessary performance overhead.
+                5) **Effective for Optimized Change Detection**: When used appropriately, \`markForCheck()\` can provide a balance between manual control and performance optimization.
+              `,
+              "code": `
+              import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+        
+              @Component({
+                selector: 'app-onpush-markforcheck',
+                template: \`
+                  <button (click)="update()">Update</button>
+                  <p>{{ data }}</p>
+                \`,
+                changeDetection: ChangeDetectionStrategy.OnPush
+              })
+              export class OnPushMarkForCheckComponent {
+                data = 'Initial Value';
+        
+                constructor(private cd: ChangeDetectorRef) {}
+        
+                update() {
+                  this.data = 'Updated Value';
+                  this.cd.markForCheck();  // Manually trigger change detection
+                }
+              }
+        
+              // The markForCheck method manually marks the component for change detection
+              // even when using the OnPush strategy, ensuring the view is updated.
+              `
+            },
+            {
+              "filename": "detectchanges.ts",
+              "title": "detectChanges() Method",
+              "description": `
+                1) **Immediate Change Detection**: Unlike \`markForCheck()\`, which schedules change detection for the next cycle, \`detectChanges()\` triggers immediate change detection for the component.
+                2) **Partial Change Detection**: This method performs change detection only on the component and its descendants, not the entire tree, making it more efficient in certain scenarios.
+                3) **Bypasses OnPush Restrictions**: In an OnPush component, \`detectChanges()\` can be used to force immediate re-rendering when non-input events trigger changes (e.g., subscriptions).
+                4) **Use with Caution**: Although powerful, overuse of \`detectChanges()\` can lead to performance issues, especially if called multiple times unnecessarily.
+                5) **Useful for Async Operations**: It is particularly useful in scenarios where data is updated asynchronously (e.g., after a server call or a timer event) and needs to be reflected immediately.
+              `,
+              "code": `
+              import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+        
+              @Component({
+                selector: 'app-onpush-detectchanges',
+                template: \`
+                  <button (click)="update()">Update</button>
+                  <p>{{ data }}</p>
+                \`,
+                changeDetection: ChangeDetectionStrategy.OnPush
+              })
+              export class OnPushDetectChangesComponent {
+                data = 'Initial Value';
+        
+                constructor(private cd: ChangeDetectorRef) {}
+        
+                update() {
+                  this.data = 'Updated Value';
+                  this.cd.detectChanges();  // Immediately trigger change detection
+                }
+              }
+        
+              // The detectChanges method forces immediate change detection
+              // for the component and its children, bypassing the OnPush strategy.
+              `
+            },
+            {
+              "filename": "applicationRef-detectChanges.ts",
+              "title": "ApplicationRef.tick() Method",
+              "description": `
+                1) **Trigger Whole App Change Detection**: The \`ApplicationRef.tick()\` method forces a change detection cycle for the entire application.
+                2) **Global Check**: Unlike \`detectChanges()\`, which focuses on a specific component, \`tick()\` triggers change detection across all components, making it a more powerful, but potentially costly method.
+                3) **Rarely Used in Practice**: This method is usually used for very specific cases, such as after bootstrap operations or external library updates where Angular's normal change detection doesn't automatically pick up changes.
+                4) **Use with Care**: Overuse of this method can degrade application performance, as it triggers change detection for the whole application.
+                5) **Reserved for Edge Cases**: It is generally considered best practice to avoid using \`tick()\` unless absolutely necessary, as other, more granular methods like \`markForCheck()\` and \`detectChanges()\` are usually sufficient.
+              `,
+              "code": `
+              import { Component, ApplicationRef } from '@angular/core';
+        
+              @Component({
+                selector: 'app-root',
+                template: \`
+                  <button (click)="update()">Force Tick</button>
+                  <p>{{ data }}</p>
+                \`
+              })
+              export class AppComponent {
+                data = 'Initial Value';
+        
+                constructor(private appRef: ApplicationRef) {}
+        
+                update() {
+                  this.data = 'Updated Value';
+                  this.appRef.tick();  // Force application-wide change detection
+                }
+              }
+        
+              // The tick method is used for forcing a global change detection cycle
+              // across the entire Angular application.
+              `
+            }
+          ]
+        },
+        {
+          "title": "Angular View Encapsulation Methods",
+          "description": "This document explains the different ViewEncapsulation modes in Angular, including how each affects the component’s styles and rendering. The three modes — None, Emulated, and ShadowDom — are covered in detail with practical examples.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "encapsulation-none.ts",
+              "title": "ViewEncapsulation.None",
+              "description": `
+                1) **No Encapsulation**: In this mode, Angular does not encapsulate component styles. The styles defined for the component are applied globally to the entire application.
+                2) **Global Styles**: Any styles within a component will leak out and affect other components in the app, since the CSS is not scoped to the component itself.
+                3) **Useful for Shared Styles**: ViewEncapsulation.None is useful when you want to define global styles in one place and apply them across multiple components without scoping.
+                4) **No Shadow DOM**: This method does not use Shadow DOM, meaning the component’s structure remains in the standard DOM tree, allowing styles to penetrate from outside.
+                5) **Potential CSS Conflicts**: Care should be taken to avoid CSS conflicts, as styles from different components may override each other when encapsulation is disabled.
+              `,
+              "code": `
+              import { Component, ViewEncapsulation } from '@angular/core';
+        
+              @Component({
+                selector: 'app-encapsulation-none',
+                template: \`
+                  <div class="box">Encapsulation None</div>
+                \`,
+                styles: [\`
+                  .box {
+                    border: 1px solid black;
+                    background-color: lightgray;
+                    padding: 20px;
+                  }
+                \`],
+                encapsulation: ViewEncapsulation.None // No encapsulation applied
+              })
+              export class EncapsulationNoneComponent {}
+        
+              // In this example, the styles defined within the component will apply globally
+              // to all .box elements in the entire app.
+              `
+            },
+            {
+              "filename": "encapsulation-emulated.ts",
+              "title": "ViewEncapsulation.Emulated",
+              "description": `
+                1) **Default Encapsulation**: This is the default mode in Angular. In Emulated mode, Angular scopes component styles to the component by adding unique attributes to both the component’s DOM elements and its styles.
+                2) **Scoped CSS**: The styles are applied only to the component, and they do not affect the global application styles. Similarly, external styles do not affect the component’s styles.
+                3) **Simulates Shadow DOM**: Emulated encapsulation mimics the behavior of the Shadow DOM, but without actually using the Shadow DOM API. Instead, Angular relies on adding attribute selectors to achieve scoped styling.
+                4) **No Global Style Leakage**: This mode prevents styles from leaking out of the component, maintaining component-level encapsulation.
+                5) **Most Common Use Case**: Emulated is the most commonly used mode for encapsulation as it balances both component isolation and performance.
+              `,
+              "code": `
+              import { Component, ViewEncapsulation } from '@angular/core';
+        
+              @Component({
+                selector: 'app-encapsulation-emulated',
+                template: \`
+                  <div class="box">Encapsulation Emulated</div>
+                \`,
+                styles: [\`
+                  .box {
+                    border: 1px solid black;
+                    background-color: lightgreen;
+                    padding: 20px;
+                  }
+                \`],
+                encapsulation: ViewEncapsulation.Emulated // Emulated encapsulation applied (default)
+              })
+              export class EncapsulationEmulatedComponent {}
+        
+              // The styles defined for this component will only apply to its DOM and will not affect other components
+              // because Angular emulates Shadow DOM encapsulation by adding scoped attributes.
+              `
+            },
+            {
+              "filename": "encapsulation-shadowdom.ts",
+              "title": "ViewEncapsulation.ShadowDom",
+              "description": `
+                1) **Native Shadow DOM**: This mode uses the browser’s native Shadow DOM API to encapsulate the component’s styles and DOM structure. Styles are scoped only to the component, and cannot affect other parts of the application.
+                2) **True Encapsulation**: With Shadow DOM, the component’s styles are fully isolated from the rest of the application. No external styles can penetrate the component, and vice versa.
+                3) **Better Performance**: Because Shadow DOM relies on native browser functionality, it can offer better performance in terms of rendering and style scoping, especially for modern browsers that support Shadow DOM natively.
+                4) **No Style Leakage**: Styles defined in a Shadow DOM component won’t leak out to affect global styles or other components. This ensures true style isolation.
+                5) **Browser Compatibility**: Not all browsers fully support Shadow DOM, so this mode is typically used in specific scenarios where strict encapsulation is necessary and browser compatibility is not an issue.
+              `,
+              "code": `
+              import { Component, ViewEncapsulation } from '@angular/core';
+        
+              @Component({
+                selector: 'app-encapsulation-shadowdom',
+                template: \`
+                  <div class="box">Encapsulation ShadowDom</div>
+                \`,
+                styles: [\`
+                  .box {
+                    border: 1px solid black;
+                    background-color: lightblue;
+                    padding: 20px;
+                  }
+                \`],
+                encapsulation: ViewEncapsulation.ShadowDom // Native Shadow DOM encapsulation
+              })
+              export class EncapsulationShadowDomComponent {}
+        
+              // In this example, the component is encapsulated using the browser’s native Shadow DOM API,
+              // ensuring complete style and DOM isolation.
+              `
+            }
+          ]
+        },
+        {
+          "title": "Angular Styling Methods: ::ng-deep, :host, and Deprecation Handling",
+          "description": "This document explains various Angular styling methods like ::ng-deep, :host, and the combination of both. It also addresses the deprecation of ::ng-deep and suggests best practices to achieve similar results using Shadow DOM-friendly alternatives.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "ng-deep.ts",
+              "title": "::ng-deep",
+              "description": `
+                1) **Global Styling**: The ::ng-deep combinator allows you to apply styles to child components from a parent component, breaking Angular's default encapsulation.
+                2) **Style Propagation**: It works by forcing styles to penetrate the encapsulation boundary, allowing you to style child components from outside.
+                3) **Deprecated**: As of recent versions of Angular, ::ng-deep has been deprecated due to its conflict with the Shadow DOM specification, which Angular embraces for better encapsulation.
+                4) **Temporary Solution**: Even though deprecated, you can still use ::ng-deep, but it’s recommended to start exploring alternatives, especially in projects that require long-term maintenance.
+                5) **Future Alternatives**: Angular plans to phase out ::ng-deep, and future solutions may involve web-standard Shadow DOM styling techniques.
+              `,
+              "code": `
+              import { Component } from '@angular/core';
+        
+              @Component({
+                selector: 'app-parent',
+                template: \`
+                  <app-child></app-child>
+                \`,
+                styles: [\`
+                  ::ng-deep app-child div {
+                    background-color: yellow;
+                  }
+                \`]
+              })
+              export class ParentComponent {}
+        
+              // The ::ng-deep selector applies styles to the child component's <div>, overriding its local styles.
+              `
+            },
+            {
+              "filename": "host.ts",
+              "title": ":host",
+              "description": `
+                1) **Component Scoped Styling**: The :host pseudo-class selector is used to style the host element of the component itself.
+                2) **Scoped to the Component**: Unlike ::ng-deep, :host only applies styles to the component's host element, without breaking the encapsulation boundary.
+                3) **Useful for Customization**: You can use :host to apply dynamic styles based on the component's state (e.g., different classes or attributes applied to the host).
+                4) **No Child Styling**: :host cannot be used to style child components — it only affects the host element itself.
+                5) **Shadow DOM Friendly**: Since :host is aligned with the Shadow DOM specification, it’s a future-proof solution for component-level styling.
+              `,
+              "code": `
+              import { Component } from '@angular/core';
+        
+              @Component({
+                selector: 'app-host-example',
+                template: \`
+                  <div>Host Example Component</div>
+                \`,
+                styles: [\`
+                  :host {
+                    display: block;
+                    border: 2px solid blue;
+                  }
+                \`]
+              })
+              export class HostExampleComponent {}
+        
+              // Here, :host applies styles to the component's host element, making the entire component block-level and adding a blue border.
+              `
+            },
+            {
+              "filename": "ng-deep-host.ts",
+              "title": "Combination of ::ng-deep and :host",
+              "description": `
+                1) **Scoped with Global Reach**: Combining ::ng-deep with :host allows you to style elements within the component but scoped to its host.
+                2) **Useful for Complex Use Cases**: This combination is often used when you need to apply styles to child elements within a component while still keeping the host element scoped.
+                3) **Deprecated Approach**: Since ::ng-deep is deprecated, this combination is not recommended for long-term use. However, it can still work in cases where you need temporary styling across components.
+                4) **Shadow DOM Incompatibility**: This approach might not work well with Shadow DOM in the future, so alternatives like using CSS variables or more component-specific styling should be considered.
+                5) **Recommendation**: Move towards styling child components within the component itself using emulated encapsulation, or shift to native Shadow DOM styling techniques.
+              `,
+              "code": `
+              import { Component } from '@angular/core';
+        
+              @Component({
+                selector: 'app-combined',
+                template: \`
+                  <div class="child-element">Combined Host and ng-deep</div>
+                \`,
+                styles: [\`
+                  :host ::ng-deep .child-element {
+                    background-color: pink;
+                  }
+                \`]
+              })
+              export class CombinedComponent {}
+        
+              // This example applies styles to the .child-element inside the host component using a combination of :host and ::ng-deep.
+              `
+            },
+            {
+              "filename": "ng-deep-solution.ts",
+              "title": "Solution for ::ng-deep Deprecation",
+              "description": `
+                1) **CSS Variables**: One effective alternative to ::ng-deep is using CSS variables, which allow for easier customization of styles across component boundaries while adhering to encapsulation.
+                2) **Component-Level Styling**: Instead of using ::ng-deep, you can encourage the use of component-level styling, where each component styles its own DOM, ensuring encapsulation is maintained.
+                3) **Component Inputs**: Passing styles or classes via @Input properties allows for more flexible styling without breaking encapsulation boundaries.
+                4) **Shared Stylesheets**: If multiple components need access to the same styles, consider using shared global stylesheets or Angular's styleUrls to propagate styles across components.
+                5) **Shadow DOM Techniques**: As browsers continue to improve Shadow DOM support, leveraging these techniques can replace the need for deep selectors while maintaining performance and encapsulation.
+              `,
+              "code": `
+              import { Component, Input } from '@angular/core';
+        
+              @Component({
+                selector: 'app-child',
+                template: \`
+                  <div [style.background-color]="bgColor">Child Component</div>
+                \`,
+                styles: [\`
+                  div {
+                    padding: 10px;
+                    border: 1px solid black;
+                  }
+                \`]
+              })
+              export class ChildComponent {
+                @Input() bgColor: string = 'lightgray'; // Allow passing background color as Input
+              }
+        
+              // Instead of using ::ng-deep, pass styles dynamically to the child component via Inputs or CSS variables.
+              `
+            }
+          ]
         }
+                
+        
+                
         
                 
       
