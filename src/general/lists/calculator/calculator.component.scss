@@ -1,0 +1,154 @@
+/* Calculator layout */
+.calculator-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.calculator {
+    flex: 1;
+    max-width: 350px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-display {
+    display: flex;
+    font-size: 2.5rem;
+    justify-content: flex-end;
+    padding: 15px;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.display-input {
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 2.5rem;
+    text-align: right;
+    width: 100%;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 2.5rem;
+    animation: blink 1s step-start infinite;
+    color: #fff;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Buttons */
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+button {
+    padding: 15px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ccc;
+}
+
+.btn-clear,
+.btn-equals {
+    background-color: #ff6f61;
+    color: white;
+}
+
+.btn-clear:hover,
+.btn-equals:hover {
+    background-color: #ff5a4c;
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+/* History Section */
+.calculator-history {
+    flex: 1;
+    max-width: 350px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.clear-history {
+    padding: 5px 10px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.clear-history:hover {
+    background-color: #ff5a4c;
+}
+
+/* History scroll */
+.history-list {
+    background-color: #fff;
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calculator-container {
+        flex-direction: column;
+    }
+
+    .calculator,
+    .calculator-history {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .calculator-display {
+        font-size: 2rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+}

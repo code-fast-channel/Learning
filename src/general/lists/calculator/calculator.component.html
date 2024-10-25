@@ -1,0 +1,57 @@
+<div style="display: flex; justify-content: end;">
+    <button class="btn btn-primary" style="font-size: 13px;
+    padding: 6px 18px 6px 18px;
+    background: green;" [routerLink]="['/general']">Back</button>
+</div>
+<div class="container">
+    <div class="calculator-container mt-4">
+        <!-- Calculator Section -->
+        <div class="calculator">
+            <div class="calculator-display">
+                <input [(ngModel)]="displayValue" class="display-input">
+                <span class="blinking-cursor">|</span> 
+                <!-- Blinking cursor -->
+            </div>
+
+            <div class="calculator-buttons">
+                <button class="btn-clear" (click)="clearDisplay()">C</button>
+                <button (click)="deleteLast()">←</button>
+                <button (click)="appendInput('/')">÷</button>
+                <button (click)="appendInput('*')">×</button>
+
+                <button (click)="appendInput('7')">7</button>
+                <button (click)="appendInput('8')">8</button>
+                <button (click)="appendInput('9')">9</button>
+                <button (click)="appendInput('-')">-</button>
+
+                <button (click)="appendInput('4')">4</button>
+                <button (click)="appendInput('5')">5</button>
+                <button (click)="appendInput('6')">6</button>
+                <button (click)="appendInput('+')">+</button>
+
+                <button (click)="appendInput('1')">1</button>
+                <button (click)="appendInput('2')">2</button>
+                <button (click)="appendInput('3')">3</button>
+                <button class="btn-equals" rowspan="2" (click)="calculate()">=</button>
+
+                <button (click)="appendInput('0')" class="btn-zero">0</button>
+                <button (click)="appendInput('.')">.</button>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="calculator-history" *ngIf="history.length > 0">
+            <div class="history-header">
+                <span>History</span>
+                <button class="clear-history" style="font-size: 13px;" (click)="clearHistory()">Clear</button>
+            </div>
+            <hr>
+            <div class="history-list">
+                <div *ngFor="let entry of history">
+                    <div>{{ entry.expression }} = {{ entry.result }}</div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
