@@ -694,7 +694,95 @@ export const learningList = [
                   `,
           },
         ],
-      }
+      },
+      {
+        title: 'let, const, var - Detailed Explanation with Block Examples',
+        description: `
+        let: 
+        - Description: Block-scoped variable, can be reassigned.
+        - Scoping: Block-scoped.
+        - Re-declaration: Cannot redeclare within the same scope.
+        - Hoisting: Hoisted but not initialized, resulting in a Temporal Dead Zone (TDZ).
+        - Assignment/Mutability: Reassignable, mutable.
+        - Example: \`let a = 5;\` \`if(true) { let a = 10; }\` \`console.log(a);\`
+        - Output: 5 (Outer \`a\` is logged because the block-scoped \`a\` is local to the block).
+  
+       const:
+        - Description: Block-scoped constant, cannot be reassigned.
+        - Scoping: Block-scoped.
+        - Re-declaration: Cannot redeclare within the same scope.
+        - Hoisting: Hoisted but not initialized, resulting in a Temporal Dead Zone (TDZ).
+        - Assignment/Mutability: Not reassignable, immutable.
+        - Example: \`const b = 15;\` \`if(true) { const b = 20; }\` \`console.log(b);\`
+        - Output: 15 (Outer \`b\` is logged because the block-scoped \`b\` is local to the block).
+  
+       var:
+        - Description: Function-scoped variable, can be reassigned.
+        - Scoping: Function-scoped.
+        - Re-declaration: Can redeclare within the same scope.
+        - Hoisting: Hoisted and initialized to \`undefined\`.
+        - Assignment/Mutability: Reassignable, mutable.
+        - Example: \`var c = 25;\` \`if(true) { var c = 30; }\` \`console.log(c);\`
+        - Output: 30 (Redeclared \`c\` inside block updates the outer \`c\` due to function-scoping).
+    `,
+        isGroup: true,
+        codeLists: [
+          {
+            filename: 'let.js',
+            title: 'Detailed Example using let',
+            description: `
+              1) **Block-scoped:** \`let\` is confined to the block, statement, or expression where it is used.
+              2) **Reassignment:** You can reassign a value to a variable declared with \`let\`.
+              3) **Hoisting:** It is hoisted to the top of the block but is not initialized until the code execution reaches it, which results in a Temporal Dead Zone (TDZ) between the start of the block and the variable declaration.
+              4) **Re-declaration:** You cannot redeclare a variable within the same block scope.
+            `,
+            code: `
+              let a = 5; // Outer 'a'
+              if (true) {
+                let a = 10; // Block-scoped 'a', different from outer 'a'
+              }
+              console.log(a); // Output: 5 (Outer 'a' is logged because the block-scoped 'a' is local to the block)
+            `,
+          },
+          {
+            filename: 'const.js',
+            title: 'Detailed Example using const',
+            description: `
+              1) **Block-scoped:** Just like \`let\`, \`const\` is block-scoped.
+              2) **Reassignment:** Once a value is assigned to a \`const\`, it cannot be reassigned (immutable).
+              3) **Hoisting:** It is hoisted, but similarly to \`let\`, is in a Temporal Dead Zone and can’t be accessed until the declaration is encountered.
+              4) **Re-declaration:** A variable declared with \`const\` cannot be redeclared within the same block scope.
+              5) **Use for constants:** Generally used when the value is meant to stay constant.
+            `,
+            code: `
+              const b = 15; // Outer 'b'
+              if (true) {
+                const b = 20; // Block-scoped 'b', different from outer 'b'
+                console.log(b); // Output: 20 (Inner 'b' logged because it's block-scoped)
+              }
+              console.log(b); // Output: 15 (Outer 'b' is logged because the block-scoped 'b' is local to the block)
+            `,
+          },
+          {
+            filename: 'var.js',
+            title: 'Detailed Example using var',
+            description: `
+              1) **Function-scoped:** Variables declared with \`var\` are scoped to the nearest function block, not the nearest enclosing block like \`let\` or \`const\`.
+              2) **Reassignment:** Variables declared with \`var\` can be reassigned and modified.
+              3) **Hoisting:** \`var\` is hoisted and initialized with \`undefined\` at the top of the function or global scope, meaning it can be accessed before the declaration but will return \`undefined\` until the declaration is executed.
+              4) **Re-declaration:** You can redeclare a variable declared with \`var\` within the same scope without throwing an error, but this can lead to confusion and bugs.
+              5) **Global scope:** If declared outside of a function, \`var\` will create a global variable, while \`let\` and \`const\` will not.
+            `,
+            code: `
+              var c = 25; // Outer 'c'
+              if (true) {
+                var c = 30; // Redeclaring and re-assigning 'c' in the same function scope (Output: 30)
+              }
+              console.log(c); // Output: 30 (Redeclared 'c' inside block updates the outer 'c' due to function-scoping)
+            `,
+          },
+        ],
+      }      
     ]
   },
   {
