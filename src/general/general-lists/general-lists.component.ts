@@ -24,6 +24,13 @@ export class GeneralListsComponent {
       `
     },
     {
+      path: '/general/quiz',
+      title: 'Quiz test',
+      description: `1) Here we can learn by writting test.
+      2) Ex: Html,Css, Angular
+      `
+    },
+    {
       path: '/general/calculator',
       title: 'Calculator',
       description: `1) Here we can use simple calculator.
@@ -37,13 +44,20 @@ export class GeneralListsComponent {
       2) Ex: Difference between two times and date
       `
     },
-    // {
-    //   path: '',
-    //   title: '',
-    //   description: `1) Here we can learn list of all topics.
-    //   2) Ex: Array,Object, Array of Objects, Angular
-    //   `
-    // }
+    {
+      path: '/general/chat',
+      title: 'Chat',
+      description: `1) Here we can chat to any person.
+      2) using sockets we can communicate
+      `
+    },
+    {
+      path: '/general/games',
+      title: 'Game',
+      description: `1) Here we can chat to any person.
+      2) using sockets we can communicate
+      `
+    }
   ];
   selectedValue = '3';
   framPerList = [

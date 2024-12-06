@@ -1,0 +1,7 @@
+<div class="grid-container">
+    <div class="grid-cell" style="font-weight: 900;" id="cell-0-0" *ngFor="let value of grid;let i=index" (click)="change(i)" [ngClass]="{'disable': value?.value}">{{value.value}}</div>
+  </div>
+  
+  <h3 *ngIf="winnerName">Winner is ====> {{winnerName}}</h3>
+  
+  <button (click)="reset()">Reset</button>

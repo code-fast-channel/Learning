@@ -1,0 +1,14 @@
+<!-- Buttons to initialize peer connection -->
+<button (click)="initializePeer(true)">Create Peer (Initiator)</button>
+<button (click)="initializePeer(false)">Join Peer (Receiver)</button>
+
+<!-- Input for Signal Data -->
+<input #signalInput placeholder="Enter Signal Data" />
+<button (click)="receiveSignal(signalInput.value)">Send Signal</button>
+
+<!-- Display Messages -->
+<div *ngFor="let message of messages">{{ message }}</div>
+
+<!-- Input to type and send messages -->
+<input [(ngModel)]="newMessage" placeholder="Type a message" />
+<button (click)="sendMessage()">Send</button>

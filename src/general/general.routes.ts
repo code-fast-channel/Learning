@@ -18,8 +18,16 @@ export const learningRoutes: Routes = [
         path: 'time-calculator',
         loadComponent:() => import('./lists/time-calculator/time-calculator.component').then(m=>m.TimeCalculatorComponent),
     },
-    // {
-    //     path: 'detail/:id',
-    //     loadComponent:() => import('./detail/detail.component').then(m=>m.DetailComponent)
-    // },
+    {
+        path: 'quiz',
+        loadChildren:() => import('./lists/quiz/quiz.route').then(routes => routes.routes)
+    },
+    {
+        path: 'chat',
+        loadComponent:() => import('./lists/chat/chat/chat.component').then(m=>m.ChatComponent)
+    },
+    {
+        path: 'games',
+        loadChildren:() => import('./lists/games/games.route').then(routes => routes.routes)
+    },
 ];

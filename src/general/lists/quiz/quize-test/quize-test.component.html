@@ -1,0 +1,28 @@
+<div class="btn-grp">
+    <button type="submit" (click)="submit()">Submit</button>
+    <button type="submit" (click)="reset()">Reset</button>
+</div>
+<div class="d-flex justify-content-evenly" *ngIf="submitted">
+    <h2>Total questions: {{list.length}}</h2>
+    <h2>Correct Answers: {{correctAnswerCount}}</h2>
+</div>
+<body>
+    <div class="container">
+        <h1>Question and Answer Test</h1>
+        <form>
+            @for (item of list; track item.id;let idx = $index) {
+            <div class="question">
+                <h3>{{idx+1}}. {{item.question}}</h3>
+                <ul class="options">
+                    @for (answer of item.answers; track answer.answer; let chdx = $index) {
+                    <li class="pointer" [id]="'group-' + chdx+'s'+idx"><label class="pointer" [for]="'group-' + chdx+'s'+idx"><input type="radio" class="pointer"  [id]="'group-' + chdx+'s'+idx"
+                        [value]="answer.option"
+                        [name]="'group-' + chdx+'s'+idx" [(ngModel)]="item.selectedOption" [ngModelOptions]="{standalone: true}"> {{answer.answer}}</label></li>
+                }
+                <p class="text-danger" *ngIf="submitted && !item?.selectedOption">Select the answer</p>
+                </ul>
+            </div>
+        }
+    </form>
+</div>
+</body>

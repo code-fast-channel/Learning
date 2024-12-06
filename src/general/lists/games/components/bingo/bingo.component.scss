@@ -1,0 +1,72 @@
+/* Add application styles & imports to this file! */
+/* Add application styles & imports to this file! */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 1px;
+  }
+  
+  .grid-item {
+    background-color: rgb(190, 164, 164);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    place-items: center;
+    display: grid;
+  }
+  
+  .crosstoptoBottom,.crosstoptoBottom1,.crosstoptoBottom2,.crosstoptoBottom3,.crosstoptoBottom4 {
+    /* transform: rotate(30deg); */
+      transform: rotate(90deg) !important;
+  }
+  
+  .crossrightSlash {
+    transform: rotate(327deg) !important;
+  
+  }
+  
+  .crossrt {
+    /* transform: rotate(30deg); */
+      transform: rotate(33deg) !important;
+  }
+  
+  .cross1,.cross2,.cross3,.cross4 {
+    scale: 1.2;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    background-color: red;
+    position: absolute;
+  }
+  
+  .cross {
+    /* transform: rotate(33deg); */
+    scale: 1.2;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    background-color: red;
+    position: absolute;
+  }
+  
+  .disabled-block {
+    opacity: 0.7;
+    pointer-events: none;
+    cursor: pointer;
+    background-color: grey;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 900;
+  }
+  
+  .strike-out {
+    text-decoration: line-through;
+  }
+  
+  .success-color {
+    background: green;
+  }
