@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import SimplePeer from 'simple-peer';
@@ -6,7 +6,7 @@ import SimplePeer from 'simple-peer';
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })

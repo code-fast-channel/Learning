@@ -4,25 +4,30 @@ padding: 6px 18px 6px 18px;
 background: green;" [routerLink]="['/general']">Back</button>
 </div> -->
 <div style="height: 100%;">
-    <div>
-        <!-- <h5 class="text-center">Learning and References</h5> -->
-    </div>
-    <div class="d-flex justify-content-end mr-1">
-        <select [(ngModel)]="selectedValue" placeholder="Select Frame">
-            <option [value]="val.value" *ngFor="let val of framPerList;trackBy: trackByIndex">{{val.name}}</option>
-        </select>
-    </div>
-    <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;" [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(selectedValue) ? 'repeat(' + selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
-        <div class="card" *ngFor="let val of listData;let i=index">
-            <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
-                {{i+1}}) {{val?.title}}
-                <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;" (click)="navigateToDetail(val)">View</button>
-            </div>
-            <div class="card-body pt-0" style="max-height: 500px;overflow-x: scroll;" *ngIf="val?.description">
-               <span [innerText]="val.description">
-
-               </span>
-            </div>
+  <div>
+    <!-- <h5 class="text-center">Learning and References</h5> -->
+  </div>
+  <div class="d-flex justify-content-end mr-1">
+    <select [(ngModel)]="selectedValue" placeholder="Select Frame">
+      @for (val of framPerList; track trackByIndex($index, val)) {
+        <option [value]="val.value">{{val.name}}</option>
+      }
+    </select>
+  </div>
+  <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;" [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(selectedValue) ? 'repeat(' + selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
+    @for (val of listData; track val; let i = $index) {
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
+          {{i+1}}) {{val?.title}}
+          <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;" (click)="navigateToDetail(val)">View</button>
         </div>
-    </div>
-</div>      
+        @if (val?.description) {
+          <div class="card-body pt-0" style="max-height: 500px;overflow-x: scroll;">
+            <span [innerText]="val.description">
+            </span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

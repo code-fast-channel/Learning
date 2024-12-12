@@ -1,36 +1,37 @@
 <div class="container">
-    <h2 class="text-center">Date Difference Calculator</h2>
-    
+  <h2 class="text-center">Date Difference Calculator</h2>
+
+  <div class="row">
+    <h5 class="col-12 text-center mb-3">Date Time Calculator</h5>
+
+    <div class="col mb-3">
+      <label for="startDate">Start Date:</label>
+      <input type="datetime-local" id="startDate" [(ngModel)]="start" class="form-control">
+    </div>
+
+    <div class="col mb-3">
+      <label for="endDate">End Date:</label>
+      <input type="datetime-local" id="endDate" [(ngModel)]="end" class="form-control">
+    </div>
+
+
+
+  </div>
+  <div class="col d-flex align-items-end">
     <div class="row">
-      <h5 class="col-12 text-center mb-3">Date Time Calculator</h5>
-      
       <div class="col mb-3">
-        <label for="startDate">Start Date:</label>
-        <input type="datetime-local" id="startDate" [(ngModel)]="start" class="form-control">
+        <label for="costPerHour">Cost(per Hour):</label>
+        <input type="number" id="costPerHour" [(ngModel)]="costPerHour" class="form-control" placeholder="Enter cost per hour">
       </div>
-  
-      <div class="col mb-3">
-        <label for="endDate">End Date:</label>
-        <input type="datetime-local" id="endDate" [(ngModel)]="end" class="form-control">
-      </div>
-  
-      
-  
-    </div>
-    <div class="col d-flex align-items-end">
-      <div class="row">
-        <div class="col mb-3">
-          <label for="costPerHour">Cost(per Hour):</label>
-          <input type="number" id="costPerHour" [(ngModel)]="costPerHour" class="form-control" placeholder="Enter cost per hour">
-        </div>
-        <div class="col mb-3" style="display: flex;gap: 3px;align-items: end;">
-          <button class="btn btn-success mb-2" style="max-height: 39px;" (click)="calculateDifferences()">Calculate</button>
-          <button class="btn btn-primary mb-2" style="max-height: 39px;" (click)="clearAll()">Clear</button>
-        </div>
+      <div class="col mb-3" style="display: flex;gap: 3px;align-items: end;">
+        <button class="btn btn-success mb-2" style="max-height: 39px;" (click)="calculateDifferences()">Calculate</button>
+        <button class="btn btn-primary mb-2" style="max-height: 39px;" (click)="clearAll()">Clear</button>
       </div>
     </div>
-  
-    <div *ngIf="differences.differences" class="mt-4">
+  </div>
+
+  @if (differences.differences) {
+    <div class="mt-4">
       <h4>Difference:</h4>
       <p>Duration: {{ differences.differences }}</p>
       <p>Approximate Months: {{ differences.month }}</p>
@@ -39,5 +40,6 @@
       <p>Minutes: {{ differences.minutes }}</p>
       <p>Cost: {{ differences.cost }}</p>
     </div>
-  </div>
+  }
+</div>
 

@@ -1,28 +1,29 @@
 <div class="container">
-    <h2 class="text-center">Date Difference Calculator</h2>
-    
-    <div class="row">
-      <h5 class="col-12 text-center mb-3">Date Time Calculator</h5>
-      
-      <div class="col-md-4 col-sm-12 mb-3">
-        <label for="startDate">Start Date:</label>
-        <input type="datetime-local" id="startDate" [(ngModel)]="startDate" class="form-control">
-      </div>
-  
-      <div class="col-md-4 col-sm-12 mb-3">
-        <label for="endDate">End Date:</label>
-        <input type="datetime-local" id="endDate" [(ngModel)]="endDate" class="form-control">
-      </div>
-  
-      <div class="col-md-4 col-sm-12 mb-3 d-flex align-items-end">
-        <div class="d-flex flex-column">
-          <button class="btn btn-success mb-2" (click)="calculateDifference()">Calculate</button>
-          <button class="btn btn-primary" (click)="clear()">Clear</button>
-        </div>
+  <h2 class="text-center">Date Difference Calculator</h2>
+
+  <div class="row">
+    <h5 class="col-12 text-center mb-3">Date Time Calculator</h5>
+
+    <div class="col-md-4 col-sm-12 mb-3">
+      <label for="startDate">Start Date:</label>
+      <input type="datetime-local" id="startDate" [(ngModel)]="startDate" class="form-control">
+    </div>
+
+    <div class="col-md-4 col-sm-12 mb-3">
+      <label for="endDate">End Date:</label>
+      <input type="datetime-local" id="endDate" [(ngModel)]="endDate" class="form-control">
+    </div>
+
+    <div class="col-md-4 col-sm-12 mb-3 d-flex align-items-end">
+      <div class="d-flex flex-column">
+        <button class="btn btn-success mb-2" (click)="calculateDifference()">Calculate</button>
+        <button class="btn btn-primary" (click)="clear()">Clear</button>
       </div>
     </div>
-  
-    <div *ngIf="difference.totalDays !== undefined" class="mt-4">
+  </div>
+
+  @if (difference.totalDays !== undefined) {
+    <div class="mt-4">
       <h4>Difference:</h4>
       <p>Total Days: {{ difference.totalDays }}</p>
       <p>Year Difference: {{ difference.yearDifference }}</p>
@@ -30,6 +31,7 @@
       <p>Detailed: {{ difference.detailed }}</p>
       <p>Detailed year: {{ difference.detailedInYear }}</p>
     </div>
-    <hr>
+  }
+  <hr>
     <app-time-money-calculation></app-time-money-calculation>
   </div>

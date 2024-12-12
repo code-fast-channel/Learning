@@ -1,52 +1,70 @@
 <div style="height: 100%;">
-    <div>
-        <h5 class="text-center">Learning and References</h5>
-    </div>
-    <div class="d-flex justify-content-end mr-1">
-        <select [(ngModel)]="selectedValue" placeholder="Select Frame">
-            <option [value]="val.value" *ngFor="let val of framPerList;trackBy: trackByIndex">{{val.name}}</option>
-        </select>
-    </div>
-    <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;" [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(selectedValue) ? 'repeat(' + selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
-        <div class="card" *ngFor="let data of listData;let i=index;trackBy: trackByIndex">
-            <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
-                {{i+1}}) {{data.title}}
-                <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;" (click)="navigateToDetail(i)">View</button>
-            </div>
-            <div class="card-body" style="max-height: 500px;overflow-x: scroll;">
-                <ng-container *ngFor="let files of data?.filesList; let ri=index;trackBy: trackByIndex" style="font-family: initial;font-size: 12;">
-                    <div>
-                        <span class="badge text-bg-success cursor-pointer" *ngIf="files?.isGroup" style="font-family: sans-serif;font-size: 14px;    top: 27px;
+  <div>
+    <h5 class="text-center">Learning and References</h5>
+  </div>
+  <div class="d-flex justify-content-end mr-1">
+    <select [(ngModel)]="selectedValue" placeholder="Select Frame">
+      @for (val of framPerList; track trackByIndex($index, val)) {
+        <option [value]="val.value">{{val.name}}</option>
+      }
+    </select>
+  </div>
+  <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;" [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(selectedValue) ? 'repeat(' + selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
+    @for (data of listData; track trackByIndex(i, data); let i = $index) {
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
+          {{i+1}}) {{data.title}}
+          <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;" (click)="navigateToDetail(i)">View</button>
+        </div>
+        <div class="card-body" style="max-height: 500px;overflow-x: scroll;">
+          @for (files of data?.filesList; track trackByIndex(ri, files); let ri = $index) {
+            <ng-container style="font-family: initial;font-size: 12;">
+              <div>
+                @if (files?.isGroup) {
+<span class="badge text-bg-success cursor-pointer" style="font-family: sans-serif;font-size: 14px;    top: 27px;
                         position: relative;
                         left: 50%;
                         z-index: 999;">Group</span>
-                    </div>
-                    <hr style="margin: 1rem -1.5rem;" *ngIf="files?.isGroup">
-                    <h4 style="font-weight: 700;" >{{files.title | titlecase}}</h4> <span class="text-br" *ngIf="files?.description" [innerText]="files.description"></span>
-                    <ng-container *ngFor="let codes of files.codeLists; let last = last;let ci=index;trackBy: trackByIndex" >
-                        <h4 style="font-weight: 700;">{{codes.title | titlecase}}</h4> <span class="text-br" *ngIf="codes?.description" [innerText]="codes.description"></span>
-                        <div class="card mb-3 editor-text" style="font-family: initial;" *ngIf="codes?.code">
-                            <div class="card-header bg-transparent" style="background-color: #27272a !important; color: white">
-                                {{codes.filename}}
-                                <div style="position: absolute;top: 7px;right: 14px;">
-                                    <span class="badge text-bg-success cursor-pointer" style="font-family: sans-serif;font-size: 14px; cursor: pointer;" (click)="copy(codes.code,i,ri,ci)">{{codes?.isCopied ?  'Copied':'Click to Copy'}}</span>
-                                </div>
-                            </div>
+                }
+              </div>
+              @if (files?.isGroup) {
+                <hr style="margin: 1rem -1.5rem;">
+              }
+              <h4 style="font-weight: 700;" >{{files.title | titlecase}}</h4> @if (files?.description) {
+              <span class="text-br" [innerText]="files.description"></span>
+            }
+            @for (codes of files.codeLists; track trackByIndex(ci, codes); let last = $last; let ci = $index) {
+              <h4 style="font-weight: 700;">{{codes.title | titlecase}}</h4> @if (codes?.description) {
+              <span class="text-br" [innerText]="codes.description"></span>
+            }
+            @if (codes?.code) {
+              <div class="card mb-3 editor-text" style="font-family: initial;">
+                <div class="card-header bg-transparent" style="background-color: #27272a !important; color: white">
+                  {{codes.filename}}
+                  <div style="position: absolute;top: 7px;right: 14px;">
+                    <span class="badge text-bg-success cursor-pointer" style="font-family: sans-serif;font-size: 14px; cursor: pointer;" (click)="copy(codes.code,i,ri,ci)">{{codes?.isCopied ?  'Copied':'Click to Copy'}}</span>
+                  </div>
+                </div>
                             <div class="card-body text-success"  style="padding: 0;
     margin: 0;background-color: #09090b !important; color: white">
-                                <!-- <h5 class="card-title" [innerText]="codes.code"></h5> -->
-                                @defer {
-                                    <app-code-formatter [code]="codes.code" />
-                                } 
-                                  @placeholder {
-                                    Loading......
-                                  }
-                            </div>
-                        </div>
-                        <hr *ngIf="files?.isGroup && last && !data?.filesList[ri+1]?.isGroup" style="margin: 1rem -1.5rem;">
-                    </ng-container>
-                </ng-container>
+                  <!-- <h5 class="card-title" [innerText]="codes.code"></h5> -->
+                  @defer {
+                  <app-code-formatter [code]="codes.code" />
+                }
+                @placeholder {
+                Loading......
+              }
             </div>
-        </div>
-    </div>
-    </div>      
+          </div>
+        }
+        @if (files?.isGroup && last && !data?.filesList[ri+1]?.isGroup) {
+          <hr style="margin: 1rem -1.5rem;">
+        }
+      }
+    </ng-container>
+  }
+</div>
+</div>
+}
+</div>
+</div>

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-general-lists',
   standalone: true,
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './general-lists.component.html',
   styleUrl: './general-lists.component.scss'
 })

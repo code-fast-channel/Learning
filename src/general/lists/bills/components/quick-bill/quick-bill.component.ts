@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { empty } from '../../../../../shared/shared.constant';
@@ -7,7 +7,7 @@ import { itemConfig } from './quick-bill.constant';
 @Component({
   selector: 'app-quick-bill',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [FormsModule],
   templateUrl: './quick-bill.component.html',
   styleUrl: './quick-bill.component.scss'
 })

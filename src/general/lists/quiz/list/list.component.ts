@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { quizList } from '../quiz.constant';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })

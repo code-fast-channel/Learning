@@ -1,18 +1,21 @@
 <div class="container">
-    <h1>Simple Peer Chat</h1>
-  
-    <div *ngIf="errorMessage" class="alert alert-danger">
+  <h1>Simple Peer Chat</h1>
+
+  @if (errorMessage) {
+    <div class="alert alert-danger">
       {{ errorMessage }}
     </div>
-  
-    <div>
-      <button class="btn btn-primary" (click)="sendMessage('Hello from Angular!')">Send Message</button>
-      <button class="btn btn-secondary" (click)="reset()">Reset</button>
-    </div>
-  
-    <h3>Messages Received:</h3>
-    <ul>
-      <li *ngFor="let message of messages">{{ message }}</li>
-    </ul>
+  }
+
+  <div>
+    <button class="btn btn-primary" (click)="sendMessage('Hello from Angular!')">Send Message</button>
+    <button class="btn btn-secondary" (click)="reset()">Reset</button>
   </div>
-  
+
+  <h3>Messages Received:</h3>
+  <ul>
+    @for (message of messages; track message) {
+      <li>{{ message }}</li>
+    }
+  </ul>
+</div>

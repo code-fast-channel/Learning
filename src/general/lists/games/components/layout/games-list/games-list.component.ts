@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { gamesList } from '../games-list.constant';
@@ -6,7 +6,7 @@ import { gamesList } from '../games-list.constant';
 @Component({
   selector: 'app-games-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './games-list.component.html',
   styleUrl: './games-list.component.scss'
 })

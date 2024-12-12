@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,7 +7,7 @@ import { TimeMoneyCalculationComponent } from './time-money-calculation/time-mon
 @Component({
   selector: 'app-time-calculator',
   standalone: true,
-  imports: [RouterModule, FormsModule,CommonModule,TimeMoneyCalculationComponent],
+  imports: [RouterModule, FormsModule, TimeMoneyCalculationComponent],
   templateUrl: './time-calculator.component.html',
   styleUrl: './time-calculator.component.scss'
 })

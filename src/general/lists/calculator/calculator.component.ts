@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, HostListener } from '@angular/core';
 import { CalculatorService } from './calculator.service';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [FormsModule, RouterModule],
   providers: [CalculatorService],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss'
