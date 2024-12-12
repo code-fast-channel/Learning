@@ -11,47 +11,74 @@ import SimplePeer from 'simple-peer';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  private peer: SimplePeer.Instance | null = null;
+  peer1: SimplePeer.Instance | null = null;
+  peer2: SimplePeer.Instance | null = null;
   messages: string[] = [];
-  newMessage: string = '';
+  errorMessage: string = '';
 
-  ngOnInit() {}
+  constructor() {}
 
-  // Initialize peer with the initiator flag
-  initializePeer(initiator: boolean) {
-    this.peer = new SimplePeer({ initiator, trickle: false });
+  ngOnInit(): void {
+    try {
+      // Initialize peers
+      this.peer1 = new SimplePeer({ initiator: true, trickle: false });
+      this.peer2 = new SimplePeer({ trickle: false });
 
-    // On signal event, send the signal data to the other peer
-    this.peer.on('signal', (data: any) => {
-      console.log('Signal Data:', JSON.stringify(data));
-      alert('Share this Signal Data with the other peer: ' + JSON.stringify(data));
-    });
+      // Handle signaling data
+      this.peer1.on('signal', (data: any) => {
+        console.log('Peer1 Signal Data:', data);
+        this.peer2?.signal(data); // Send data to Peer2
+      });
 
-    // On receiving data from the other peer, add it to the messages
-    this.peer.on('data', (data: any) => {
-      this.messages.push(data.toString());
-    });
+      this.peer2.on('signal', (data: any) => {
+        console.log('Peer2 Signal Data:', data);
+        this.peer1?.signal(data); // Send data to Peer1
+      });
 
-    // On error handling
-    this.peer.on('error', (err: any) => {
-      console.error('Error:', err);
-    });
-  }
+      // Handle connection established
+      this.peer1.on('connect', () => {
+        console.log('Peer1 connected to Peer2!');
+        this.sendMessage('Hello from Peer1!');
+      });
 
-  // Handle signal from the other peer
-  receiveSignal(signal: string) {
-    if (this.peer) {
-      // Pass the signal data to the peer
-      this.peer.signal(JSON.parse(signal));
+      // Handle data reception
+      this.peer2.on('data', (data: any) => {
+        console.log('Peer2 received message:', data.toString());
+        this.messages.push(data.toString());
+      });
+
+      // Handle error events
+      this.peer1.on('error', (err) => this.handleError(err, 'Peer1'));
+      this.peer2.on('error', (err) => this.handleError(err, 'Peer2'));
+    } catch (error) {
+      console.error('Error initializing peers:', error);
+      this.errorMessage = 'Failed to initialize peers.';
     }
   }
 
-  // Send a message to the other peer
-  sendMessage() {
-    if (this.newMessage.trim() && this.peer) {
-      this.peer.send(this.newMessage);  // Send the message through the peer connection
-      this.messages.push(this.newMessage);  // Add the message to the local list
-      this.newMessage = '';  // Clear the input field
+  // Function to send a message from Peer1
+  sendMessage(message: string) {
+    if (this.peer1 && this.peer1.connected) {
+      this.peer1.send(message);
+      console.log('Peer1 sent message:', message);
+    } else {
+      console.error('Peer1 is not connected.');
+      this.errorMessage = 'Peer1 is not connected.';
     }
+  }
+
+  // Reset peers and messages
+  reset() {
+    this.peer1?.destroy();
+    this.peer2?.destroy();
+    this.messages = [];
+    this.errorMessage = '';
+    this.ngOnInit(); // Reinitialize
+  }
+
+  // Handle errors
+  handleError(error: any, peerName: string) {
+    console.error(`${peerName} Error:`, error);
+    this.errorMessage = `${peerName} encountered an error: ${error.message}`;
   }
 }

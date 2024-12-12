@@ -1,0 +1,10 @@
+<div class="list">
+    @for (item of list; track item.id) {
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">{{ item.title }}<button (click)="navigate(item)" class="btn btn-sm btn-primary">Take Test</button></div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    }
+</div>

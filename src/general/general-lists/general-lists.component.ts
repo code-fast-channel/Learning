@@ -44,18 +44,25 @@ export class GeneralListsComponent {
       2) Ex: Difference between two times and date
       `
     },
-    {
-      path: '/general/chat',
-      title: 'Chat',
-      description: `1) Here we can chat to any person.
-      2) using sockets we can communicate
-      `
-    },
+    // {
+    //   path: '/general/chat',
+    //   title: 'Chat',
+    //   description: `1) Here we can chat to any person.
+    //   2) using sockets we can communicate
+    //   `
+    // },
     {
       path: '/general/games',
       title: 'Game',
       description: `1) Here we can chat to any person.
       2) using sockets we can communicate
+      `
+    },
+    {
+      path: '/general/bills',
+      title: 'Bills',
+      description: `1) Here we can create a quick bill.
+      2) Here we can use list of values based on that bill can generate.
       `
     }
   ];

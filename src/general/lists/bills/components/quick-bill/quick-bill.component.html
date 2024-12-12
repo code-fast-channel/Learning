@@ -1,0 +1,63 @@
+<!-- <div class="container">
+    <table class="table table-bordered table-striped table-responsive">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(list of bill; track list.itemName; let index = $index) {
+            <tr>
+              <td><input [(ngModel)]="list.itemName" placeholder="Name"></td>
+              <td><input [(ngModel)]="list.quantity" placeholder="Quantity" type="number" (input)="calculateItemPrice()"></td>
+              <td><span>₹</span><input [(ngModel)]="list.price" placeholder="Price per quantity" type="number" (input)="calculateItemPrice()"></td>
+              <td><span>₹</span><input [(ngModel)]="list.totalPrice" placeholder="Price" (input)="calculateItemPrice()" (keyup.enter)="addNewRow()"></td>
+              <td><button class="btn btn-danger" (click)="delete(index)">Delete</button></td>
+            </tr>
+        }
+        <tr>
+          <td colspan="3" class="text-right"><strong>Total</strong></td>
+          <td><strong>₹{{totalBillAmount}}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+  <div class="container">
+    <div class="bill-container" >
+      <h2 class="text-center mb-4">Invoice</h2>
+      <button class="btn btn-secondary btn-block mt-3 float-right" (click)="addNewRow()">+ Add New Item</button>
+      <button style="margin-right: 3px" class="btn btn-primary btn-block mt-3 float-right" (click)="saveAsPdf()">Save as PDF</button>
+      <div id="invoiceTable">
+          <table class="table table-bordered table-striped table-responsive">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for(list of bill; track list.itemName; let index = $index) {
+                    <tr>
+                      <td><input [value]="list.itemName" [(ngModel)]="list.itemName" placeholder="Item Name" class="form-control"></td>
+                      <td><input [(ngModel)]="list.quantity" placeholder="Quantity" type="number" class="form-control" (input)="calculateItemPrice()"></td>
+                      <td><span>₹</span><input [(ngModel)]="list.price" placeholder="Price per quantity" type="number" class="form-control" (input)="calculateItemPrice()"></td>
+                      <td><span>₹</span><input [(ngModel)]="list.totalPrice" placeholder="Total Price" class="form-control" readonly></td>
+                      <td><button class="btn btn-danger" (click)="delete(index)">Delete</button></td>
+                    </tr>
+                }
+                <tr>
+                  <td colspan="3" class="text-right"><strong>Total</strong></td>
+                  <td><strong>₹{{totalBillAmount}}</strong></td>
+                  <td></td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+    </div>
+  </div>

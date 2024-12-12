@@ -1,0 +1,114 @@
+/* Table Styling */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  .table th, .table td {
+    text-align: left;
+    padding: 12px;
+    vertical-align: middle;
+  }
+  
+  .table th {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .table input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Header */
+  .bill-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styles */
+  .btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  /* Responsive */
+  @media (max-width: 767px) {
+    .table th, .table td {
+      padding: 8px;
+    }
+  
+    .bill-container h2 {
+      font-size: 20px;
+    }
+  
+    .table input {
+      padding: 6px;
+      font-size: 14px;
+    }
+  
+    .btn {
+      font-size: 12px;
+      padding: 8px 10px;
+    }
+  
+    .btn-block {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .table th, .table td {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .table input {
+      font-size: 12px;
+      padding: 5px;
+    }
+  
+    .btn {
+      font-size: 10px;
+      padding: 6px 8px;
+    }
+  }
+  
+  .float-right {
+    float: right;
+  }

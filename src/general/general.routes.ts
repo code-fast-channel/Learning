@@ -30,4 +30,8 @@ export const learningRoutes: Routes = [
         path: 'games',
         loadChildren:() => import('./lists/games/games.route').then(routes => routes.routes)
     },
+    {
+        path: 'bills',
+        loadChildren:() => import('./lists/bills/bills.route').then(routes => routes.routes)
+    },
 ];
