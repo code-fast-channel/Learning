@@ -2,6 +2,8 @@ export const quizList = [
     {
         "id": 1,
         "title": "Html",
+        "description": `1) Html question and answer test,
+        2) Easy to memory`,
         data: [
             {
               "question": "What is HTML?",
@@ -665,10 +667,13 @@ export const quizList = [
               ]
             }
           ]
-    },
+    }
+    ,
     {
       "id": 2,
       "title": "Css",
+      "description": `1) Html question and answer test,
+        2) Easy to memory`,
       data: [
         {
           "question": "What does CSS stand for?",

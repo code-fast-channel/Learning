@@ -1,49 +1,34 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { learningList } from '../learning.constant';
+import { dropdownConfig, learningList } from '../learning.constant';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CodeFormatterComponent } from '../code-formatter/code-formatter.component';
+import { SingleSelectComponent } from '../../shared/components/single-select/single-select.component';
 declare const ace: any;
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, FormsModule,CodeFormatterComponent],
+  imports: [CommonModule, FormsModule,CodeFormatterComponent,SingleSelectComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent implements OnInit {
-  constructor(private router: Router,private ref: ChangeDetectorRef) {
-
-  }
+  isMobile: boolean = false; // Flag to check if the device is mobile
   
   listData: any = learningList;
-  selectedValue = '1';
-  framPerList = [
-    {
-      name: 'Auto Adjust',
-      value: null
-
-    },
-    {
-      name: '1frame',
-      value:'1'
-
-    },
-    {
-      name: '2frame',
-      value:'2'
-      
-    },
-    {
-      name: '3frame',
-      value:'3'
-    }
-  ];
+  dropdownConfig = dropdownConfig
   trackByIndex(index: number, item: any): number {
     return index;
+  }
+
+  constructor(private router: Router,private ref: ChangeDetectorRef) {
+    this.isMobile = window.innerWidth <= 768; // Check if the width is less than or equal to 768px (common breakpoint for mobile)
+    if (this.isMobile) {
+      dropdownConfig.selectedValue = null as any;
+    }
   }
 
   ngOnInit() {}

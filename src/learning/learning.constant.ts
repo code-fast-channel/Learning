@@ -1,3 +1,30 @@
+export const dropdownConfig = {
+  selectedValue : '1',
+  placeholder: '',
+  displayName: 'name',
+  bindValue: 'value',
+  data: [
+    {
+      name: 'Auto Adjust',
+      value: null
+    },
+    {
+      name: '1frame',
+      value:'1'
+
+    },
+    {
+      name: '2frame',
+      value:'2'
+      
+    },
+    {
+      name: '3frame',
+      value:'3'
+    }
+  ]
+};
+
 export const learningList = [
   {
     id: 1,

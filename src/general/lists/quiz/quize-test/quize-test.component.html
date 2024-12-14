@@ -1,25 +1,30 @@
 <div class="btn-grp">
-  <button type="submit" (click)="submit()">Submit</button>
-  <button type="submit" (click)="reset()">Reset</button>
+  <button type="submit" class="btn btn-submit" (click)="submit()">Submit</button>
+  <button type="button" class="btn btn-reset" (click)="reset()">Reset</button>
 </div>
 @if (submitted) {
-  <div class="d-flex justify-content-evenly">
+  <div class="d-flex justify-content-evenly result-summary">
     <h2>Total questions: {{list.length}}</h2>
     <h2>Correct Answers: {{correctAnswerCount}}</h2>
   </div>
 }
 <body>
   <div class="container">
-    <h1>Question and Answer Test</h1>
+    <h1 class="page-title">Question and Answer Test</h1>
     <form>
-      @for (item of list; track item.id;let idx = $index) {
+      @for (item of list; track item.id; let idx = $index) {
         <div class="question">
-          <h3>{{idx+1}}. {{item.question}}</h3>
+          <h3 class="question-title">{{idx+1}}. {{item.question}}</h3>
           <ul class="options">
             @for (answer of item.answers; track answer.answer; let chdx = $index) {
-              <li class="pointer" [id]="'group-' + chdx+'s'+idx"><label class="pointer" [for]="'group-' + chdx+'s'+idx"><input type="radio" class="pointer"  [id]="'group-' + chdx+'s'+idx"
-                [value]="answer.option"
-              [name]="'group-' + chdx+'s'+idx" [(ngModel)]="item.selectedOption" [ngModelOptions]="{standalone: true}"> {{answer.answer}}</label></li>
+              <li class="option-item" [id]="'group-' + chdx+'s'+idx">
+                <label class="option-label" [for]="'group-' + chdx+'s'+idx">
+                  <input type="radio" class="option-input" [id]="'group-' + chdx+'s'+idx"
+                    [value]="answer.option"
+                    [name]="'group-' + chdx+'s'+idx" [(ngModel)]="item.selectedOption" [ngModelOptions]="{standalone: true}"> 
+                  {{answer.answer}}
+                </label>
+              </li>
             }
             @if (submitted && !item?.selectedOption) {
               <p class="text-danger">Select the answer</p>

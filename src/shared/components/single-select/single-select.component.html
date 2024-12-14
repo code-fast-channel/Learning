@@ -1,0 +1,5 @@
+<select class="custom-select pointer" [(ngModel)]="config.selectedValue" (ngModelChange)="onSelectionChange($event)" placeholder="Select Frame">
+    @for (val of config.data; track trackByIndex($index, val)) {
+      <option [value]="val[config.bindValue]">{{val[config.displayName]}}</option>
+    }
+</select>

@@ -10,6 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CommonCardListComponent {
  @Input() list: any = [];
+ @Input() gridCount?:any = null;
  @Output() listChange = new EventEmitter<any[]>();
 
  navigate(item: any): void {

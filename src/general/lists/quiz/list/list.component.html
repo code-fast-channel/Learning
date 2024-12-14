@@ -1,10 +1,8 @@
-<div class="list">
-    @for (item of list; track item.id) {
-        <div class="card text-white bg-success mb-3">
-            <div class="card-header">{{ item.title }}<button (click)="navigate(item.id)" class="btn btn-sm btn-primary">Take Test</button></div>
-            <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-    }
+<div style="height: 100%;">
+    <div class="content-wrapper">
+      <div class="d-flex justify-content-end mr-1 mb-2">
+        <app-single-select [config]="config"></app-single-select>
+      </div>
+        <app-common-card-list [list]="list" [gridCount]="config.selectedValue" (listChange)="navigate($event)"/>
+    </div>
 </div>

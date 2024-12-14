@@ -1,3 +1,67 @@
-.bttn {
- top: 5px
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #004d40;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* Enable wrapping for smaller screens */
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-button {
+  background: #00796b;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Adjustments for medium screens */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Make elements take full width */
+  }
+
+  .logo {
+    margin-bottom: 10px; /* Add spacing below the logo */
+    text-align: center; /* Center the logo */
+  }
+
+  .nav-links {
+    justify-content: center; /* Center buttons horizontally */
+  }
+
+  .nav-button {
+    flex-grow: 1; /* Buttons expand to fill available space */
+    text-align: center; /* Center the text inside the button */
+  }
+}
+
+/* Adjustments for smaller screens (narrower than 480px) */
+@media (max-width: 480px) {
+  .nav-button {
+    font-size: 12px; /* Reduce font size for smaller screens */
+    padding: 6px 10px; /* Adjust padding */
+  }
+
+  .logo {
+    font-size: 16px; /* Slightly smaller logo for better fit */
+  }
 }

@@ -1,5 +1,8 @@
-<div class="mb-2">
-<h1 class="text-center">General use Website</h1>
-<button class="btn btn-primary position-absolute bttn" [routerLink]="['/general']">Home</button>
+<div class="top-bar">
+  <div class="logo" [routerLink]="['/general']">Code Fast Channel</div>
+  <div class="nav-links">
+    <button class="nav-button pointer" [routerLink]="['/general']">Menu</button>
+    <!-- <button class="nav-button pointer" [routerLink]="['/logout']">Logout</button> -->
+  </div>
 </div>
 <router-outlet />

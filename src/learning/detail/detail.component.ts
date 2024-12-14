@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { learningList } from '../learning.constant';
+import { dropdownConfig, learningList } from '../learning.constant';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodeFormatterComponent } from '../code-formatter/code-formatter.component';
+import { SingleSelectComponent } from '../../shared/components/single-select/single-select.component';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, CodeFormatterComponent],
+  imports: [CommonModule, FormsModule, CodeFormatterComponent, SingleSelectComponent],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -16,35 +17,18 @@ import { CodeFormatterComponent } from '../code-formatter/code-formatter.compone
 export class DetailComponent implements OnInit {
   
   selectedListData: any = {};
-  selectedValue = '1';
+  dropdownConfig = dropdownConfig;
   listData: any = [];
-  framPerList = [
-    {
-      name: 'Auto Adjust',
-      value: null
-
-    },
-    {
-      name: '1frame',
-      value:'1'
-
-    },
-    {
-      name: '2frame',
-      value:'2'
-      
-    },
-    {
-      name: '3frame',
-      value:'3'
-    }
-  ];
+  isMobile: boolean = false;
 
   trackByIndex(index: number, item: any): number {
     return index;
   }
   constructor(private activateRoute: ActivatedRoute,private router: Router, private ref: ChangeDetectorRef) {
-
+    this.isMobile = window.innerWidth <= 768; // Check if the width is less than or equal to 768px (common breakpoint for mobile)
+    if (this.isMobile) {
+      dropdownConfig.selectedValue = null as any;
+    }
   }
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {

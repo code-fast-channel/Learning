@@ -1,1 +1,8 @@
-<app-common-card-list [list]="list" (listChange)="listData($event)"/>
+<div style="height: 100%;">
+    <div class="content-wrapper">
+      <div class="d-flex justify-content-end mr-1 mb-2">
+        <app-single-select [config]="config"></app-single-select>
+      </div>
+        <app-common-card-list [list]="list" [gridCount]="config.selectedValue" (listChange)="listData($event)"/>
+    </div>
+</div>

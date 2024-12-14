@@ -1,15 +1,11 @@
 <div style="height: 100%;">
-  <div>
-    <h5 class="text-center">Learning and References</h5>
+  <div class="d-flex justify-content-between align-items-center flex-wrap title-head">
+    <h4 class="text-left mb-2">Learning and References</h4>
+    <div class="d-flex justify-content-end mb-2">
+      <app-single-select [config]="dropdownConfig"></app-single-select>
+    </div>
   </div>
-  <div class="d-flex justify-content-end mr-1">
-    <select [(ngModel)]="selectedValue" placeholder="Select Frame">
-      @for (val of framPerList; track trackByIndex($index, val)) {
-        <option [value]="val.value">{{val.name}}</option>
-      }
-    </select>
-  </div>
-  <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;" [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(selectedValue) ? 'repeat(' + selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
+  <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;" [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(dropdownConfig.selectedValue) ? 'repeat(' + dropdownConfig.selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
     @for (data of listData; track trackByIndex(i, data); let i = $index) {
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
@@ -30,11 +26,11 @@
               @if (files?.isGroup) {
                 <hr style="margin: 1rem -1.5rem;">
               }
-              <h4 style="font-weight: 700;" >{{files.title | titlecase}}</h4> @if (files?.description) {
+              <h6 style="font-weight: 700;" >{{files.title | titlecase}}</h6> @if (files?.description) {
               <span class="text-br" [innerText]="files.description"></span>
             }
             @for (codes of files.codeLists; track trackByIndex(ci, codes); let last = $last; let ci = $index) {
-              <h4 style="font-weight: 700;">{{codes.title | titlecase}}</h4> @if (codes?.description) {
+              <h6 style="font-weight: 700;">{{codes.title | titlecase}}</h6> @if (codes?.description) {
               <span class="text-br" [innerText]="codes.description"></span>
             }
             @if (codes?.code) {

@@ -1,17 +1,13 @@
 <div style="height: 100%;">
-  <div>
-    <h2 style="text-align: center;">{{selectedListData.title}}</h2>
-  </div>
-  <div class="d-flex justify-content-end mr-1">
-    <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;margin-right: 2px;" (click)="navigatetoList()">Home</button>
-    <select [(ngModel)]="selectedValue" placeholder="Select Frame">
-      @for (val of framPerList; track trackByIndex($index, val)) {
-        <option [value]="val.value">{{val.name}}</option>
-      }
-    </select>
+  <div class="d-flex justify-content-between align-items-center flex-wrap title-head">
+    <h4 class="text-left mb-2">{{selectedListData.title}}</h4>
+    <div class="d-flex justify-content-end mb-2">
+      <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;margin-right: 2px;" (click)="navigatetoList()">Home</button>
+      <app-single-select [config]="dropdownConfig"></app-single-select>
+    </div>
   </div>
   <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;"
-    [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(selectedValue) ? 'repeat(' + selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
+    [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(dropdownConfig.selectedValue) ? 'repeat(' + dropdownConfig.selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
     @for (data of listData; track trackByIndex(i, data); let i = $index) {
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
@@ -27,12 +23,12 @@
           @for (files of data?.filesList; track trackByIndex(ri, files); let ri = $index) {
             <ng-container
               style="font-family: initial;font-size: 12;">
-              <h4 style="font-weight: 700;">{{files.title | titlecase}}</h4> @if (files?.description) {
+              <h6 style="font-weight: 700;">{{files.title | titlecase}}</h6> @if (files?.description) {
               <span class="text-br"
               [innerText]="files.description"></span>
             }
             @for (codes of files.codeLists; track trackByIndex(ci, codes); let last = $last; let ci = $index) {
-              <h4 style="font-weight: 700;">{{codes.title | titlecase}}</h4> @if (codes?.description) {
+              <h6 style="font-weight: 700;">{{codes.title | titlecase}}</h6> @if (codes?.description) {
               <span class="text-br"
               [innerText]="codes.description"></span>
             }
