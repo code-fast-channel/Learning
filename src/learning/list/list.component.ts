@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
   constructor(private router: Router,private ref: ChangeDetectorRef) {
     this.isMobile = window.innerWidth <= 768; // Check if the width is less than or equal to 768px (common breakpoint for mobile)
     if (this.isMobile) {
-      dropdownConfig.selectedValue = null as any;
+      dropdownConfig.selectedValue = 1 as any;
     }
   }
 
