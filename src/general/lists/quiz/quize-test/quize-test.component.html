@@ -1,25 +1,26 @@
-<div class="btn-grp">
-  <button type="submit" class="btn btn-submit" (click)="submit()">Submit</button>
-  <button type="button" class="btn btn-reset" (click)="reset()">Reset</button>
+<div class="btn-group">
+  <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+  <button type="button" class="btn btn-secondary" (click)="reset()">Reset</button>
 </div>
 @if (submitted) {
-  <div class="d-flex justify-content-evenly result-summary">
+  <div class="result-summary d-flex justify-content-between">
     <h2>Total questions: {{list.length}}</h2>
     <h2>Correct Answers: {{correctAnswerCount}}</h2>
   </div>
 }
 <body>
   <div class="container">
-    <h1 class="page-title">Question and Answer Test</h1>
+    <h4 class="qa">Question and Answer Test</h4>
     <form>
       @for (item of list; track item.id; let idx = $index) {
-        <div class="question">
-          <h3 class="question-title">{{idx+1}}. {{item.question}}</h3>
-          <ul class="options">
+        <div class="question-card">
+          <h3 class="question-heading">{{idx+1}}. {{item.question}}</h3>
+          <ul class="answer-options">
             @for (answer of item.answers; track answer.answer; let chdx = $index) {
-              <li class="option-item" [id]="'group-' + chdx+'s'+idx">
-                <label class="option-label" [for]="'group-' + chdx+'s'+idx">
-                  <input type="radio" class="option-input" [id]="'group-' + chdx+'s'+idx"
+              <li class="answer-item" [id]="'group-' + chdx+'s'+idx">
+                <label class="answer-label" [for]="'group-' + chdx+'s'+idx" [ngClass]="{'correct-icon': submitted && (item.selectedOption == item.selectedAnswer && item.selectedOption == answer.option || item.selectedAnswer == answer.option), 
+                          'incorrect-icon': submitted && (item.selectedOption != item.selectedAnswer && item.selectedOption == answer.option)}">
+                  <input type="radio" class="answer-input" [id]="'group-' + chdx+'s'+idx"
                     [value]="answer.option"
                     [name]="'group-' + chdx+'s'+idx" [(ngModel)]="item.selectedOption" [ngModelOptions]="{standalone: true}"> 
                   {{answer.answer}}
@@ -27,7 +28,7 @@
               </li>
             }
             @if (submitted && !item?.selectedOption) {
-              <p class="text-danger">Select the answer</p>
+              <p class="error-message">Select the answer</p>
             }
           </ul>
         </div>

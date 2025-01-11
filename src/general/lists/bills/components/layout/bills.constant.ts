@@ -10,6 +10,6 @@ export const billsList = [
       "id": 2,
       "title": "Custom Bill",
       description: `1) Here we can create a quick bill.
-      2) Here we can use list of values based on that bill can generate.`
+      2) Development inprogress`
     },
 ];

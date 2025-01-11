@@ -36,8 +36,8 @@
               <tr>
                 <th>Item</th>
                 <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+                <th>Price (₹)</th>
+                <th>Total (₹)</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -46,8 +46,8 @@
                     <tr>
                       <td><input [value]="list.itemName" [(ngModel)]="list.itemName" placeholder="Item Name" class="form-control"></td>
                       <td><input [(ngModel)]="list.quantity" placeholder="Quantity" type="number" class="form-control" (input)="calculateItemPrice()"></td>
-                      <td><span>₹</span><input [(ngModel)]="list.price" placeholder="Price per quantity" type="number" class="form-control" (input)="calculateItemPrice()"></td>
-                      <td><span>₹</span><input [(ngModel)]="list.totalPrice" placeholder="Total Price" class="form-control" readonly></td>
+                      <td><input [(ngModel)]="list.price" placeholder="Price per quantity" type="number" class="form-control" (input)="calculateItemPrice()"></td>
+                      <td><input [(ngModel)]="list.totalPrice" placeholder="Total Price" class="form-control" readonly></td>
                       <td><button class="btn btn-danger" (click)="delete(index)">Delete</button></td>
                     </tr>
                 }

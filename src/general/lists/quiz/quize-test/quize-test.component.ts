@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { quizList } from '../quiz.constant';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-quize-test',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './quize-test.component.html',
   styleUrl: './quize-test.component.scss'
 })
