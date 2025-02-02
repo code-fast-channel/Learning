@@ -34,7 +34,7 @@
               <span class="text-br" [innerText]="codes.description"></span>
             }
             @if (codes?.code) {
-              <div class="card mb-3 editor-text" style="font-family: initial;">
+              <div class="card mb-3 editor-text" style="font-family: initial;" #code>
                 <div class="card-header bg-transparent" style="background-color: #27272a !important; color: white">
                   {{codes.filename}}
                   <div style="position: absolute;top: 7px;right: 14px;">
@@ -44,7 +44,8 @@
                             <div class="card-body text-success"  style="padding: 0;
     margin: 0;background-color: #09090b !important; color: white">
                   <!-- <h5 class="card-title" [innerText]="codes.code"></h5> -->
-                  @defer {
+                  <h5 class="card-title" style="position: absolute; top: -9999px" >{{codes.code}}</h5>
+                  @defer (on viewport(code)) {
                   <app-code-formatter [code]="codes.code" />
                 }
                 @placeholder {

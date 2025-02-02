@@ -13,8 +13,8 @@ export class CommonCardListComponent {
  @Input() gridCount?:any = null;
  @Output() listChange = new EventEmitter<any[]>();
 
- navigate(item: any): void {
-  this.listChange.emit(item);
+ navigate(item: any,index: number): void {
+  this.listChange.emit({...item, selectedIndex: index});
  }
 
 }

@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.7",
+    "@angular/cdk": "^18.2.14",
     "@angular/common": "^18.2.7",
     "@angular/compiler": "^18.2.7",
     "@angular/core": "^18.2.7",
@@ -41,5 +42,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

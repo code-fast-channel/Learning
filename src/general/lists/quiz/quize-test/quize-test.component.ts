@@ -39,7 +39,7 @@ export class QuizeTestComponent {
   submit(): void {
     this.submitted = true;
     this.correctAnswerCount = this.list.reduce((total: any, question: any) => {
-      return total + (question.selectedAnswer === question.selectedOption ? 1 : 0);
+      return total + (question.correctAnswerOption === question.selectedOption ? 1 : 0);
     }, 0);
   }
 

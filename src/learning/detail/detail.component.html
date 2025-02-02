@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div class="d-flex justify-content-between align-items-center flex-wrap title-head">
-    <h4 class="text-left mb-2">{{selectedListData.title}}</h4>
+    <h4 class="text-left mb-2">{{selectedListData?.title}}</h4>
     <div class="d-flex justify-content-end mb-2">
       <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;margin-right: 2px;" (click)="navigatetoList()">Home</button>
       <app-single-select [config]="dropdownConfig"></app-single-select>
@@ -33,7 +33,7 @@
               [innerText]="codes.description"></span>
             }
             @if (codes?.code) {
-              <div class="card mb-3 editor-text" style="font-family: initial;">
+              <div class="card mb-3 editor-text" #code style="font-family: initial;">
                 <div class="card-header bg-transparent"
                   style="background-color: #27272a !important; color: white">
                   {{codes.filename}}
@@ -44,8 +44,8 @@
                 <div class="card-body text-success"
                                 style="background-color: #09090b !important; color: white;padding: 0;
     margin: 0;">
-                  <!-- <h5 class="card-title" [innerText]="codes.code"></h5> -->
-                  @defer {
+                  <h5 class="card-title" style="position: absolute; left: -9999px" >{{codes.code}}</h5>
+                  @defer (on viewport(code)) {
                   <app-code-formatter [code]="codes.code"></app-code-formatter>
                 }
                 @placeholder {

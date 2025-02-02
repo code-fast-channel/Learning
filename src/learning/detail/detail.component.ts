@@ -32,7 +32,9 @@ export class DetailComponent implements OnInit {
   }
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      const data: any = learningList[+params.id].filesList;
+      const id = +params.id;
+      // const selectedId = learningList.findIndex(val => val.id == id);
+      const data: any = learningList[id].filesList;
       let arr: any = [];
       data.forEach((element: any) => {
         let obj = {filesList: [element],title: element.title, isGroup: element.isGroup}
@@ -51,7 +53,7 @@ export class DetailComponent implements OnInit {
   }
 
   navigatetoList() {
-    this.router.navigate(['learning/list'])
+    this.router.navigate(['learning/'])
   }
 
   copy(text: any,i: any,parentIndex: any,childIndex: any) {

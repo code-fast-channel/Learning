@@ -18,8 +18,8 @@
           <ul class="answer-options">
             @for (answer of item.answers; track answer.answer; let chdx = $index) {
               <li class="answer-item" [id]="'group-' + chdx+'s'+idx">
-                <label class="answer-label" [for]="'group-' + chdx+'s'+idx" [ngClass]="{'correct-icon': submitted && (item.selectedOption == item.selectedAnswer && item.selectedOption == answer.option || item.selectedAnswer == answer.option), 
-                          'incorrect-icon': submitted && (item.selectedOption != item.selectedAnswer && item.selectedOption == answer.option)}">
+                <label class="answer-label" [for]="'group-' + chdx+'s'+idx" [ngClass]="{'correct-icon': submitted && (item.selectedOption == item.correctAnswerOption && item.selectedOption == answer.option || item.correctAnswerOption == answer.option), 
+                          'incorrect-icon': submitted && (item.selectedOption != item.correctAnswerOption && item.selectedOption == answer.option)}">
                   <input type="radio" class="answer-input" [id]="'group-' + chdx+'s'+idx"
                     [value]="answer.option"
                     [name]="'group-' + chdx+'s'+idx" [(ngModel)]="item.selectedOption" [ngModelOptions]="{standalone: true}"> 

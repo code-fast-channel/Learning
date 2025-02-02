@@ -1,0 +1,9 @@
+<div style="height: 100%;">
+    <div class="content-wrapper">
+      <div class="d-flex justify-content-end mr-1 mb-2">
+        <button class="btn btn-md btn-success" style="margin-right: 3px;" [routerLink]="['/learning/list']">View All</button>
+        <app-single-select [config]="config"></app-single-select>
+      </div>
+        <app-common-card-list [list]="list" [gridCount]="config.selectedValue" (listChange)="navigate($event)"/>
+    </div>
+</div>

@@ -1325,7 +1325,7 @@ export const learningList = [
   {
     id: 3,
     title: 'Array of object Concepts',
-    description: 'Object methods all with examples',
+    description: 'Array of Object methods all with examples',
     image: '',
     groupBy: [],
     filesList: 
@@ -11273,7 +11273,7 @@ export class DisableDirective implements OnChanges {
   {
     "id": 5,
     "title": "Tricky Array Interview Concepts",
-    "description": "",
+    "description": "Tricky array concepts to crack interview",
     "image": "",
     "groupBy": [],
     "isGroup": true,

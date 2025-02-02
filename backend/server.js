@@ -1,14 +1,17 @@
 const express = require("express");
+const cors = require('cors'); // Import cors
 const app = express();
-// require("dotenv").config();
-// const dbConfig = require("./config/dbConfig");
-// app.use(express.json());
-// const userRoute = require("./routes/userRoute");
+require("dotenv").config();
+const dbConfig = require("./config/dbConfig");
+app.use(cors()); // Use CORS middleware
+app.use(express.json());
+const userRoute = require("./routes/userRoute");
 // const adminRoute = require("./routes/adminRoute");
 // const doctorRoute = require("./routes/doctorsRoute");
 // const path = require("path");
 
-// app.use("/api/user", userRoute);
+app.use("/api/user", userRoute);
+// app.use("/api/learning", userRoute);
 // app.use("/api/admin", adminRoute);
 // app.use("/api/doctor", doctorRoute);
 

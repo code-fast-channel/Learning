@@ -13,5 +13,9 @@ export const routes: Routes = [
     {
         path: 'general',
         loadChildren:() => import('../general/general.routes').then(routes => routes.learningRoutes)
+    },
+    {
+        path: 'auth',
+        loadChildren:() => import('../auth/auth.routes').then(route => route.authRoutes)
     }
 ];

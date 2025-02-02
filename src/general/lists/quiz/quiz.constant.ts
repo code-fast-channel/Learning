@@ -5,139 +5,139 @@ export const quizList = [
         "description": `1) Html question and answer test,
         2) Easy to memory`,
         data: [
-            {
-              "question": "What is HTML?",
-              "selectedAnswer": "a",
-              "answers": [
-                { "answer": "Hyper Text Markup Language", "option": "a" },
-                { "answer": "Hyperlinks and Text Markup Language", "option": "b" },
-                { "answer": "High-Level Text Markup Language", "option": "c" },
-                { "answer": "Hyper Text Machine Language", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which is the correct HTML element for inserting a line break?",
-              "selectedAnswer": "b",
-              "answers": [
-                { "answer": "<break>", "option": "a" },
-                { "answer": "<br>", "option": "b" },
-                { "answer": "<lb>", "option": "c" },
-                { "answer": "<newline>", "option": "d" }
-              ]
-            },
-            {
-              "question": "What does CSS stand for?",
-              "selectedAnswer": "c",
-              "answers": [
-                { "answer": "Computer Style Sheets", "option": "a" },
-                { "answer": "Creative Style Sheets", "option": "b" },
-                { "answer": "Cascading Style Sheets", "option": "c" },
-                { "answer": "Colorful Style Sheets", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML attribute is used to define inline styles?",
-              "selectedAnswer": "a",
-              "answers": [
-                { "answer": "style", "option": "a" },
-                { "answer": "font", "option": "b" },
-                { "answer": "class", "option": "c" },
-                { "answer": "styles", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which is the correct HTML for creating a hyperlink?",
-              "selectedAnswer": "d",
-              "answers": [
-                { "answer": "<a>http://www.example.com</a>", "option": "a" },
-                { "answer": "<link>http://www.example.com</link>", "option": "b" },
-                { "answer": "<href>http://www.example.com</href>", "option": "c" },
-                { "answer": "<a href='http://www.example.com'>Example</a>", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML element defines the title of a document?",
-              "selectedAnswer": "b",
-              "answers": [
-                { "answer": "<head>", "option": "a" },
-                { "answer": "<title>", "option": "b" },
-                { "answer": "<meta>", "option": "c" },
-                { "answer": "<header>", "option": "d" }
-              ]
-            },
-            {
-              "question": "What is the correct HTML for adding a background color?",
-              "selectedAnswer": "a",
-              "answers": [
-                { "answer": "<body style='background-color:yellow;'>", "option": "a" },
-                { "answer": "<body bg='yellow'>", "option": "b" },
-                { "answer": "<background>yellow</background>", "option": "c" },
-                { "answer": "<body background='yellow'>", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML element is used for the largest heading?",
-              "selectedAnswer": "c",
-              "answers": [
-                { "answer": "<h6>", "option": "a" },
-                { "answer": "<h1>", "option": "b" },
-                { "answer": "<h2>", "option": "c" },
-                { "answer": "<heading>", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML element is used to define an unordered list?",
-              "selectedAnswer": "a",
-              "answers": [
-                { "answer": "<ul>", "option": "a" },
-                { "answer": "<ol>", "option": "b" },
-                { "answer": "<li>", "option": "c" },
-                { "answer": "<list>", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML element is used to define a table?",
-              "selectedAnswer": "b",
-              "answers": [
-                { "answer": "<table>", "option": "a" },
-                { "answer": "<tab>", "option": "b" },
-                { "answer": "<tbody>", "option": "c" },
-                { "answer": "<tr>", "option": "d" }
-              ]
-            },
-            {
-              "question": "What is the purpose of the alt attribute in an img tag?",
-              "selectedAnswer": "a",
-              "answers": [
-                { "answer": "To provide alternative text for an image", "option": "a" },
-                { "answer": "To specify the image source", "option": "b" },
-                { "answer": "To define the image size", "option": "c" },
-                { "answer": "To create a link", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML element is used to create a dropdown list?",
-              "selectedAnswer": "b",
-              "answers": [
-                { "answer": "<input>", "option": "a" },
-                { "answer": "<select>", "option": "b" },
-                { "answer": "<dropdown>", "option": "c" },
-                { "answer": "<list>", "option": "d" }
-              ]
-            },
-            {
-              "question": "Which HTML element is used to define a footer for a document?",
-              "selectedAnswer": "c",
-              "answers": [
-                { "answer": "<bottom>", "option": "a" },
-                { "answer": "<footer>", "option": "b" },
-                { "answer": "<section>", "option": "c" },
-                { "answer": "<aside>", "option": "d" }
-              ]
-            },
+          {
+            "question": "What is HTML?",
+            "correctAnswerOption": "a",
+            "answers": [
+              { "answer": "Hyper Text Markup Language", "option": "a" },
+              { "answer": "Hyperlinks and Text Markup Language", "option": "b" },
+              { "answer": "High-Level Text Markup Language", "option": "c" },
+              { "answer": "Hyper Text Machine Language", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which is the correct HTML element for inserting a line break?",
+            "correctAnswerOption": "b",
+            "answers": [
+              { "answer": "<break>", "option": "a" },
+              { "answer": "<br>", "option": "b" },
+              { "answer": "<lb>", "option": "c" },
+              { "answer": "<newline>", "option": "d" }
+            ]
+          },
+          {
+            "question": "What does CSS stand for?",
+            "correctAnswerOption": "c",
+            "answers": [
+              { "answer": "Computer Style Sheets", "option": "a" },
+              { "answer": "Creative Style Sheets", "option": "b" },
+              { "answer": "Cascading Style Sheets", "option": "c" },
+              { "answer": "Colorful Style Sheets", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML attribute is used to define inline styles?",
+            "correctAnswerOption": "a",
+            "answers": [
+              { "answer": "style", "option": "a" },
+              { "answer": "font", "option": "b" },
+              { "answer": "class", "option": "c" },
+              { "answer": "styles", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which is the correct HTML for creating a hyperlink?",
+            "correctAnswerOption": "d",
+            "answers": [
+              { "answer": "<a>http://www.example.com</a>", "option": "a" },
+              { "answer": "<link>http://www.example.com</link>", "option": "b" },
+              { "answer": "<href>http://www.example.com</href>", "option": "c" },
+              { "answer": "<a href='http://www.example.com'>Example</a>", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML element defines the title of a document?",
+            "correctAnswerOption": "b",
+            "answers": [
+              { "answer": "<head>", "option": "a" },
+              { "answer": "<title>", "option": "b" },
+              { "answer": "<meta>", "option": "c" },
+              { "answer": "<header>", "option": "d" }
+            ]
+          },
+          {
+            "question": "What is the correct HTML for adding a background color?",
+            "correctAnswerOption": "a",
+            "answers": [
+              { "answer": "<body style='background-color:yellow;'>", "option": "a" },
+              { "answer": "<body bg='yellow'>", "option": "b" },
+              { "answer": "<background>yellow</background>", "option": "c" },
+              { "answer": "<body background='yellow'>", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML element is used for the largest heading?",
+            "correctAnswerOption": "b",
+            "answers": [
+              { "answer": "<h6>", "option": "a" },
+              { "answer": "<h1>", "option": "b" },
+              { "answer": "<h2>", "option": "c" },
+              { "answer": "<heading>", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML element is used to define an unordered list?",
+            "correctAnswerOption": "a",
+            "answers": [
+              { "answer": "<ul>", "option": "a" },
+              { "answer": "<ol>", "option": "b" },
+              { "answer": "<li>", "option": "c" },
+              { "answer": "<list>", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML element is used to define a table?",
+            "correctAnswerOption": "a",
+            "answers": [
+              { "answer": "<table>", "option": "a" },
+              { "answer": "<tab>", "option": "b" },
+              { "answer": "<tbody>", "option": "c" },
+              { "answer": "<tr>", "option": "d" }
+            ]
+          },
+          {
+            "question": "What is the purpose of the alt attribute in an img tag?",
+            "correctAnswerOption": "a",
+            "answers": [
+              { "answer": "To provide alternative text for an image", "option": "a" },
+              { "answer": "To specify the image source", "option": "b" },
+              { "answer": "To define the image size", "option": "c" },
+              { "answer": "To create a link", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML element is used to create a dropdown list?",
+            "correctAnswerOption": "b",
+            "answers": [
+              { "answer": "<input>", "option": "a" },
+              { "answer": "<select>", "option": "b" },
+              { "answer": "<dropdown>", "option": "c" },
+              { "answer": "<list>", "option": "d" }
+            ]
+          },
+          {
+            "question": "Which HTML element is used to define a footer for a document?",
+            "correctAnswerOption": "b",
+            "answers": [
+              { "answer": "<bottom>", "option": "a" },
+              { "answer": "<footer>", "option": "b" },
+              { "answer": "<section>", "option": "c" },
+              { "answer": "<aside>", "option": "d" }
+            ]
+          },
             {
               "question": "What does the <meta> tag in HTML do?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "Defines the character set", "option": "a" },
                 { "answer": "Links to external stylesheets", "option": "b" },
@@ -147,7 +147,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a navigation link?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "<nav>", "option": "a" },
                 { "answer": "<link>", "option": "b" },
@@ -157,7 +157,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a checkbox?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<input type='check'>", "option": "a" },
                 { "answer": "<input type='checkbox'>", "option": "b" },
@@ -167,7 +167,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section in a document?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "<div>", "option": "a" },
                 { "answer": "<section>", "option": "b" },
@@ -177,7 +177,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <link> tag in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "To link to external resources", "option": "a" },
                 { "answer": "To create a hyperlink", "option": "b" },
@@ -187,7 +187,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a list item?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<li>", "option": "a" },
                 { "answer": "<item>", "option": "b" },
@@ -197,7 +197,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a text area?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "<textarea></textarea>", " option": "a" },
                 { "answer": "<input type='textarea'>", "option": "b" },
@@ -207,7 +207,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a header for a document?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<head>", "option": "a" },
                 { "answer": "<header>", "option": "b" },
@@ -217,7 +217,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <script> tag in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "To define client-side JavaScript", "option": "a" },
                 { "answer": "To link to external stylesheets", "option": "b" },
@@ -227,7 +227,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a form?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<input>", "option": "a" },
                 { "answer": "<form>", "option": "b" },
@@ -237,7 +237,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a radio button?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "<input type='radio'>", "option": "a" },
                 { "answer": "<radio>", "option": "b" },
@@ -247,7 +247,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a clickable button?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<button>", "option": "a" },
                 { "answer": "<input type='button'>", "option": "b" },
@@ -257,7 +257,7 @@ export const quizList = [
             },
             {
               "question": "What does the <iframe> tag do in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "Defines an inline frame", "option": "a" },
                 { "answer": "Links to external resources", "option": "b" },
@@ -267,7 +267,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of navigation links?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<nav>", "option": "a" },
                 { "answer": "<menu>", "option": "b" },
@@ -277,7 +277,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a definition list?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "<dl>", "option": "a" },
                 { "answer": "<list>", "option": "b" },
@@ -287,7 +287,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a description list?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<dl>", "option": "a" },
                 { "answer": "<list>", "option": "b" },
@@ -297,7 +297,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <style> tag in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "To define CSS styles for the document", "option": "a" },
                 { "answer": "To link to external stylesheets", "option": "b" },
@@ -307,7 +307,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a main content area?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<main>", "option": "a" },
                 { "answer": "<content>", "option": "b" },
@@ -317,7 +317,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a progress bar?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "<progress></progress>", "option": "a" },
                 { "answer": "<bar></bar>", "option": "b" },
@@ -327,7 +327,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a time element?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<date>", "option": "a" },
                 { "answer": "<time>", "option": "b" },
@@ -337,7 +337,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <canvas> element in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "To draw graphics on the fly", "option": "a" },
                 { "answer": "To create a hyperlink", "option": "b" },
@@ -347,7 +347,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a video?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<movie>", "option": "a" },
                 { "answer": "<video>", "option": "b" },
@@ -357,7 +357,7 @@ export const quizList = [
             },
             {
               "question": "What does the <audio> tag do in HTML?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "Defines a sound content", "option": "a" },
                 { "answer": "Links to external resources", "option": "b" },
@@ -367,7 +367,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a map for an image?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<area>", "option": "a" },
                 { "answer": "<map>", "option": "b" },
@@ -377,7 +377,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a tooltip?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "<span title='Tooltip text'>Hover over me</span>", "option": "a" },
                 { "answer": "<tooltip>Hover over me</tooltip>", "option": "b" },
@@ -387,7 +387,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is tangentially related to the main content?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<aside>", "option": "a" },
                 { "answer": "<section>", "option": "b" },
@@ -398,7 +398,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <details> tag in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "To create a disclosure widget from which the user can obtain additional information", "option": "a" },
                 { "answer": "To define a summary", "option": "b" },
@@ -408,7 +408,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a summary for a <details> element?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<summary>", "option": "a" },
                 { "answer": "<details-summary>", "option": "b" },
@@ -418,7 +418,7 @@ export const quizList = [
             },
             {
               "question": "What does the <mark> tag do in HTML?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "Highlights text", "option": "a" },
                 { "answer": "Defines a strong emphasis", "option": "b" },
@@ -428,7 +428,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is related to the main content?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<div>", "option": "b" },
@@ -438,7 +438,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a navigation bar?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "<nav></nav>", "option": "a" },
                 { "answer": "<navigation></navigation>", "option": "b" },
@@ -448,7 +448,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is independent from the rest of the document?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<article>", "option": "b" },
@@ -458,7 +458,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <blockquote> tag in HTML?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "To define a section that is quoted from another source", "option": "a" },
                 { "answer": "To create a block of text", "option": "b" },
@@ -468,7 +468,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a citation?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<cite>", "option": "a" },
                 { "answer": "<reference>", "option": "b" },
@@ -478,7 +478,7 @@ export const quizList = [
             },
             {
               "question": "What does the <time> tag do in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "Represents a specific period in time", "option": "a" },
                 { "answer": "Defines a date", "option": "b" },
@@ -488,7 +488,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is related to the main content?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<div>", "option": "b" },
@@ -498,7 +498,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a navigation bar?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "<nav></nav>", "option": "a" },
                 { "answer": "<navigation></navigation>", "option": "b" },
@@ -508,7 +508,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is independent from the rest of the document?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<article>", "option": "b" },
@@ -518,7 +518,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <blockquote> tag in HTML?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "To define a section that is quoted from another source", "option": "a" },
                 { "answer": "To create a block of text", "option": "b" },
@@ -528,7 +528,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a citation?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<cite>", "option": "a" },
                 { "answer": "<reference>", "option": "b" },
@@ -538,7 +538,7 @@ export const quizList = [
             },
             {
               "question": "What does the <time> tag do in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "Represents a specific period in time", "option": "a" },
                 { "answer": "Defines a date", "option": "b" },
@@ -548,7 +548,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is related to the main content?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<div>", "option": "b" },
@@ -558,7 +558,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a navigation bar?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "<nav></nav>", "option": "a" },
                 { "answer": "<navigation></navigation>", "option": "b" },
@@ -568,7 +568,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is independent from the rest of the document?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<article>", "option": "b" },
@@ -578,7 +578,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <blockquote> tag in HTML?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "To define a section that is quoted from another source", "option": "a" },
                 { "answer": "To create a block of text", "option": "b" },
@@ -588,7 +588,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a citation?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<cite>", "option": "a" },
                 { "answer": "<reference>", "option": "b" },
@@ -598,7 +598,7 @@ export const quizList = [
             },
             {
               "question": "What does the <time> tag do in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "Represents a specific period in time", "option": "a" },
                 { "answer": "Defines a date", "option": "b" },
@@ -608,7 +608,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is related to the main content?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<div>", "option": "b" },
@@ -618,7 +618,7 @@ export const quizList = [
             },
             {
               "question": "What is the correct HTML for creating a navigation bar?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "<nav></nav>", "option": "a" },
                 { "answer": "<navigation></navigation>", "option": "b" },
@@ -628,7 +628,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a section of content that is independent from the rest of the document?",
-              "selectedAnswer": "b",
+              "correctAnswerOption": "b",
               "answers": [
                 { "answer": "<section>", "option": "a" },
                 { "answer": "<article>", "option": "b" },
@@ -638,7 +638,7 @@ export const quizList = [
             },
             {
               "question": "What is the purpose of the <blockquote> tag in HTML?",
-              "selectedAnswer": "c",
+              "correctAnswerOption": "c",
               "answers": [
                 { "answer": "To define a section that is quoted from another source", "option": "a" },
                 { "answer": "To create a block of text", "option": "b" },
@@ -648,7 +648,7 @@ export const quizList = [
             },
             {
               "question": "Which HTML element is used to define a citation?",
-              "selectedAnswer": "d",
+              "correctAnswerOption": "d",
               "answers": [
                 { "answer": "<cite>", "option": "a" },
                 { "answer": "<reference>", "option": "b" },
@@ -658,7 +658,7 @@ export const quizList = [
             },
             {
               "question": "What does the <time> tag do in HTML?",
-              "selectedAnswer": "a",
+              "correctAnswerOption": "a",
               "answers": [
                 { "answer": "Represents a specific period in time", "option": "a" },
                 { "answer": "Defines a date", "option": "b" },
@@ -677,7 +677,7 @@ export const quizList = [
       data: [
         {
           "question": "What does CSS stand for?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Cascading Style Sheets", "option": "a" },
             { "answer": "Creative Style Sheets", "option": "b" },
@@ -687,7 +687,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to change the background color?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "color", "option": "a" },
             { "answer": "background-color", "option": "b" },
@@ -697,7 +697,7 @@ export const quizList = [
         },
         {
           "question": "Which CSS property is used to change the text color of an element?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "color", "option": "a" },
             { "answer": "text-color", "option": "b" },
@@ -707,7 +707,7 @@ export const quizList = [
         },
         {
           "question": "How do you select an element with id 'header' in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "#header", "option": "a" },
             { "answer": ".header", "option": "b" },
@@ -717,7 +717,7 @@ export const quizList = [
         },
         {
           "question": "What is the default position of elements in CSS?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "absolute", "option": "a" },
             { "answer": "relative", "option": "b" },
@@ -727,7 +727,7 @@ export const quizList = [
         },
         {
           "question": "Which property controls the size of an element's font?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "font-weight", "option": "a" },
             { "answer": "text-size", "option": "b" },
@@ -737,7 +737,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'z-index' property?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Controls the stack order of elements", "option": "a" },
             { "answer": "Sets the transparency of an element", "option": "b" },
@@ -747,7 +747,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to make a webpage responsive?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "position", "option": "a" },
             { "answer": "media queries", "option": "b" },
@@ -757,7 +757,7 @@ export const quizList = [
         },
         {
           "question": "How do you apply a style to multiple classes in CSS?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Separate classes with a comma", "option": "a" },
             { "answer": "Use & symbol between classes", "option": "b" },
@@ -767,7 +767,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'position: absolute' property do?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Positions an element relative to its nearest positioned ancestor", "option": "a" },
             { "answer": "Positions an element relative to the viewport", "option": "b" },
@@ -777,7 +777,7 @@ export const quizList = [
         },
         {
           "question": "How do you make text bold in CSS?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "font-style: bold", "option": "a" },
             { "answer": "font-weight: bold", "option": "b" },
@@ -787,7 +787,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to add shadows to elements?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "box-shadow", "option": "a" },
             { "answer": "shadow-effect", "option": "b" },
@@ -797,7 +797,7 @@ export const quizList = [
         },
         {
           "question": "What is the use of the 'clip-path' property?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Sets the transparency level of an element", "option": "a" },
             { "answer": "Applies a filter to the element", "option": "b" },
@@ -807,7 +807,7 @@ export const quizList = [
         },
         {
           "question": "What unit is used to specify font sizes relative to the root element?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "rem", "option": "a" },
             { "answer": "em", "option": "b" },
@@ -817,7 +817,7 @@ export const quizList = [
         },
         {
           "question": "What is the maximum value for opacity in CSS?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "50", "option": "a" },
             { "answer": "1", "option": "b" },
@@ -827,7 +827,7 @@ export const quizList = [
         },
         {
           "question": "How do you make a list display horizontally in CSS?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Set list-style to inline", "option": "a" },
             { "answer": "Set display to inline", "option": "b" },
@@ -837,7 +837,7 @@ export const quizList = [
         },
         {
           "question": "What is the default value of the 'position' property in CSS?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "absolute", "option": "a" },
             { "answer": "relative", "option": "b" },
@@ -847,7 +847,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to increase or decrease the space between letters?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "text-indent", "option": "a" },
             { "answer": "letter-spacing", "option": "b" },
@@ -857,7 +857,7 @@ export const quizList = [
         },
         {
           "question": "How do you make the corners of an element rounded in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "border-radius", "option": "a" },
             { "answer": "corner-style", "option": "b" },
@@ -867,7 +867,7 @@ export const quizList = [
         },
         {
           "question": "Which CSS property is used to set the spacing between lines of text?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "letter-spacing", "option": "a" },
             { "answer": "text-indent", "option": "b" },
@@ -877,7 +877,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'overflow' property in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Controls how content is displayed when it overflows the element", "option": "a" },
             { "answer": "Sets the text alignment", "option": "b" },
@@ -887,7 +887,7 @@ export const quizList = [
         },
         {
           "question": "Which property specifies whether an element's box should be a block or inline?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "float", "option": "a" },
             { "answer": "display", "option": "b" },
@@ -897,7 +897,7 @@ export const quizList = [
         },
         {
           "question": "How do you hide an element but still keep its space in the layout?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "display: none", "option": "a" },
             { "answer": "opacity: 0", "option": "b" },
@@ -907,7 +907,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'float' property do in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Positions elements to the left or right of a container", "option": "a" },
             { "answer": "Aligns text within a block", "option": "b" },
@@ -917,7 +917,7 @@ export const quizList = [
         },
         {
           "question": "Which CSS property is used to set the width of an element?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "height", "option": "a" },
             { "answer": "width", "option": "b" },
@@ -927,7 +927,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between 'em' and 'rem' in CSS?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "'em' is relative to the root element, 'rem' is relative to the parent", "option": "a" },
             { "answer": "'em' is absolute, 'rem' is relative", "option": "b" },
@@ -937,7 +937,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to create space between an element's content and its border?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "padding", "option": "a" },
             { "answer": "margin", "option": "b" },
@@ -947,7 +947,7 @@ export const quizList = [
         },
         {
           "question": "Which value of 'position' makes an element scroll with the page?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "static", "option": "a" },
             { "answer": "absolute", "option": "b" },
@@ -957,7 +957,7 @@ export const quizList = [
         },
         {
           "question": "Which CSS property controls the transparency of an element?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "visibility", "option": "a" },
             { "answer": "opacity", "option": "b" },
@@ -967,7 +967,7 @@ export const quizList = [
         },
         {
           "question": "What does 'display: flex' do?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Creates a flexible layout container", "option": "a" },
             { "answer": "Centers elements horizontally", "option": "b" },
@@ -977,7 +977,7 @@ export const quizList = [
         },
         {
           "question": "What is the 'max-width' property used for?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Sets the minimum width of an element", "option": "a" },
             { "answer": "Specifies the total width of an element", "option": "b" },
@@ -987,7 +987,7 @@ export const quizList = [
         },
         {
           "question": "Which pseudo-class selects an element when hovered over?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": ":hover", "option": "a" },
             { "answer": ":active", "option": "b" },
@@ -997,7 +997,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to align text horizontally in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "text-align", "option": "a" },
             { "answer": "horizontal-align", "option": "b" },
@@ -1007,7 +1007,7 @@ export const quizList = [
         },
         {
           "question": "What does 'z-index' specify in CSS?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "The size of an element", "option": "a" },
             { "answer": "The stack order of elements", "option": "b" },
@@ -1017,7 +1017,7 @@ export const quizList = [
         },
         {
           "question": "How do you apply a CSS rule only when the screen width is less than 600px?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "@media (min-width: 600px)", "option": "a" },
             { "answer": "@media (screen-width: 600px)", "option": "b" },
@@ -1027,7 +1027,7 @@ export const quizList = [
         },
         {
           "question": "What does 'overflow: auto' do in CSS?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Hides overflowing content", "option": "a" },
             { "answer": "Always shows scrollbars", "option": "b" },
@@ -1037,7 +1037,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'clip-path' property in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Clips an element to a specific shape", "option": "a" },
             { "answer": "Defines the border style of an element", "option": "b" },
@@ -1047,7 +1047,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to set the shadow of a box element?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "text-shadow", "option": "a" },
             { "answer": "outline-shadow", "option": "b" },
@@ -1057,7 +1057,7 @@ export const quizList = [
         },
         {
           "question": "Which property controls the order of items in a flex container?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "justify-content", "option": "a" },
             { "answer": "align-items", "option": "b" },
@@ -1067,7 +1067,7 @@ export const quizList = [
         },
         {
           "question": "Which CSS property allows text to overflow into an ellipsis?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "text-overflow: clip", "option": "a" },
             { "answer": "text-overflow: ellipsis", "option": "b" },
@@ -1077,7 +1077,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'content' property in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Generates content in pseudo-elements", "option": "a" },
             { "answer": "Adds content to a div", "option": "b" },
@@ -1087,7 +1087,7 @@ export const quizList = [
         },
         {
           "question": "Which CSS property specifies the transparency of a color?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "opacity", "option": "a" },
             { "answer": "background-color", "option": "b" },
@@ -1097,7 +1097,7 @@ export const quizList = [
         },
         {
           "question": "Which value of 'display' makes an element disappear but keeps its layout intact?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "block", "option": "a" },
             { "answer": "inline", "option": "b" },
@@ -1107,7 +1107,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to add space outside an element's border?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "padding", "option": "a" },
             { "answer": "margin", "option": "b" },
@@ -1117,7 +1117,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'cubic-bezier' function do in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Defines a custom easing curve for animations", "option": "a" },
             { "answer": "Specifies the duration of an animation", "option": "b" },
@@ -1127,7 +1127,7 @@ export const quizList = [
         },
         {
           "question": "Which property is used to stack elements one over the other?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "position", "option": "a" },
             { "answer": "float", "option": "b" },
@@ -1137,7 +1137,7 @@ export const quizList = [
         },
         {
           "question": "How do you apply a linear gradient in CSS?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "background: linear-gradient()", "option": "a" },
             { "answer": "background-color: gradient()", "option": "b" },
@@ -1147,7 +1147,7 @@ export const quizList = [
         },
         {
           "question": "What does 'position: sticky' do in CSS?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Fixes an element relative to the viewport", "option": "a" },
             { "answer": "Fixes an element relative to its nearest scrollable ancestor", "option": "b" },
@@ -1157,7 +1157,7 @@ export const quizList = [
         },
         {
           "question": "Which property controls the direction in a flex container?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "justify-content", "option": "a" },
             { "answer": "align-content", "option": "b" },
@@ -1167,7 +1167,7 @@ export const quizList = [
         },
         {
           "question": "What does 'outline-offset' specify?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "The width of an outline", "option": "a" },
             { "answer": "The visibility of the outline", "option": "b" },
@@ -1185,7 +1185,7 @@ export const quizList = [
       "data": [
         {
           "question": "What is Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A front-end framework for developing responsive websites", "option": "a" },
             { "answer": "A CSS preprocessor", "option": "b" },
@@ -1195,7 +1195,7 @@ export const quizList = [
         },
         {
           "question": "What is the primary feature of Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Responsive grid system", "option": "a" },
             { "answer": "Support for jQuery plugins", "option": "b" },
@@ -1205,7 +1205,7 @@ export const quizList = [
         },
         {
           "question": "Which HTML tag is used to include Bootstrap CSS?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "<link>", "option": "a" },
             { "answer": "<style>", "option": "b" },
@@ -1215,7 +1215,7 @@ export const quizList = [
         },
         {
           "question": "What is the default grid system used in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Flexbox", "option": "a" },
             { "answer": "CSS Grid", "option": "b" },
@@ -1225,7 +1225,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to create a container in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "container", "option": "a" },
             { "answer": "box", "option": "b" },
@@ -1235,7 +1235,7 @@ export const quizList = [
         },
         {
           "question": "Which class in Bootstrap adds padding to all sides of an element?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "p-0", "option": "a" },
             { "answer": "m-0", "option": "b" },
@@ -1245,7 +1245,7 @@ export const quizList = [
         },
         {
           "question": "What class would you use to hide an element on mobile devices in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "hidden-sm", "option": "a" },
             { "answer": "d-none d-sm-block", "option": "b" },
@@ -1255,7 +1255,7 @@ export const quizList = [
         },
         {
           "question": "Which Bootstrap class is used to make text bold?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "font-weight-bold", "option": "a" },
             { "answer": "bold-text", "option": "b" },
@@ -1265,7 +1265,7 @@ export const quizList = [
         },
         {
           "question": "Which Bootstrap class is used to create a button with a red background?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "btn-danger", "option": "a" },
             { "answer": "btn-red", "option": "b" },
@@ -1275,7 +1275,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is the correct way to use a card in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "<div class='card-body'></div>", "option": "a" },
             { "answer": "<card></card>", "option": "b" },
@@ -1285,7 +1285,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to create a modal in Bootstrap?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "modal-container", "option": "a" },
             { "answer": "popup-modal", "option": "b" },
@@ -1295,7 +1295,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to add a background color in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "bg-color", "option": "a" },
             { "answer": "bg-primary", "option": "b" },
@@ -1305,7 +1305,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of Bootstrap’s grid system?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To create a responsive layout", "option": "a" },
             { "answer": "To create static layouts", "option": "b" },
@@ -1315,7 +1315,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is the correct syntax for adding Bootstrap’s JavaScript file?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "<script src='bootstrap.js'></script>", "option": "a" },
             { "answer": "<script href='bootstrap.js'></script>", "option": "b" },
@@ -1325,7 +1325,7 @@ export const quizList = [
         },
         {
           "question": "Which Bootstrap class is used for aligning text in the center?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "align-text-center", "option": "a" },
             { "answer": "text-center", "option": "b" },
@@ -1335,7 +1335,7 @@ export const quizList = [
         },
         {
           "question": "How do you disable a button in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "btn-disabled", "option": "a" },
             { "answer": "btn-off", "option": "b" },
@@ -1345,7 +1345,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to create a flex container in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "d-flex", "option": "a" },
             { "answer": "d-flex justify-content-center", "option": "b" },
@@ -1355,7 +1355,7 @@ export const quizList = [
         },
         {
           "question": "How do you create a responsive table in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "table-responsive", "option": "a" },
             { "answer": "table-flex", "option": "b" },
@@ -1365,7 +1365,7 @@ export const quizList = [
         },
         {
           "question": "Which Bootstrap component is used for alert messages?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "btn", "option": "a" },
             { "answer": "alert-box", "option": "b" },
@@ -1375,7 +1375,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to make an element float left in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "float-left", "option": "a" },
             { "answer": "float-start", "option": "b" },
@@ -1385,7 +1385,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to align a column in the center of a row in Bootstrap?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "align-middle", "option": "a" },
             { "answer": "text-center", "option": "b" },
@@ -1395,7 +1395,7 @@ export const quizList = [
         },
         {
           "question": "Which class in Bootstrap is used to make a button large?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "btn-large", "option": "a" },
             { "answer": "btn-lg", "option": "b" },
@@ -1405,7 +1405,7 @@ export const quizList = [
         },
         {
           "question": "How do you make a modal appear at the top of the page in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "modal-dialog-centered", "option": "a" },
             { "answer": "modal-top", "option": "b" },
@@ -1415,7 +1415,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to add a border to a Bootstrap button?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "btn-outline", "option": "a" },
             { "answer": "btn-bordered", "option": "b" },
@@ -1425,7 +1425,7 @@ export const quizList = [
         },
         {
           "question": "What class would you use to create a responsive navbar in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "navbar-flex", "option": "a" },
             { "answer": "navbar-responsive", "option": "b" },
@@ -1435,7 +1435,7 @@ export const quizList = [
         },
         {
           "question": "How do you make a Bootstrap card header sticky at the top of a card?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "position-sticky", "option": "a" },
             { "answer": "sticky-top", "option": "b" },
@@ -1445,7 +1445,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is used to display an inline-block element in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "d-inline", "option": "a" },
             { "answer": "d-inline-block", "option": "b" },
@@ -1455,7 +1455,7 @@ export const quizList = [
         },
         {
           "question": "Which Bootstrap class is used for the alignment of a flex container?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "justify-content-{alignment}", "option": "a" },
             { "answer": "align-items-{alignment}", "option": "b" },
@@ -1465,7 +1465,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to make an element float right in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "float-left", "option": "a" },
             { "answer": "float-right", "option": "b" },
@@ -1475,7 +1475,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'col' class in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "It defines a column width", "option": "a" },
             { "answer": "It defines a grid system", "option": "b" },
@@ -1485,7 +1485,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to create a shadow effect on an element in Bootstrap?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "shadow-none", "option": "a" },
             { "answer": "shadow-lg", "option": "b" },
@@ -1495,7 +1495,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used for a carousel indicator in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "carousel-indicator", "option": "a" },
             { "answer": "carousel-slide", "option": "b" },
@@ -1505,7 +1505,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to add space between elements in a flex container?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "space-between", "option": "a" },
             { "answer": "gap-{size}", "option": "b" },
@@ -1515,7 +1515,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to create a bordered table in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "table-bordered", "option": "a" },
             { "answer": "border-table", "option": "b" },
@@ -1525,7 +1525,7 @@ export const quizList = [
         },
         {
           "question": "How can you make a table responsive in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "table-responsive", "option": "a" },
             { "answer": "table-responsive{-sm,-md,-lg}", "option": "b" },
@@ -1535,7 +1535,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to add padding to all sides of an element in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "p-{size}", "option": "a" },
             { "answer": "padding-all", "option": "b" },
@@ -1545,7 +1545,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to create a rounded button in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "btn-rounded", "option": "a" },
             { "answer": "btn-circle", "option": "b" },
@@ -1555,7 +1555,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to hide an element on mobile in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "d-none d-sm-block", "option": "a" },
             { "answer": "d-block d-sm-none", "option": "b" },
@@ -1565,7 +1565,7 @@ export const quizList = [
         },
         {
           "question": "What class is used to create a rounded corner for a card in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "card-radius", "option": "a" },
             { "answer": "rounded", "option": "b" },
@@ -1575,7 +1575,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to create a background color for a Bootstrap button?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "bg-primary", "option": "a" },
             { "answer": "button-bg", "option": "b" },
@@ -1585,7 +1585,7 @@ export const quizList = [
         },
         {
           "question": "What class is used for a fixed navbar in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "navbar-fixed-top", "option": "a" },
             { "answer": "navbar-fixed", "option": "b" },
@@ -1595,7 +1595,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to change the text color in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "color-text", "option": "a" },
             { "answer": "text-{color}", "option": "b" },
@@ -1605,7 +1605,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to display elements in a flex container in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "d-flex", "option": "a" },
             { "answer": "flex-container", "option": "b" },
@@ -1615,7 +1615,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to remove all margins from an element in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "m-0", "option": "a" },
             { "answer": "no-margin", "option": "b" },
@@ -1625,7 +1625,7 @@ export const quizList = [
         },
         {
           "question": "What is the default grid system in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "flexbox", "option": "a" },
             { "answer": "12-column grid", "option": "b" },
@@ -1635,7 +1635,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to align items in a flex container along the cross axis in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "align-items-start", "option": "a" },
             { "answer": "align-items-center", "option": "b" },
@@ -1645,7 +1645,7 @@ export const quizList = [
         },
         {
           "question": "How can you disable the hover effect on a Bootstrap button?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "btn-no-hover", "option": "a" },
             { "answer": "btn:hover { pointer-events: none; }", "option": "b" },
@@ -1655,7 +1655,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to add a transparent background color in Bootstrap?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "bg-transparent", "option": "a" },
             { "answer": "bg-opacity", "option": "b" },
@@ -1665,7 +1665,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to display an element inline in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "d-inline", "option": "a" },
             { "answer": "display-inline", "option": "b" },
@@ -1675,7 +1675,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to set the background color for alerts in Bootstrap?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "alert-{color}", "option": "a" },
             { "answer": "bg-alert", "option": "b" },
@@ -1685,7 +1685,7 @@ export const quizList = [
         },
         {
           "question": "Which class is used to specify a list group item in Bootstrap?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "list-group-item", "option": "a" },
             { "answer": "list-item", "option": "b" },
@@ -1703,7 +1703,7 @@ export const quizList = [
       "data": [
         {
           "question": "What is Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A TypeScript-based framework", "option": "a" },
             { "answer": "A CSS preprocessor", "option": "b" },
@@ -1713,7 +1713,7 @@ export const quizList = [
         },
         {
           "question": "Which directive is used for two-way data binding in Angular?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "ngModal", "option": "a" },
             { "answer": "ngBind", "option": "b" },
@@ -1723,7 +1723,7 @@ export const quizList = [
         },
         {
           "question": "How do you define a service in Angular?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "By using the @Component decorator", "option": "a" },
             { "answer": "By using the @Injectable decorator", "option": "b" },
@@ -1733,7 +1733,7 @@ export const quizList = [
         },
         {
           "question": "Which command is used to create a new Angular component?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "ng generate component", "option": "a" },
             { "answer": "ng create component", "option": "b" },
@@ -1743,7 +1743,7 @@ export const quizList = [
         },
         {
           "question": "What is a module in Angular?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "A CSS file", "option": "a" },
             { "answer": "A JavaScript library", "option": "b" },
@@ -1753,7 +1753,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of Angular CLI?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To manage database operations", "option": "a" },
             { "answer": "To streamline the development process", "option": "b" },
@@ -1763,7 +1763,7 @@ export const quizList = [
         },
         {
           "question": "Which lifecycle hook is called after the component is initialized?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "ngOnInit", "option": "a" },
             { "answer": "ngAfterViewInit", "option": "b" },
@@ -1773,7 +1773,7 @@ export const quizList = [
         },
         {
           "question": "What is RxJS in Angular?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "A routing library", "option": "a" },
             { "answer": "A CSS framework", "option": "b" },
@@ -1783,7 +1783,7 @@ export const quizList = [
         },
         {
           "question": "How do you bind a class to an element conditionally in Angular?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Using the ngStyle directive", "option": "a" },
             { "answer": "Using the ngClass directive", "option": "b" },
@@ -1793,7 +1793,7 @@ export const quizList = [
         },
         {
           "question": "What is a decorator in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A function that adds metadata to a class", "option": "a" },
             { "answer": "A special type of HTML element", "option": "b" },
@@ -1803,7 +1803,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a feature of Angular?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Server-side rendering only", "option": "a" },
             { "answer": "Exclusive support for mobile apps", "option": "b" },
@@ -1813,7 +1813,7 @@ export const quizList = [
         },
         {
           "question": "How do you handle HTTP requests in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Using the HttpClient module", "option": "a" },
             { "answer": "Using the HttpModule", "option": "b" },
@@ -1823,7 +1823,7 @@ export const quizList = [
         },
         {
           "question": "What is the default change detection strategy in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "CheckAlways", "option": "a" },
             { "answer": "OnPush", "option": "b" },
@@ -1833,7 +1833,7 @@ export const quizList = [
         },
         {
           "question": "Which Angular directive is used to conditionally include or exclude an element?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "ngShow", "option": "a" },
             { "answer": "ngInclude", "option": "b" },
@@ -1843,7 +1843,7 @@ export const quizList = [
         },
         {
           "question": "How do you create a reactive form in Angular?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "By using FormGroup and FormControl", "option": "a" },
             { "answer": "By using Template-driven forms", "option": "b" },
@@ -1853,7 +1853,7 @@ export const quizList = [
         },
         {
           "question": "What is the Angular Router used for?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To style components", "option": "a" },
             { "answer": "To navigate between views or pages", "option": "b" },
@@ -1863,7 +1863,7 @@ export const quizList = [
         },
         {
           "question": "What is a singleton service in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A service that is instantiated only once per application", "option": "a" },
             { "answer": "A service that is instantiated multiple times per component", "option": "b" },
@@ -1873,7 +1873,7 @@ export const quizList = [
         },
         {
           "question": "How do you optimize the performance of an Angular application?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "By using ngInit", "option": "a" },
             { "answer": "By using inline styles", "option": "b" },
@@ -1883,7 +1883,7 @@ export const quizList = [
         },
         {
           "question": "Which decorator is used to mark a class as a component in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "@Component", "option": "a" },
             { "answer": "@Injectable", "option": "b" },
@@ -1893,7 +1893,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between a component and a directive in Angular?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Components are used for UI, directives are used for behavior", "option": "a" },
             { "answer": "Directives can have templates, components cannot", "option": "b" },
@@ -1903,7 +1903,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the async pipe in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To subscribe to an Observable or Promise and return the latest value", "option": "a" },
             { "answer": "To create a new Observable", "option": "b" },
@@ -1913,7 +1913,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Forms module?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To create services", "option": "a" },
             { "answer": "To manage user input and form validation", "option": "b" },
@@ -1923,7 +1923,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ngFor directive?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To conditionally display elements", "option": "a" },
             { "answer": "To bind data to a form", "option": "b" },
@@ -1933,7 +1933,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ngSwitch directive?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To iterate over a collection", "option": "a" },
             { "answer": "To bind data to a form", "option": "b" },
@@ -1943,7 +1943,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the @Input decorator?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To pass data from a parent component to a child component", "option": "a" },
             { "answer": "To define a service", "option": "b" },
@@ -1953,7 +1953,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the @Output decorator?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To pass data from a child component to a parent component", "option": "a" },
             { "answer": "To define an event emitter for a component", "option": "b" },
@@ -1963,7 +1963,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the HttpClientModule in Angular?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To manage state", "option": "a" },
             { "answer": "To handle routing", "option": "b" },
@@ -1973,7 +1973,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the RouterModule in Angular?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To create services", "option": "a" },
             { "answer": "To configure and manage routes in an application", "option": "b" },
@@ -1983,7 +1983,7 @@ export const quizList = [
         },
         {
           "question": "What is lazy loading in Angular?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Loading modules only when they are needed", "option": "a" },
             { "answer": "Loading all modules at the start of the application", "option": "b" },
@@ -1993,7 +1993,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ng-template directive?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To create a component", "option": "a" },
             { "answer": "To define a service", "option": "b" },
@@ -2003,7 +2003,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ViewChild decorator?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To access a child component or directive in the parent component", "option": "a" },
             { "answer": "To define a service", "option": "b" },
@@ -2013,7 +2013,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ChangeDetectorRef service?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To manually trigger change detection in a component", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2023,7 +2023,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ng-content directive?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To project content into a component", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2033,7 +2033,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Universal?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To create mobile applications", "option": "a" },
             { "answer": "To enable server-side rendering of Angular applications", "option": "b" },
@@ -2044,7 +2044,7 @@ export const quizList = [
        
         {
           "question": "What is the purpose of the @HostListener decorator?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To listen to events on the host element of the directive or component", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2054,7 +2054,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the @ViewChild decorator?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To access a child component or directive in the parent component", "option": "a" },
             { "answer": "To get a reference to a child component or directive", "option": "b" },
@@ -2064,7 +2064,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the ngModel directive?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To create a reactive form", "option": "a" },
             { "answer": "To bind data to a form control", "option": "b" },
@@ -2074,7 +2074,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Service Worker?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To manage state", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2084,7 +2084,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Ivy renderer?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To improve the performance and size of Angular applications", "option": "a" },
             { "answer": "To handle routing", "option": "b" },
@@ -2094,7 +2094,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the @NgModule imports array?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To define components", "option": "a" },
             { "answer": "To import other modules into the current module", "option": "b" },
@@ -2104,7 +2104,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the @Pipe decorator?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To create a service", "option": "a" },
             { "answer": "To define a module", "option": "b" },
@@ -2114,7 +2114,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Router Guards?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To manage state", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2124,7 +2124,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Dependency Injection?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To provide instances of services and other dependencies to components", "option": "a" },
             { "answer": "To manage state", "option": "b" },
@@ -2134,7 +2134,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Change Detection?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To track changes in the application state and update the view accordingly", "option": "a" },
             { "answer": "To manage state", "option": "b" },
@@ -2144,7 +2144,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular EventEmitter?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To emit events from a component or service", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2154,7 +2154,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular HttpInterceptor?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To intercept and modify HTTP requests and responses", "option": "a" },
             { "answer": "To manage state", "option": "b" },
@@ -2164,7 +2164,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular NgZone?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To manage change detection and run outside of Angular's zone", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2174,7 +2174,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Renderer2?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To manipulate the DOM in a platform-independent way", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2184,7 +2184,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular TrackBy function?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To optimize rendering of lists by tracking items", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2194,7 +2194,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular NgModule exports array?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To define components", "option": "a" },
             { "answer": "To create services", "option": "b" },
@@ -2204,7 +2204,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular NgModule declarations array?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To declare components, directives, and pipes that belong to the module", "option": "a" },
             { "answer": "To create services", "option": "b" },
@@ -2214,7 +2214,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular HttpClient?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To make HTTP requests and handle responses", "option": "a" },
             { "answer": "To provide a simplified API for HTTP operations", "option": "b" },
@@ -2224,7 +2224,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular NgModule providers array?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To declare components", "option": "a" },
             { "answer": "To import other modules", "option": "b" },
@@ -2234,7 +2234,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Component Lifecycle?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To manage the lifecycle of a component from creation to destruction", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -2244,7 +2244,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular ChangeDetectionStrategy?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To define how change detection is performed in a component", "option": "a" },
             { "answer": "To manage state", "option": "b" },
@@ -2254,7 +2254,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Template Reference Variable?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To reference a DOM element or directive in a template", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2264,7 +2264,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular HostBinding decorator?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To bind a property of the host element to a property of the directive or component", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2274,7 +2274,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular HostListener decorator?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To listen to events on the host element of the directive or component", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2284,7 +2284,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular Pipe?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To transform data for display in templates", "option": "a" },
             { "answer": "To create a service", "option": "b" },
@@ -2294,7 +2294,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the Angular NgForOf directive?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To conditionally display elements", "option": "a" },
             { "answer": "To bind data to a form", "option": "b" },
@@ -2311,7 +2311,7 @@ export const quizList = [
       "data": [
         {
           "question": "What is React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A JavaScript library for building user interfaces", "option": "a" },
             { "answer": "A framework for developing full-stack applications", "option": "b" },
@@ -2321,7 +2321,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of React hooks?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To manage lifecycle methods", "option": "a" },
             { "answer": "To add state and side effects to functional components", "option": "b" },
@@ -2331,7 +2331,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a valid hook in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "useState", "option": "a" },
             { "answer": "getState", "option": "b" },
@@ -2341,7 +2341,7 @@ export const quizList = [
         },
         {
           "question": "What is JSX?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A syntax extension for JavaScript that looks like HTML", "option": "a" },
             { "answer": "A JavaScript library for templating", "option": "b" },
@@ -2351,7 +2351,7 @@ export const quizList = [
         },
         {
           "question": "What is the virtual DOM in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "A way to manipulate the DOM directly", "option": "a" },
             { "answer": "An in-memory representation of the actual DOM", "option": "b" },
@@ -2361,7 +2361,7 @@ export const quizList = [
         },
         {
           "question": "What does the React component lifecycle method 'componentDidMount' do?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Executes after the component has mounted", "option": "a" },
             { "answer": "Runs before the component is rendered", "option": "b" },
@@ -2371,7 +2371,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between a class component and a functional component in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Class components are stateful, functional components are stateless", "option": "a" },
             { "answer": "Class components use the 'render' method, functional components use return", "option": "b" },
@@ -2381,7 +2381,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of 'useEffect' in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To handle side effects like data fetching, DOM manipulation, or setting up subscriptions", "option": "a" },
             { "answer": "To update the state in functional components", "option": "b" },
@@ -2391,7 +2391,7 @@ export const quizList = [
         },
         {
           "question": "What is the 'key' prop used for in React lists?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To make the list item unique", "option": "a" },
             { "answer": "To apply CSS styles to a list item", "option": "b" },
@@ -2401,7 +2401,7 @@ export const quizList = [
         },
         {
           "question": "How can you optimize performance in React?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "By using the 'forceUpdate' method", "option": "a" },
             { "answer": "By using setState in every component", "option": "b" },
@@ -2411,7 +2411,7 @@ export const quizList = [
         },
         {
           "question": "What is React's Context API used for?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "For managing global state without prop drilling", "option": "a" },
             { "answer": "For rendering lists of items", "option": "b" },
@@ -2421,7 +2421,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between controlled and uncontrolled components in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Controlled components have their state controlled by React, uncontrolled components manage their state internally", "option": "a" },
             { "answer": "Controlled components handle events, uncontrolled components handle data validation", "option": "b" },
@@ -2431,7 +2431,7 @@ export const quizList = [
         },
         {
           "question": "How would you prevent re-rendering of a functional component in React?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Using shouldComponentUpdate", "option": "a" },
             { "answer": "Using React.memo", "option": "b" },
@@ -2441,7 +2441,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of 'useCallback' in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To memoize callback functions to prevent unnecessary re-renders", "option": "a" },
             { "answer": "To trigger re-renders when the component’s state changes", "option": "b" },
@@ -2451,7 +2451,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between React's 'useEffect' and 'useLayoutEffect'?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "'useEffect' runs after the DOM has painted, while 'useLayoutEffect' runs synchronously before the DOM is painted", "option": "a" },
             { "answer": "'useEffect' is used for async operations, while 'useLayoutEffect' is for synchronous DOM manipulations", "option": "b" },
@@ -2461,7 +2461,7 @@ export const quizList = [
         },
         {
           "question": "What is a higher-order component (HOC) in React?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "A component that manipulates the state of other components", "option": "a" },
             { "answer": "A function that returns a new component with additional functionality", "option": "b" },
@@ -2471,7 +2471,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'useRef' hook do in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "It creates a mutable object that persists across renders", "option": "a" },
             { "answer": "It allows you to persist values across renders without triggering re-renders", "option": "b" },
@@ -2481,7 +2481,7 @@ export const quizList = [
         },
         {
           "question": "How would you handle error boundaries in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "By using the componentDidCatch lifecycle method in class components", "option": "a" },
             { "answer": "By using the 'catch' method in async functions", "option": "b" },
@@ -2491,7 +2491,7 @@ export const quizList = [
         },
         {
           "question": "What are keys in React lists and why are they important?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Keys are unique identifiers for list items to help React track changes", "option": "a" },
             { "answer": "Keys are used to set default values for list items", "option": "b" },
@@ -2501,7 +2501,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between 'useEffect' and 'useLayoutEffect' in terms of rendering?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "'useEffect' is run after the component has rendered, while 'useLayoutEffect' is run before the layout is painted", "option": "a" },
             { "answer": "'useEffect' is used for event handling, while 'useLayoutEffect' is for state changes", "option": "b" },
@@ -2511,7 +2511,7 @@ export const quizList = [
         },
         {
           "question": "In which case would you use 'React.memo'?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "When you want to improve performance by memoizing the entire component", "option": "a" },
             { "answer": "When you want to avoid re-rendering a component on state change", "option": "b" },
@@ -2521,7 +2521,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'useContext' hook?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To share state or values between components without prop drilling", "option": "a" },
             { "answer": "To handle side effects in functional components", "option": "b" },
@@ -2531,7 +2531,7 @@ export const quizList = [
         },
         {
           "question": "What are the advantages of using functional components over class components in React?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Functional components have more power than class components", "option": "a" },
             { "answer": "Functional components are more lightweight and easier to read", "option": "b" },
@@ -2541,7 +2541,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'React.StrictMode' component?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "It is used to enable features of React Router", "option": "a" },
             { "answer": "It is used to trigger a full app reload on state change", "option": "b" },
@@ -2551,7 +2551,7 @@ export const quizList = [
         },
         {
           "question": "How does React's reconciliation algorithm work?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "It compares the current and previous virtual DOM trees and updates only the changed parts", "option": "a" },
             { "answer": "It creates new virtual DOM nodes for each render cycle", "option": "b" },
@@ -2561,7 +2561,7 @@ export const quizList = [
         },
         {
           "question": "What are 'render props' in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "A method of passing data between components", "option": "a" },
             { "answer": "A technique for sharing code between React components using a function that returns a component", "option": "b" },
@@ -2571,7 +2571,7 @@ export const quizList = [
         },
         {
           "question": "What is 'JSX' in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A syntax extension for JavaScript that allows HTML-like code in JavaScript", "option": "a" },
             { "answer": "A type of JavaScript object used to manage component state", "option": "b" },
@@ -2581,7 +2581,7 @@ export const quizList = [
         },
         {
           "question": "What is the significance of the 'key' prop in React lists?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "It helps React identify which items have changed, been added, or removed", "option": "a" },
             { "answer": "It is used to maintain the order of the list items", "option": "b" },
@@ -2591,7 +2591,7 @@ export const quizList = [
         },
         {
           "question": "What is 'useState' hook in React?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "A hook that allows you to define and manage component-level state in functional components", "option": "a" },
             { "answer": "A hook used for handling side effects", "option": "b" },
@@ -2601,7 +2601,7 @@ export const quizList = [
         },
         {
           "question": "What are 'synthetic events' in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A cross-browser wrapper around the native DOM events", "option": "a" },
             { "answer": "A custom event system used for component interaction", "option": "b" },
@@ -2611,7 +2611,7 @@ export const quizList = [
         },
         {
           "question": "How do you optimize performance in React components?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "By avoiding the use of React's rendering algorithm", "option": "a" },
             { "answer": "By using class components exclusively", "option": "b" },
@@ -2621,7 +2621,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'useEffect' hook do in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "It handles asynchronous operations inside functional components", "option": "a" },
             { "answer": "It allows you to run side effects in functional components after the render", "option": "b" },
@@ -2631,7 +2631,7 @@ export const quizList = [
         },
         {
           "question": "What is the main purpose of React Router?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To manage navigation and routing between views or components", "option": "a" },
             { "answer": "To handle server-side rendering of React applications", "option": "b" },
@@ -2641,7 +2641,7 @@ export const quizList = [
         },
         {
           "question": "How does React handle re-renders of components?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "React re-renders components whenever the state or props change", "option": "a" },
             { "answer": "React re-renders components when the component is mounted", "option": "b" },
@@ -2651,7 +2651,7 @@ export const quizList = [
         },
         {
           "question": "What is 'React.memo' used for?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To optimize the performance of functional components by memoizing the component's output", "option": "a" },
             { "answer": "To manage global application state", "option": "b" },
@@ -2661,7 +2661,7 @@ export const quizList = [
         },
         {
           "question": "How does React's virtual DOM work?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "React creates a lightweight copy of the actual DOM, which helps improve performance during re-renders", "option": "a" },
             { "answer": "The virtual DOM is the actual DOM, used directly for rendering components", "option": "b" },
@@ -2671,7 +2671,7 @@ export const quizList = [
         },
         {
           "question": "What are 'refs' in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Refs are used to reference DOM elements directly in React", "option": "a" },
             { "answer": "Refs are used to store component state", "option": "b" },
@@ -2681,7 +2681,7 @@ export const quizList = [
         },
         {
           "question": "What is 'componentDidMount' in React?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "A lifecycle method that is called after the component has been rendered to the screen", "option": "a" },
             { "answer": "A lifecycle method that is called before the component is rendered", "option": "b" },
@@ -2691,7 +2691,7 @@ export const quizList = [
         },
         {
           "question": "What is 'React.StrictMode' used for?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "It is used to highlight potential problems in an application during development", "option": "a" },
             { "answer": "It is used to optimize rendering performance", "option": "b" },
@@ -2701,7 +2701,7 @@ export const quizList = [
         },
         {
           "question": "How would you handle the passing of dynamic props in React?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "By directly passing props as parameters inside a component", "option": "a" },
             { "answer": "By using state to store and manage dynamic props", "option": "b" },
@@ -2711,7 +2711,7 @@ export const quizList = [
         },
         {
           "question": "How can you prevent a React component from re-rendering on state change?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "By using shouldComponentUpdate in class components", "option": "a" },
             { "answer": "By using React.memo or PureComponent", "option": "b" },
@@ -2721,7 +2721,7 @@ export const quizList = [
         },
         {
           "question": "What is the use of 'useContext' in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To share state across components without prop drilling", "option": "a" },
             { "answer": "To handle side effects in components", "option": "b" },
@@ -2731,7 +2731,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between 'useEffect' and 'useLayoutEffect' in React?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "'useEffect' runs asynchronously after the render, while 'useLayoutEffect' runs synchronously before the render", "option": "a" },
             { "answer": "'useEffect' is used for DOM updates, while 'useLayoutEffect' is for side effects", "option": "b" },
@@ -2748,7 +2748,7 @@ export const quizList = [
       "data": [
         {
           "question": "What is Next.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A React-based framework for server-side rendering", "option": "a" },
             { "answer": "A CSS framework", "option": "b" },
@@ -2758,7 +2758,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a feature of Next.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Client-side rendering only", "option": "a" },
             { "answer": "Server-side rendering and static site generation", "option": "b" },
@@ -2768,7 +2768,7 @@ export const quizList = [
         },
         {
           "question": "How does Next.js improve performance for React apps?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "By performing server-side rendering and static site generation", "option": "a" },
             { "answer": "By providing an easy-to-use CSS-in-JS solution", "option": "b" },
@@ -2778,7 +2778,7 @@ export const quizList = [
         },
         {
           "question": "Which method is used in Next.js for pre-rendering pages?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "getServerSideProps", "option": "a" },
             { "answer": "useEffect", "option": "b" },
@@ -2788,7 +2788,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'pages' directory in Next.js do?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Contains all the components of the application", "option": "a" },
             { "answer": "Holds the global state of the app", "option": "b" },
@@ -2798,7 +2798,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the '_document.js' file in Next.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Handles dynamic content fetching", "option": "a" },
             { "answer": "Customizes the HTML document structure", "option": "b" },
@@ -2808,7 +2808,7 @@ export const quizList = [
         },
         {
           "question": "How does Next.js handle dynamic routes?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "By using brackets in the file name (e.g., [id].js)", "option": "a" },
             { "answer": "By defining routes in a JSON file", "option": "b" },
@@ -2818,7 +2818,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of 'getStaticProps' in Next.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Fetches data at runtime", "option": "a" },
             { "answer": "Prevents the page from being cached", "option": "b" },
@@ -2828,7 +2828,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'Link' component in Next.js do?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Links to external websites", "option": "a" },
             { "answer": "Handles deep linking", "option": "b" },
@@ -2838,7 +2838,7 @@ export const quizList = [
         },
         {
           "question": "Which hook is commonly used for data fetching in Next.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "useEffect", "option": "a" },
             { "answer": "useSWR", "option": "b" },
@@ -2848,7 +2848,7 @@ export const quizList = [
         },
         {
           "question": "How can you optimize Next.js application for SEO?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "By using inline JavaScript for dynamic rendering", "option": "a" },
             { "answer": "By using getInitialProps for every page", "option": "b" },
@@ -2858,7 +2858,7 @@ export const quizList = [
         },
         {
           "question": "What is the role of 'getServerSideProps' in Next.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Pre-renders a page at build time", "option": "a" },
             { "answer": "Fetches data at request time for server-side rendering", "option": "b" },
@@ -2868,7 +2868,7 @@ export const quizList = [
         },
         {
           "question": "What file is used to customize the Next.js App?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "next.config.js", "option": "a" },
             { "answer": "_app.js", "option": "b" },
@@ -2878,7 +2878,7 @@ export const quizList = [
         },
         {
           "question": "How do you create a static page in Next.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "By using 'getStaticProps'", "option": "a" },
             { "answer": "By using 'getServerSideProps'", "option": "b" },
@@ -2888,7 +2888,7 @@ export const quizList = [
         },
         {
           "question": "What is the Next.js CLI command to build the app for production?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "next start", "option": "a" },
             { "answer": "next run", "option": "b" },
@@ -2898,7 +2898,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is true about static site generation in Next.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "It generates HTML at build time for faster page loads", "option": "a" },
             { "answer": "It generates HTML at runtime for each request", "option": "b" },
@@ -2908,7 +2908,7 @@ export const quizList = [
         },
         {
           "question": "What is the default behavior of Next.js for page routing?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "It uses hash-based routing", "option": "a" },
             { "answer": "It uses file-system-based routing", "option": "b" },
@@ -2918,7 +2918,7 @@ export const quizList = [
         },
         {
           "question": "What is the Next.js 'Image' component used for?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Displaying videos", "option": "a" },
             { "answer": "Displaying content dynamically", "option": "b" },
@@ -2928,7 +2928,7 @@ export const quizList = [
         },
         {
           "question": "How can you deploy a Next.js application?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "On Vercel", "option": "a" },
             { "answer": "On Netlify", "option": "b" },
@@ -2938,7 +2938,7 @@ export const quizList = [
         },
         {
           "question": "Which command is used to start the development server in Next.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "npm run start", "option": "a" },
             { "answer": "npm run dev", "option": "b" },
@@ -2948,7 +2948,7 @@ export const quizList = [
         },
         {
           "question": "What feature does Next.js offer for incremental static regeneration?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Pages can be updated after being built", "option": "a" },
             { "answer": "Pages can only be updated on server-side requests", "option": "b" },
@@ -2958,7 +2958,7 @@ export const quizList = [
         },
         {
           "question": "What is the default method for handling routing in Next.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Hash routing", "option": "a" },
             { "answer": "File-based routing", "option": "b" },
@@ -2975,7 +2975,7 @@ export const quizList = [
       "data": [
         {
           "question": "What is Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A JavaScript runtime built on Chrome's V8 JavaScript engine", "option": "a" },
             { "answer": "A type of database", "option": "b" },
@@ -2985,7 +2985,7 @@ export const quizList = [
         },
         {
           "question": "What is the default module system used in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "ES6 Modules", "option": "a" },
             { "answer": "CommonJS", "option": "b" },
@@ -2995,7 +2995,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is used to install packages in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "npm", "option": "a" },
             { "answer": "npx", "option": "b" },
@@ -3005,7 +3005,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'package.json' file in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To store metadata about the project and dependencies", "option": "a" },
             { "answer": "To store environment variables", "option": "b" },
@@ -3015,7 +3015,7 @@ export const quizList = [
         },
         {
           "question": "Which method is used to read a file in Node.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "fs.writeFile()", "option": "a" },
             { "answer": "fs.createFile()", "option": "b" },
@@ -3025,7 +3025,7 @@ export const quizList = [
         },
         {
           "question": "What is the main event-driven mechanism in Node.js?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Threads", "option": "a" },
             { "answer": "Async functions", "option": "b" },
@@ -3035,7 +3035,7 @@ export const quizList = [
         },
         {
           "question": "Which function is used to create a server in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "server.create()", "option": "a" },
             { "answer": "http.createServer()", "option": "b" },
@@ -3045,7 +3045,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is true about Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Node.js is single-threaded but uses non-blocking I/O calls", "option": "a" },
             { "answer": "Node.js is multi-threaded by default", "option": "b" },
@@ -3055,7 +3055,7 @@ export const quizList = [
         },
         {
           "question": "How do you handle errors in Node.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Using try-catch blocks only", "option": "a" },
             { "answer": "Using error-handling middleware", "option": "b" },
@@ -3065,7 +3065,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'require' function in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To load external modules and files", "option": "a" },
             { "answer": "To import dependencies from other files", "option": "b" },
@@ -3075,7 +3075,7 @@ export const quizList = [
         },
         {
           "question": "What is the 'fs' module used for in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "File system operations", "option": "a" },
             { "answer": "Network communication", "option": "b" },
@@ -3085,7 +3085,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a built-in module in Node.js?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "express", "option": "a" },
             { "answer": "lodash", "option": "b" },
@@ -3095,7 +3095,7 @@ export const quizList = [
         },
         {
           "question": "What is the difference between 'require' and 'import' in Node.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "'require' is synchronous, 'import' is asynchronous", "option": "a" },
             { "answer": "'require' is only used for modules, 'import' is for files", "option": "b" },
@@ -3105,7 +3105,7 @@ export const quizList = [
         },
         {
           "question": "Which method is used to create a new directory in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "fs.mkdir()", "option": "a" },
             { "answer": "fs.createDirectory()", "option": "b" },
@@ -3115,7 +3115,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'npm init' command do?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Creates a new Node.js project and generates a package.json file", "option": "a" },
             { "answer": "Generates a new npm package", "option": "b" },
@@ -3125,7 +3125,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following statements is true about Node.js event loop?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "The event loop can handle only synchronous operations", "option": "a" },
             { "answer": "The event loop blocks the main thread", "option": "b" },
@@ -3135,7 +3135,7 @@ export const quizList = [
         },
         {
           "question": "Which command is used to install Node.js packages?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "npm install", "option": "a" },
             { "answer": "npm get", "option": "b" },
@@ -3145,7 +3145,7 @@ export const quizList = [
         },
         {
           "question": "What is the role of 'callback functions' in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To handle asynchronous operations", "option": "a" },
             { "answer": "To execute synchronous code", "option": "b" },
@@ -3155,7 +3155,7 @@ export const quizList = [
         },
         {
           "question": "What is Express.js in Node.js?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "A database system", "option": "a" },
             { "answer": "A JavaScript library", "option": "b" },
@@ -3165,7 +3165,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a middleware used in Node.js Express applications?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "HttpServer", "option": "a" },
             { "answer": "body-parser", "option": "b" },
@@ -3175,7 +3175,7 @@ export const quizList = [
         },
         {
           "question": "What is a callback hell in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "A situation where multiple nested callbacks become difficult to manage", "option": "a" },
             { "answer": "A way of handling errors in Node.js", "option": "b" },
@@ -3185,7 +3185,7 @@ export const quizList = [
         },
         {
           "question": "How do you handle multiple asynchronous tasks in Node.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "Using callbacks only", "option": "a" },
             { "answer": "Using synchronous code", "option": "b" },
@@ -3195,7 +3195,7 @@ export const quizList = [
         },
         {
           "question": "Which built-in module is used for networking in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "fs", "option": "a" },
             { "answer": "http", "option": "b" },
@@ -3205,7 +3205,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of 'npx' command in Node.js?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To execute Node.js packages without installing them globally", "option": "a" },
             { "answer": "To install Node.js packages globally", "option": "b" },
@@ -3215,7 +3215,7 @@ export const quizList = [
         },
         {
           "question": "What is 'cluster' module used for in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To create child processes to handle multiple cores in a multi-core system", "option": "a" },
             { "answer": "To handle HTTP requests", "option": "b" },
@@ -3225,7 +3225,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is the default port number for a Node.js server?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "3000", "option": "a" },
             { "answer": "8080", "option": "b" },
@@ -3235,7 +3235,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'npm audit' command do?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "It checks for vulnerabilities in the project's dependencies", "option": "a" },
             { "answer": "It updates the npm version", "option": "b" },
@@ -3245,7 +3245,7 @@ export const quizList = [
         },
         {
           "question": "What is the Node.js module that allows you to work with file systems?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "fs", "option": "a" },
             { "answer": "http", "option": "b" },
@@ -3255,7 +3255,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is true about the Node.js event loop?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "It processes events in a synchronous manner.", "option": "a" },
             { "answer": "It processes events asynchronously.", "option": "b" },
@@ -3265,7 +3265,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is the correct syntax to create a server in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "http.createServer()", "option": "a" },
             { "answer": "server.create()", "option": "b" },
@@ -3275,7 +3275,7 @@ export const quizList = [
         },
         {
           "question": "What is the default port used by a Node.js HTTP server?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "8080", "option": "a" },
             { "answer": "3000", "option": "b" },
@@ -3285,7 +3285,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following methods is used to include a module in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "import", "option": "a" },
             { "answer": "require", "option": "b" },
@@ -3295,7 +3295,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a common use case for the Node.js module 'express'?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Database connection", "option": "a" },
             { "answer": "File system operations", "option": "b" },
@@ -3305,7 +3305,7 @@ export const quizList = [
         },
         {
           "question": "What does 'npm' stand for in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Node Package Manager", "option": "a" },
             { "answer": "Node Project Manager", "option": "b" },
@@ -3315,7 +3315,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'callback' function in Node.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To pause execution of the program", "option": "a" },
             { "answer": "To execute a function after a set interval", "option": "b" },
@@ -3325,7 +3325,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following Node.js modules is used for working with streams?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "stream", "option": "a" },
             { "answer": "buffer", "option": "b" },
@@ -3335,7 +3335,7 @@ export const quizList = [
         },
         {
           "question": "Which function is used to read a file in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "fs.readFile()", "option": "a" },
             { "answer": "fs.read()", "option": "b" },
@@ -3345,7 +3345,7 @@ export const quizList = [
         },
         {
           "question": "What does 'require' do in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "It loads and executes a module", "option": "a" },
             { "answer": "It creates a new function", "option": "b" },
@@ -3355,7 +3355,7 @@ export const quizList = [
         },
         {
           "question": "How can you handle errors in Node.js?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "By using try-catch blocks only", "option": "a" },
             { "answer": "By using promises only", "option": "b" },
@@ -3365,7 +3365,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'package.json' file in a Node.js project?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "To specify the project's configuration", "option": "a" },
             { "answer": "To list the project's dependencies and scripts", "option": "b" },
@@ -3375,7 +3375,7 @@ export const quizList = [
         },
         {
           "question": "What does 'event-driven architecture' mean in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Code execution is triggered by events", "option": "a" },
             { "answer": "Code is executed sequentially in response to requests", "option": "b" },
@@ -3385,7 +3385,7 @@ export const quizList = [
         },
         {
           "question": "What is the default behavior of Node.js in terms of concurrency?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "It runs in a single thread and uses an event loop", "option": "a" },
             { "answer": "It uses multiple threads for concurrency", "option": "b" },
@@ -3395,7 +3395,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is used to install dependencies in a Node.js project?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "npm install", "option": "a" },
             { "answer": "npm get", "option": "b" },
@@ -3405,7 +3405,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of middleware in Node.js, especially with Express?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "To handle HTTP requests and responses", "option": "a" },
             { "answer": "To validate inputs", "option": "b" },
@@ -3415,7 +3415,7 @@ export const quizList = [
         },
         {
           "question": "What is the use of the 'buffer' module in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To handle binary data", "option": "a" },
             { "answer": "To handle strings", "option": "b" },
@@ -3425,7 +3425,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a characteristic of Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "It is single-threaded", "option": "a" },
             { "answer": "It is non-blocking", "option": "b" },
@@ -3435,7 +3435,7 @@ export const quizList = [
         },
         {
           "question": "Which method is used to start a Node.js application?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "node.start()", "option": "a" },
             { "answer": "npm.start()", "option": "b" },
@@ -3445,7 +3445,7 @@ export const quizList = [
         },
         {
           "question": "What does 'npm run start' command do in a Node.js project?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "Runs the start script defined in package.json", "option": "a" },
             { "answer": "Installs project dependencies", "option": "b" },
@@ -3455,7 +3455,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is the default package manager for Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Yarn", "option": "a" },
             { "answer": "npm", "option": "b" },
@@ -3465,7 +3465,7 @@ export const quizList = [
         },
         {
           "question": "Which function is used to create an HTTP server in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "http.createServer()", "option": "a" },
             { "answer": "server.create()", "option": "b" },
@@ -3475,7 +3475,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is used to handle HTTP requests in Node.js?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "fs", "option": "a" },
             { "answer": "http", "option": "b" },
@@ -3485,7 +3485,7 @@ export const quizList = [
         },
         {
           "question": "What is the primary function of the 'express' module?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Handling files", "option": "a" },
             { "answer": "Connecting to databases", "option": "b" },
@@ -3495,7 +3495,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is the correct way to define a route in an Express app?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "app.get('/path', function(req, res) {...})", "option": "a" },
             { "answer": "app.route('/path')", "option": "b" },
@@ -3505,7 +3505,7 @@ export const quizList = [
         },
         {
           "question": "Which Node.js module is used to parse URL query strings?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "query", "option": "a" },
             { "answer": "parse", "option": "b" },
@@ -3515,7 +3515,7 @@ export const quizList = [
         },
         {
           "question": "What does 'node_modules' folder in Node.js contain?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "Project source code", "option": "a" },
             { "answer": "Installed packages and dependencies", "option": "b" },
@@ -3525,7 +3525,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'package-lock.json' file in a Node.js project?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "To define the project's metadata", "option": "a" },
             { "answer": "To store project configuration settings", "option": "b" },
@@ -3535,7 +3535,7 @@ export const quizList = [
         },
         {
           "question": "How can you handle a promise rejection in Node.js?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "By using a try-catch block", "option": "a" },
             { "answer": "By using the 'then' method", "option": "b" },
@@ -3545,7 +3545,7 @@ export const quizList = [
         },
         {
           "question": "What is 'cluster' used for in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To take advantage of multi-core systems", "option": "a" },
             { "answer": "To handle database connections", "option": "b" },
@@ -3555,7 +3555,7 @@ export const quizList = [
         },
         {
           "question": "Which module in Node.js is used to work with environment variables?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "dotenv", "option": "a" },
             { "answer": "process", "option": "b" },
@@ -3565,7 +3565,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following best describes the 'async' keyword in Node.js?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "It makes a function synchronous", "option": "a" },
             { "answer": "It returns a promise", "option": "b" },
@@ -3575,7 +3575,7 @@ export const quizList = [
         },
         {
           "question": "What is the purpose of the 'res.send()' method in Express?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "To send a response back to the client", "option": "a" },
             { "answer": "To send a request to a server", "option": "b" },
@@ -3585,7 +3585,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is a benefit of using the 'npm start' command?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "It installs the latest version of dependencies", "option": "a" },
             { "answer": "It serves the application in development mode", "option": "b" },
@@ -3595,7 +3595,7 @@ export const quizList = [
         },
         {
           "question": "What is a promise in Node.js?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "An object that represents the eventual completion or failure of an asynchronous operation", "option": "a" },
             { "answer": "A function that always returns a value", "option": "b" },
@@ -3605,7 +3605,7 @@ export const quizList = [
         },
         {
           "question": "What is 'middleware' in Express?",
-          "selectedAnswer": "b",
+          "correctAnswerOption": "b",
           "answers": [
             { "answer": "A function that modifies the request or response objects", "option": "a" },
             { "answer": "A function that handles HTTP requests", "option": "b" },
@@ -3615,7 +3615,7 @@ export const quizList = [
         },
         {
           "question": "Which of the following is used to run a script at the end of each Node.js session?",
-          "selectedAnswer": "c",
+          "correctAnswerOption": "c",
           "answers": [
             { "answer": "npm stop", "option": "a" },
             { "answer": "npm run", "option": "b" },
@@ -3625,7 +3625,7 @@ export const quizList = [
         },
         {
           "question": "What does the 'res.json()' method do in Express?",
-          "selectedAnswer": "d",
+          "correctAnswerOption": "d",
           "answers": [
             { "answer": "Sends a plain text response", "option": "a" },
             { "answer": "Sends a JSON response", "option": "b" },
@@ -3635,7 +3635,7 @@ export const quizList = [
         },
         {
           "question": "Which command is used to initialize a new Node.js project?",
-          "selectedAnswer": "a",
+          "correctAnswerOption": "a",
           "answers": [
             { "answer": "npm init", "option": "a" },
             { "answer": "npm start", "option": "b" },
