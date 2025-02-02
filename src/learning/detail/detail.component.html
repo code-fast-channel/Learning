@@ -2,63 +2,61 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap title-head">
     <h4 class="text-left mb-2">{{selectedListData?.title}}</h4>
     <div class="d-flex justify-content-end mb-2">
-      <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;margin-right: 2px;" (click)="navigatetoList()">Home</button>
+      <button type="button" class="btn btn-success" style="padding: 2px 18px 2px 18px;margin-right: 2px;"
+        (click)="navigatetoList()">Home</button>
       <app-single-select [config]="dropdownConfig"></app-single-select>
     </div>
   </div>
   <div style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));display: grid;gap: 1rem;padding: 1rem;"
     [style.grid-template-columns]="!['',null,undefined,0,'null'].includes(dropdownConfig.selectedValue) ? 'repeat(' + dropdownConfig.selectedValue + ', 1fr)' : 'repeat(auto-fit, minmax(500px, 1fr))'">
     @for (data of listData; track trackByIndex(i, data); let i = $index) {
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
-          <div>
-            {{i+1}}) {{data.title}}
-          </div>
-          @if (data?.isGroup) {
-            <span class="badge text-bg-success">Group</span>
-          }
-          <!-- <a class="btn btn-primary" (click)="navigateToDetail(i)">View</a> -->
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: 900;">
+        <div>
+          {{i+1}}) {{data.title}}
         </div>
-        <div class="card-body" style="max-height: 500px;overflow-x: scroll;">
-          @for (files of data?.filesList; track trackByIndex(ri, files); let ri = $index) {
-            <ng-container
-              style="font-family: initial;font-size: 12;">
-              <h6 style="font-weight: 700;">{{files.title | titlecase}}</h6> @if (files?.description) {
-              <span class="text-br"
-              [innerText]="files.description"></span>
-            }
-            @for (codes of files.codeLists; track trackByIndex(ci, codes); let last = $last; let ci = $index) {
-              <h6 style="font-weight: 700;">{{codes.title | titlecase}}</h6> @if (codes?.description) {
-              <span class="text-br"
-              [innerText]="codes.description"></span>
-            }
-            @if (codes?.code) {
-              <div class="card mb-3 editor-text" #code style="font-family: initial;">
-                <div class="card-header bg-transparent"
-                  style="background-color: #27272a !important; color: white">
-                  {{codes.filename}}
-                  <div style="position: absolute;top: 7px;right: 14px;">
-                    <span class="badge text-bg-success cursor-pointer" style="font-family: sans-serif;font-size: 14px;cursor: pointer;" (click)="copy(codes.code,i,ri,ci)">{{codes?.isCopied ? 'Copied':'Click to Copy'}}</span>
-                  </div>
-                </div>
-                <div class="card-body text-success"
-                                style="background-color: #09090b !important; color: white;padding: 0;
+        @if (data?.isGroup) {
+        <span class="badge text-bg-success">Group</span>
+        }
+        <!-- <a class="btn btn-primary" (click)="navigateToDetail(i)">View</a> -->
+      </div>
+      <div class="card-body" style="max-height: 500px;overflow-x: scroll;">
+        @for (files of data?.filesList; track trackByIndex(ri, files); let ri = $index) {
+        <ng-container style="font-family: initial;font-size: 12;">
+          <h6 style="font-weight: 700;">{{files.title | titlecase}}</h6> @if (files?.description) {
+          <span class="text-br" [innerText]="files.description"></span>
+          }
+          @for (codes of files.codeLists; track trackByIndex(ci, codes); let last = $last; let ci = $index) {
+          <h6 style="font-weight: 700;">{{codes.title | titlecase}}</h6> @if (codes?.description) {
+          <span class="text-br" [innerText]="codes.description"></span>
+          }
+          @if (codes?.code) {
+          <h5 class="card-title" style="position: absolute;left: -9999px;opacity: 0;">{{codes.code}}</h5>
+          <div class="card mb-3 editor-text" #code style="font-family: initial;">
+            <div class="card-header bg-transparent" style="background-color: #27272a !important; color: white">
+              {{codes.filename}}
+              <div style="position: absolute;top: 7px;right: 14px;">
+                <span class="badge text-bg-success cursor-pointer"
+                  style="font-family: sans-serif;font-size: 14px;cursor: pointer;"
+                  (click)="copy(codes.code,i,ri,ci)">{{codes?.isCopied ? 'Copied':'Click to Copy'}}</span>
+              </div>
+            </div>
+            <div class="card-body text-success" style="background-color: #09090b !important; color: white;padding: 0;
     margin: 0;">
-                  <h5 class="card-title" style="position: absolute; left: -9999px" >{{codes.code}}</h5>
-                  @defer (on viewport(code)) {
-                  <app-code-formatter [code]="codes.code"></app-code-formatter>
-                }
-                @placeholder {
-                Loading......
+              @defer (on viewport(code)) {
+              <app-code-formatter [code]="codes.code"></app-code-formatter>
+              }
+              @placeholder {
+              Loading......
               }
             </div>
           </div>
+          }
+          }
+        </ng-container>
         }
-      }
-    </ng-container>
-  }
-</div>
-</div>
-}
-</div>
+      </div>
+    </div>
+    }
+  </div>
 </div>

@@ -18,4 +18,8 @@ export const learningRoutes: Routes = [
         path: 'detail/:id',
         loadComponent:() => import('./detail/detail.component').then(m=>m.DetailComponent)
     },
+    {
+        path: 'chat',
+        loadComponent:() => import('./chat/chat.component').then(m=>m.ChatComponent)
+    },
 ];
