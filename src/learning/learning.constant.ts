@@ -11234,7 +11234,785 @@ export class DisableDirective implements OnChanges {
               `
             }
           ]
+        },
+        {
+          "title": "Angular Signals: Complete Guide with Examples",
+          "description": "This document provides a complete overview of Angular Signals, including definitions, types, usage patterns, and best practices. Each concept is explained with practical examples using string, number, array, object, and array of object data types.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "signal-basic.ts",
+              "title": "Basic Signal",
+              "description": "Signals in Angular are reactive primitives used to hold and track values over time. A signal can be created using the `signal()` function and updates trigger reactive computations. Signals replace `BehaviorSubject` in many reactive use cases.",
+              "code": `
+              import { signal } from '@angular/core';
+        
+              const name = signal('John');         // string
+              const age = signal(30);              // number
+              const skills = signal(['Angular']);  // array
+              const profile = signal({ role: 'dev', level: 2 });  // object
+              const users = signal([{ id: 1, name: 'John' }]);    // array of objects
+              `
+            },
+            {
+              "filename": "read-write.ts",
+              "title": "Read and Write",
+              "description": "You can read the signal's current value using the function call syntax `signal()`, and write new values using `set()`. This helps keep a predictable and reactive data flow.",
+              "code": `
+              name(); // 'John'
+              age();  // 30
+        
+              name.set('Alice');    // string
+              age.set(35);          // number
+              skills.set(['React']);  // array
+              profile.set({ role: 'admin', level: 3 }); // object
+              users.set([{ id: 2, name: 'Alice' }]); // array of objects
+              `
+            },
+            {
+              "filename": "update-signal.ts",
+              "title": "Update Signal",
+              "description": "The `update()` method allows you to mutate the current value of a signal instead of replacing it completely. Useful for incremental changes like adding items or updating properties.",
+              "code": `
+              age.update(current => current + 1); // number
+              skills.update(current => [...current, 'Vue']); // array
+              profile.update(current => ({ ...current, level: 4 })); // object
+              users.update(current => [...current, { id: 3, name: 'Bob' }]); // array of objects
+              `
+            },
+            {
+              "filename": "computed-signal.ts",
+              "title": "Computed Signal",
+              "description": "The `computed()` function creates a derived signal whose value automatically updates when its dependencies change. This is useful for reactive transformations of signal values.",
+              "code": `
+              import { computed } from '@angular/core';
+        
+              const fullName = computed(() => 'Mr. ' + name()); // string
+              const isAdult = computed(() => age() >= 18);      // number
+              const skillCount = computed(() => skills().length); // array
+              const isSenior = computed(() => profile().level > 5); // object
+              const userNames = computed(() => users().map(u => u.name)); // array of objects
+              `
+            },
+            {
+              "filename": "effect-signal.ts",
+              "title": "Effect",
+              "description": "`effect()` is used to run side effects when the signal's value changes. It's like a reactive listener that automatically responds to updates in any dependent signals.",
+              "code": `
+              import { effect } from '@angular/core';
+        
+              effect(() => {
+                console.log('Name changed to:', name());
+              });
+        
+              effect(() => {
+                console.log('User count is:', users().length);
+              });
+              `
+            },
+            {
+              "filename": "signal-input.ts",
+              "title": "Using Signal as Input",
+              "description": "Angular components can now accept signals as inputs using the `@Input({ signal: true })` decorator. This allows reactive and efficient component updates without traditional change detection.",
+              "code": `
+              import { Component, Input, signal } from '@angular/core';
+              import { Signal } from '@angular/core';
+        
+              @Component({
+                selector: 'app-user-card',
+                template: \`<div>{{ user().name }}</div>\`
+              })
+              export class UserCardComponent {
+                @Input({ signal: true }) user!: Signal<{ name: string }>;
+              }
+              `
+            },
+            {
+              "filename": "readonly-signal.ts",
+              "title": "ReadOnly Signal",
+              "description": "Signals can be exposed as read-only by returning a `ReadonlySignal`, which allows access to the value but restricts mutations. Useful for encapsulating logic and protecting state.",
+              "code": `
+              import { signal, computed, Signal } from '@angular/core';
+        
+              const _status = signal('active');
+        
+              export const status: Signal<string> = computed(() => _status());
+        
+             _status.set('inactive'); // Allowed internally
+              // status.set('something'); // Error: ReadonlySignal
+              `
+            },
+            {
+              "filename": "signal-vs-rxjs.ts",
+              "title": "Signals vs RxJS",
+              "description": "Signals are synchronous, dependency-tracked, and simpler to use than RxJS for local state. However, RxJS is still better for event streams, debouncing, and complex async logic.",
+              "code": `
+        // RxJS
+        import { BehaviorSubject } from 'rxjs';
+        const counter$ = new BehaviorSubject(0);
+        counter$.subscribe(val => console.log(val));
+        
+        // Signal
+        import { signal } from '@angular/core';
+        const counter = signal(0);
+        effect(() => console.log(counter()));
+              `
+            },
+            {
+              "filename": "signal-best-practices.ts",
+              "title": "Best Practices",
+              "description": "Use signals for component-local state, expose only read-only signals from services, avoid chaining signals deeply, and favor `computed()` over manual effect + logic.",
+              "code": `
+        // Good
+        const count = signal(1);
+        const double = computed(() => count() * 2);
+        
+        // Better structure
+        function useCounter() {
+          const _count = signal(0);
+          const double = computed(() => _count() * 2);
+          return {
+            count: _count,
+            double
+          };
         }
+              `
+            }
+          ]
+        },
+        {
+          "title": "Angular Signals: Input/Output/ViewChild/ViewChildren Examples",
+          "description": "This document focuses on Angular component communication and DOM interaction using Signals. It includes practical examples using string, number, array, object, and array of object types.",
+          "isGroup": true,
+          "codeLists": [
+            {
+              "filename": "signal-input.ts",
+              "title": "Signal-based @Input()",
+              "description": "Angular 17+ allows `@Input({ signal: true })` to pass signals directly between components, enabling reactive updates without traditional change detection.",
+              "code": `
+              // parent.component.ts
+              @Component({
+                selector: 'app-parent',
+                template: \`
+                  <app-child 
+                    [name]="name" 
+                    [count]="count" 
+                    [items]="items" 
+                    [info]="info" 
+                    [list]="list">
+                  </app-child>
+                \`
+              })
+              export class ParentComponent {
+                name = signal('Parent');                         // string
+                count = signal(10);                              // number
+                items = signal(['one', 'two']);                  // array
+                info = signal({ status: 'active' });             // object
+                list = signal([{ id: 1, value: 'first' }]);      // array of object
+              }
+        
+              // child.component.ts
+              @Component({
+                selector: 'app-child',
+                template: \`
+                  {{ name() }} - {{ count() }}
+                  <ul><li *ngFor="let i of items()">{{ i }}</li></ul>
+                \`
+              })
+              export class ChildComponent {
+                @Input({ signal: true }) name!: Signal<string>;
+                @Input({ signal: true }) count!: Signal<number>;
+                @Input({ signal: true }) items!: Signal<string[]>;
+                @Input({ signal: true }) info!: Signal<{ status: string }>;
+                @Input({ signal: true }) list!: Signal<{ id: number; value: string }[]>;
+              }
+              `
+            },
+            {
+              "filename": "signal-output-effect.ts",
+              "title": "Signal-based Output using Effect",
+              "description": "You can use `effect()` to watch a signal and trigger callbacks to simulate Output behavior from child to parent using functions.",
+              "code": `
+              // parent.component.ts
+              <app-child 
+                [text]="text" 
+                [onChanged]="handleChange" 
+                [onDataChanged]="handleObjectChange" 
+                [onListUpdate]="handleList">
+              </app-child>
+        
+              export class ParentComponent {
+                text = signal('Hello');
+        
+                handleChange = (val: number) => console.log('Child number:', val);
+                handleObjectChange = (obj: { name: string }) => console.log('Child object:', obj);
+                handleList = (data: { id: number }[]) => console.log('Child array of objects:', data);
+              }
+        
+              // child.component.ts
+              @Component({
+                selector: 'app-child',
+                template: \`<button (click)="update()">Change</button>\`
+              })
+              export class ChildComponent {
+                @Input({ signal: true }) text!: Signal<string>;
+                @Input() onChanged!: (val: number) => void;
+                @Input() onDataChanged!: (obj: { name: string }) => void;
+                @Input() onListUpdate!: (data: { id: number }[]) => void;
+        
+                numberSignal = signal(99);
+                objectSignal = signal({ name: 'Child' });
+                listSignal = signal([{ id: 1 }, { id: 2 }]);
+        
+                update() {
+                  this.onChanged(this.numberSignal());
+                  this.onDataChanged(this.objectSignal());
+                  this.onListUpdate(this.listSignal());
+                }
+              }
+              `
+            },
+            {
+              "filename": "viewchild-signal.ts",
+              "title": "ViewChild with Signal",
+              "description": "`@ViewChild` can be used to access a child component and trigger or read its signals from the parent component.",
+              "code": `
+              // child.component.ts
+              @Component({
+                selector: 'app-box',
+                template: \`<div>{{ status() }}</div>\`
+              })
+              export class BoxComponent {
+                status = signal('ready'); // string
+                value = signal(100); // number
+                data = signal(['x']); // array
+                detail = signal({ key: 'A' }); // object
+                list = signal([{ id: 1 }]); // array of object
+              }
+        
+              // parent.component.ts
+              @Component({
+                selector: 'app-container',
+                template: \`
+                  <app-box></app-box>
+                  <button (click)="log()">Check</button>
+                \`
+              })
+              export class ContainerComponent implements AfterViewInit {
+                @ViewChild(BoxComponent) box!: BoxComponent;
+        
+                ngAfterViewInit() {
+                  console.log(this.box.status());
+                }
+        
+                log() {
+                  console.log(this.box.value());
+                  console.log(this.box.data());
+                  console.log(this.box.detail());
+                  console.log(this.box.list());
+                }
+              }
+              `
+            },
+            {
+              "filename": "viewchildren-signal.ts",
+              "title": "ViewChildren with Signal",
+              "description": "`@ViewChildren` returns a QueryList of child components. You can iterate and access each child's signals reactively.",
+              "code": `
+              // child.component.ts
+              @Component({
+                selector: 'app-item',
+                template: \`<span>{{ label() }}</span>\`
+              })
+              export class ItemComponent {
+                label = signal('Item');
+                index = signal(0);
+                tags = signal(['tag1']);
+                config = signal({ enabled: true });
+                records = signal([{ id: 1 }]);
+              }
+        
+              // parent.component.ts
+              @Component({
+                selector: 'app-list',
+                template: \`
+                  <app-item *ngFor="let i of [1,2,3]"></app-item>
+                  <button (click)="showAll()">Show All</button>
+                \`
+              })
+              export class ListComponent implements AfterViewInit {
+                @ViewChildren(ItemComponent) items!: QueryList<ItemComponent>;
+        
+                ngAfterViewInit() {
+                  this.items.forEach(item => console.log(item.label()));
+                }
+        
+                showAll() {
+                  this.items.forEach(item => {
+                    console.log(item.index());
+                    console.log(item.tags());
+                    console.log(item.config());
+                    console.log(item.records());
+                  });
+                }
+              }
+              `
+            },
+            {
+              "filename": "queryselector-signals.ts",
+              "title": "QuerySelector DOM access + Signals",
+              "description": "Using `@ViewChild` with `ElementRef` and updating a signal when DOM changes (e.g., input text).",
+              "code": `
+              @Component({
+                selector: 'app-input-box',
+                template: \`
+                  <input #inputRef (input)="update()" />
+                  <p>Typed: {{ text() }}</p>
+                \`
+              })
+              export class InputBoxComponent implements AfterViewInit {
+                @ViewChild('inputRef') input!: ElementRef<HTMLInputElement>;
+                text = signal(''); // string
+        
+                update() {
+                  this.text.set(this.input.nativeElement.value);
+                }
+              }
+              `
+            }
+          ]
+        },
+            {
+      title: 'Angular @defer Concept',
+      description:
+        "1) Angular @defer is a declarative syntax for lazy-loading UI components.\n2) It improves performance by deferring rendering until a condition or trigger is met.\n3) Triggers include 'on idle', 'on viewport', 'on interaction', 'on hover', 'on timer', and 'when'.\n4) It supports fallback, loading, and error templates for better UX.",
+      isGroup: true,
+      codeLists: [
+        {
+          filename: 'defer_viewport.component.html',
+          title: 'Defer with Viewport Trigger',
+          description:
+            "1) Demonstrates @defer with 'on viewport' trigger.\n2) Content loads only when it enters the viewport.",
+          code: '<div style="height: 1000px;">Scroll down to load content</div>\n\n@defer (on viewport)\n{\n  <div class="card">🌟 This content was loaded on viewport!</div>\n}',
+        },
+        {
+          filename: 'defer_idle.component.html',
+          title: 'Defer with Idle Trigger',
+          description:
+            "1) Uses @defer with 'on idle' trigger.\n2) Includes @placeholder and @loading templates.",
+          code: '@defer (on idle)\n{\n  <div class="card">✅ Loaded after idle!</div>\n}\n@placeholder {\n  <div class="card">⏳ Placeholder while waiting...</div>\n}\n@loading {\n  <div class="card">🔄 Loading...</div>\n}',
+        },
+        {
+          filename: 'defer_when.component.html',
+          title: 'Defer with Condition',
+          description:
+            '1) Uses @defer (when condition) to load content based on a boolean.',
+          code: '<button (click)="show = true">Show Content</button>\n\n@defer (when show)\n{\n  <div class="card">🎉 Conditional content is now visible!</div>\n}',
+        },
+        {
+          filename: 'defer_interaction.component.html',
+          title: 'Defer with Interaction',
+          description: '1) Loads content after user interaction (e.g., click).',
+          code: '@defer (on interaction)\n{\n  <div class="card">👆 You interacted, so here’s the content!</div>\n}',
+        },
+        {
+          filename: 'defer_hover.component.html',
+          title: 'Defer with Hover Trigger',
+          description:
+            '1) Loads content when the user hovers over a trigger element.',
+          code: '<div @defer (on hover)>\n  <div class="card">🖱️ Hovered content loaded!</div>\n</div>',
+        },
+        {
+          filename: 'defer_timer.component.html',
+          title: 'Defer with Timer',
+          description:
+            "1) Loads content after a specified delay using 'on timer'.",
+          code: '@defer (on timer(3000))\n{\n  <div class="card">⏲️ Loaded after 3 seconds!</div>\n}',
+        },
+        {
+          filename: 'defer_error.component.html',
+          title: 'Defer with Error Handling',
+          description:
+            '1) Demonstrates use of @error block to handle loading failures.',
+          code: '@defer (on idle)\n{\n  <app-lazy-component></app-lazy-component>\n}\n@loading {\n  <div class="card">🔄 Loading...</div>\n}\n@error {\n  <div class="card">❌ Failed to load content.</div>\n}',
+        },
+      ],
+    },
+    {
+      title: 'Angular New Control Flow Syntaxes',
+      description:
+        "1) Angular's new control flow syntax provides a more declarative and readable way to handle conditional rendering and iteration.\n2) Key syntaxes include @if, @for, @switch, and @defer.\n3) These syntaxes improve performance and developer experience.\n4) They are part of Angular's template syntax modernization.",
+      isGroup: true,
+      codeLists: [
+        {
+          filename: 'if.component.html',
+          title: '@if Syntax Example (HTML)',
+          description: 'Demonstrates the use of @if for conditional rendering.',
+          code: '<button (click)="isVisible = !isVisible">Toggle</button>\n\n@if (isVisible) {\n  <p>The content is visible!</p>\n}',
+        },
+        {
+          filename: 'if.component.ts',
+          title: '@if Syntax Example (TS)',
+          description:
+            'Defines the boolean variable used in the @if condition.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-if',\n  templateUrl: './if.component.html'\n})\nexport class IfComponent {\n  isVisible = true;\n}",
+        },
+        {
+          filename: 'if_else.component.html',
+          title: '@if-else Syntax Example (HTML)',
+          description:
+            'Demonstrates the use of @if with @else for conditional rendering.',
+          code: '<button (click)="isVisible = !isVisible">Toggle</button>\n\n@if (isVisible) {\n  <p>Visible content</p>\n} @else {\n  <p>Hidden content</p>\n}',
+        },
+        {
+          filename: 'if_else.component.ts',
+          title: '@if-else Syntax Example (TS)',
+          description:
+            'Defines the boolean variable used in the @if-else condition.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-if-else',\n  templateUrl: './if_else.component.html'\n})\nexport class IfElseComponent {\n  isVisible = false;\n}",
+        },
+        {
+          filename: 'if_elseif_else.component.html',
+          title: '@if-elseif-else Syntax Example (HTML)',
+          description:
+            'Demonstrates the use of @if, @elseif, and @else for multiple conditions.',
+          code: "@if (status === 'loading') {\n  <p>Loading...</p>\n} @elseif (status === 'success') {\n  <p>Success!</p>\n} @else {\n  <p>Error occurred.</p>\n}",
+        },
+        {
+          filename: 'if_elseif_else.component.ts',
+          title: '@if-elseif-else Syntax Example (TS)',
+          description: 'Defines the status variable used in the condition.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-if-elseif-else',\n  templateUrl: './if_elseif_else.component.html'\n})\nexport class IfElseIfElseComponent {\n  status: 'loading' | 'success' | 'error' = 'loading';\n}",
+        },
+        {
+          filename: 'switch.component.html',
+          title: '@switch Syntax Example (HTML)',
+          description:
+            'Demonstrates the use of @switch with @case and @default.',
+          code: "@switch (status) {\n  @case ('loading') {\n    <p>Loading...</p>\n  }\n  @case ('success') {\n    <p>Data loaded successfully!</p>\n  }\n  @default {\n    <p>Unknown status.</p>\n  }\n}",
+        },
+        {
+          filename: 'switch.component.ts',
+          title: '@switch Syntax Example (TS)',
+          description: 'Defines the status variable used in the switch block.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-switch',\n  templateUrl: './switch.component.html'\n})\nexport class SwitchComponent {\n  status: 'loading' | 'success' | 'unknown' = 'success';\n}",
+        },
+        {
+          filename: 'for_track.component.html',
+          title: '@for with trackBy Example (HTML)',
+          description:
+            'Demonstrates the use of @for with track by to optimize rendering.',
+          code: '@for (item of items; track item.id) {\n  <div>{{ item.name }}</div>\n}',
+        },
+        {
+          filename: 'for_track.component.ts',
+          title: '@for with trackBy Example (TS)',
+          description:
+            'Defines the items array with unique IDs for tracking using the new Angular @for syntax.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-for-track',\n  template: `\n    <ul>\n      @for (item of items; track item.id) {\n        <li>{{ item.name }}</li>\n      }\n    </ul>\n  `\n})\nexport class ForTrackComponent {\n  items = [\n    { id: 1, name: 'Item One' },\n    { id: 2, name: 'Item Two' },\n    { id: 3, name: 'Item Three' }\n  ];\n}",
+        },
+        {
+          filename: 'for_track.component.ts',
+          title: '@for with trackBy Index and Context Variables (TS)',
+          description:
+            'Demonstrates @for loop with track by index and usage of $first, $last, $even, $odd, and $length.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-for-track',\n  template: `\n    <ul>\n      @for (item of items; track $index; let $index = $index; let $first = $first; let $last = $last; let $even = $even; let $odd = $odd; let $length = $length) {\n        <li>\n          <strong>{{ item.name }}</strong>\n          <span> - Index: {{ $index }}</span>\n          <span *ngIf=\"$first\"> (First)</span>\n          <span *ngIf=\"$last\"> (Last)</span>\n          <span *ngIf=\"$even\"> (Even)</span>\n          <span *ngIf=\"$odd\"> (Odd)</span>\n        </li>\n      }\n    </ul>\n    <p>Total items: {{ items.length }}</p>\n  `\n})\nexport class ForTrackComponent {\n  items = [\n    { id: 1, name: 'Item One' },\n    { id: 2, name: 'Item Two' },\n    { id: 3, name: 'Item Three' },\n    { id: 4, name: 'Item Four' }\n  ];\n}",
+        },
+        {
+          filename: 'migration-command.txt',
+          title: 'Migration Command for New Control Flow Syntax',
+          description:
+            "1) Command to enable Angular's new control flow syntax using Angular CLI.\n2) This migration introduces @if, @for, @switch, and @defer template syntax.",
+          code: 'ng generate @angular/core:control-flow',
+        },
+      ],
+    },
+    {
+      title: 'Angular Template Variables with @let and @if',
+      description:
+        '1) Demonstrates advanced usage of @let to declare local variables in Angular templates.\n2) Combines @let with @if and @for for dynamic rendering.\n3) Useful for managing async data, constants, and complex expressions.',
+      isGroup: true,
+      codeLists: [
+        {
+          filename: 'template-variables-advanced.component.html',
+          title: 'Advanced Template Variables Example (HTML)',
+          description:
+            '1) Uses multiple @let declarations.\n2) Includes @if and @for with trackBy.\n3) Demonstrates async pipe and nested data rendering.',
+          code: "@let name = user.name;\n@let greeting = 'Hello, ' + name;\n@let data = data$ | async;\n@let pi = 3.1459;\n@let coordinates = {x: 50, y: 100};\n@let longExpression = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ' +\n                      'sed do eiusmod tempor incididunt ut labore et dolore magna ' +\n                      'Ut enim ad minim veniam...';\n@let user = user$ | async;\n\n@if (user) {\n  <h1>Hello, {{user.name}}</h1>\n  <user-avatar [photo]=\"user.photo\"/>\n  <ul>\n    @for (snack of user.favoriteSnacks; track snack.id) {\n      <li>{{snack.name}}</li>\n    }\n  </ul>\n  <button (click)=\"update(user)\">Update profile</button>\n}",
+        },
+        {
+          filename: 'template-variables-advanced.component.ts',
+          title: 'Advanced Template Variables Example (TS)',
+          description:
+            '1) Provides mock data for user and data$ observable.\n2) Includes update method for interaction.',
+          code: "import { Component } from '@angular/core';\nimport { of } from 'rxjs';\n\n@Component({\n  selector: 'app-template-variables-advanced',\n  templateUrl: './template-variables-advanced.component.html'\n})\nexport class TemplateVariablesAdvancedComponent {\n  user$ = of({\n    name: 'Alice',\n    photo: 'assets/alice.jpg',\n    favoriteSnacks: [\n      { id: 1, name: 'Chips' },\n      { id: 2, name: 'Cookies' },\n      { id: 3, name: 'Fruit' }\n    ]\n  });\n\n  data$ = of({ info: 'Some async data' });\n\n  update(user: any) {\n    console.log('Updating user:', user);\n  }\n}",
+        },
+      ],
+    },
+    {
+      title: 'Angular Lazy Loading with loadChildren and loadComponent',
+      description:
+        '1) Demonstrates how to use loadChildren for lazy-loaded routes.\n2) Demonstrates how to use loadComponent for standalone component loading.\n3) Improves performance by loading modules and components only when needed.',
+      isGroup: true,
+      codeLists: [
+        {
+          filename: 'app-routing.module.ts',
+          title: 'Lazy Loading with loadChildren',
+          description:
+            '1) Defines a route that lazy-loads a feature module using loadChildren.',
+          code: "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nconst routes: Routes = [\n  {\n    path: 'products',\n    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)\n  }\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {}",
+        },
+        {
+          filename: 'products-routing.module.ts',
+          title: 'Feature Module Routing',
+          description:
+            '1) Defines child routes for the lazy-loaded ProductsModule.',
+          code: "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { ProductListComponent } from './product-list/product-list.component';\n\nconst routes: Routes = [\n  { path: '', component: ProductListComponent }\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class ProductsRoutingModule {}",
+        },
+        {
+          filename: 'standalone-routing.module.ts',
+          title: 'Lazy Loading with loadComponent',
+          description:
+            '1) Demonstrates route-level lazy loading of a standalone component using loadComponent.',
+          code: "import { Routes } from '@angular/router';\n\nexport const routes: Routes = [\n  {\n    path: 'about',\n    loadComponent: () => import('./about/about.component').then(m => m.AboutComponent)\n  }\n];",
+        },
+        {
+          filename: 'about.component.ts',
+          title: 'Standalone Component',
+          description:
+            '1) A standalone component that can be lazy-loaded using loadComponent.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-about',\n  standalone: true,\n  template: `<h2>About Us</h2><p>This is a standalone component.</p>`\n})\nexport class AboutComponent {}",
+        },
+        {
+          filename: 'app.module.ts',
+          title: 'App Module Setup',
+          description:
+            '1) Root module that imports AppRoutingModule and bootstraps the application.',
+          code: "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [AppComponent],\n  imports: [BrowserModule, AppRoutingModule],\n  bootstrap: [AppComponent]\n})\nexport class AppModule {}",
+        },
+        {
+          filename: 'main.ts',
+          title: 'Bootstrap with Standalone Routing',
+          description:
+            '1) Bootstraps the application using standalone routing configuration.',
+          code: "import { bootstrapApplication } from '@angular/platform-browser';\nimport { provideRouter } from '@angular/router';\nimport { routes } from './standalone-routing.module';\nimport { AppComponent } from './app/app.component';\n\nbootstrapApplication(AppComponent, {\n  providers: [provideRouter(routes)]\n});",
+        },
+      ],
+    },
+    {
+      title: 'Angular Lazy Loading Without NgModules',
+      description:
+        '1) Demonstrates lazy loading using loadComponent and loadChildren without NgModules.\n2) Uses standalone components and provideRouter for routing.\n3) Simplifies Angular architecture by removing the need for NgModules.',
+      isGroup: true,
+      codeLists: [
+        {
+          filename: 'app.routes.ts',
+          title: 'Standalone Routing Configuration',
+          description:
+            '1) Defines routes using loadComponent and loadChildren.\n2) Uses standalone components and lazy loading.',
+          code: "import { Routes } from '@angular/router';\n\nexport const routes: Routes = [\n  {\n    path: '',\n    loadComponent: () => import('./home.component').then(m => m.HomeComponent)\n  },\n  {\n    path: 'about',\n    loadComponent: () => import('./about.component').then(m => m.AboutComponent)\n  },\n  {\n    path: 'admin',\n    loadChildren: () => import('./admin.routes').then(m => m.adminRoutes)\n  }\n];",
+        },
+        {
+          filename: 'admin.routes.ts',
+          title: 'Lazy Loaded Child Routes',
+          description:
+            '1) Defines child routes for the admin section using standalone components.',
+          code: "import { Routes } from '@angular/router';\n\nexport const adminRoutes: Routes = [\n  {\n    path: '',\n    loadComponent: () => import('./admin.component').then(m => m.AdminComponent)\n  },\n  {\n    path: 'settings',\n    loadComponent: () => import('./admin-settings.component').then(m => m.AdminSettingsComponent)\n  }\n];",
+        },
+        {
+          filename: 'main.ts',
+          title: 'Bootstrap with provideRouter',
+          description:
+            '1) Bootstraps the application using standalone AppComponent and provideRouter.',
+          code: "import { bootstrapApplication } from '@angular/platform-browser';\nimport { provideRouter } from '@angular/router';\nimport { AppComponent } from './app.component';\nimport { routes } from './app.routes';\n\nbootstrapApplication(AppComponent, {\n  providers: [provideRouter(routes)]\n});",
+        },
+        {
+          filename: 'app.component.ts',
+          title: 'Standalone AppComponent',
+          description:
+            '1) Root component with router links and outlet.\n2) Declared as standalone.',
+          code: 'import { Component } from \'@angular/core\';\nimport { RouterModule } from \'@angular/router\';\n\n@Component({\n  selector: \'app-root\',\n  standalone: true,\n  imports: [RouterModule],\n  template: `\n    <h1>Standalone Routing</h>\n    <nav>\n      <a routerLink="/">Home</a>\n      <a routerLink="/about">About</a>\n      <a routerLink="/admin">Admin</a>\n    </nav>\n    <router-outlet></router-outlet>\n  `\n})\nexport class AppComponent {}',
+        },
+        {
+          filename: 'home.component.ts',
+          title: 'HomeComponent (Standalone)',
+          description: '1) Simple standalone component for the home route.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  standalone: true,\n  template: `<h2>Welcome to the Home Page</h2>`\n})\nexport class HomeComponent {}",
+        },
+        {
+          filename: 'about.component.ts',
+          title: 'AboutComponent (Standalone)',
+          description: '1) Simple standalone component for the about route.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-about',\n  standalone: true,\n  template: `<h2>About Us</h2>`\n})\nexport class AboutComponent {}",
+        },
+        {
+          filename: 'admin.component.ts',
+          title: 'AdminComponent (Standalone)',
+          description: '1) Standalone component for the admin route.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-admin',\n  standalone: true,\n  template: `<h2>Admin Dashboard</h2>`\n})\nexport class AdminComponent {}",
+        },
+        {
+          filename: 'admin-settings.component.ts',
+          title: 'AdminSettingsComponent (Standalone)',
+          description: '1) Standalone component for the admin/settings route.',
+          code: "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-admin-settings',\n  standalone: true,\n  template: `<h2>Admin Settings</h2>`\n})\nexport class AdminSettingsComponent {}",
+        },
+        {
+          filename: 'migration-command.txt',
+          title: 'Migration Command for Standalone APIs',
+          description:
+            '1) Command to migrate Angular application to use standalone APIs.\n2) This enables standalone components, directives, and pipes without NgModules.',
+          code: 'ng generate @angular/core:standalone',
+        },
+      ],
+    },
+    {
+      title: 'Angular Self-Closing Tag Migration',
+      description:
+        '1) Angular now supports self-closing tags for components and elements.\n2) This improves template readability and consistency.\n3) The migration updates component templates to use self-closing syntax where applicable.',
+      isGroup: true,
+      codeLists: [
+        {
+          filename: 'before.html',
+          title: 'Before Migration',
+          description:
+            '1) Traditional component usage with opening and closing tags.',
+          code: '<hello-world></hello-world>',
+        },
+        {
+          filename: 'after.html',
+          title: 'After Migration',
+          description: '1) Updated to use self-closing tag syntax.',
+          code: '<hello-world />',
+        },
+        {
+          filename: 'migration-command.txt',
+          title: 'Migration Command',
+          description:
+            '1) Command to apply the self-closing tag migration using Angular CLI.',
+          code: 'ng generate @angular/core:self-closing-tag',
+        },
+      ],
+    },
+    {
+  "title": "Angular NgRx Students Feature Example",
+  "description": "This example demonstrates full NgRx usage with actions, reducers, effects, selectors, and components for a student feature in an Angular application.",
+  "isGroup": true,
+  "codeLists": [
+    {
+      "filename": "commands",
+      "title": "command",
+      "description": "Contents of app/app.component.html",
+      "code": `npm install @ngrx/store @ngrx/effects @ngrx/router-store reselect
+
+      npm install immutable
+`
+    },
+    {
+      "filename": "app/app.component.html",
+      "title": "App.Component",
+      "description": "Contents of app/app.component.html",
+      "code": "<h2>NgRx Files</h2>\n<router-outlet></router-outlet>"
+    },
+    {
+      "filename": "app/app.component.ts",
+      "title": "App.Component",
+      "description": "Contents of app/app.component.ts",
+      "code": "import { Component, VERSION } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss'],\n})\nexport class AppComponent {\n  version = VERSION.full;\n}\n"
+    },
+    {
+      "filename": "app/app.module.ts",
+      "title": "App.Module",
+      "description": "Contents of app/app.module.ts",
+      "code": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { HttpClientModule } from '@angular/common/http';\n\nimport { StoreModule } from '@ngrx/store';\nimport { EffectsModule } from '@ngrx/effects';\n\nimport { AppRoutingModule } from './app.routing.module';\nimport { AppComponent } from './app.component';\n\nimport { reducers,metaReducers } from './app.reducer';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n  bootstrap: [AppComponent],\n  declarations: [AppComponent],\n  imports: [\n    CommonModule, \n    BrowserModule,\n    RouterModule,\n    HttpClientModule,\n    AppRoutingModule,\n    StoreModule.forRoot(reducers, {metaReducers}),\n    EffectsModule.forRoot([])\n  ],\n    providers:[]\n})\nexport class AppModule {}\n"
+    },
+    {
+      "filename": "app/app.reducer.ts",
+      "title": "App.Reducer",
+      "description": "Contents of app/app.reducer.ts",
+      "code": "import * as fromStudents from './ngrx/students/students.reducer'\nimport {ActionReducer, ActionReducerMap, MetaReducer} from '@ngrx/store';\nimport { AppState as State } from './app.state.interface';\n\nexport const reducers: ActionReducerMap<State> = {\n    students: fromStudents.reducer,\n};\n\n// console.log all actions\nexport function logger(reducer: ActionReducer<State>): ActionReducer<any, any> {\n    return function (state: State, action: any): State {\n        return reducer(state, action);\n    };\n}\n\nexport const metaReducers: MetaReducer<State>[] = [logger];"
+    },
+    {
+      "filename": "app/app.routing.module.ts",
+      "title": "App.Routing.Module",
+      "description": "Contents of app/app.routing.module.ts",
+      "code": "// src/app/app-routing.module.ts\nimport { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { AppComponent } from './app.component';\n\nconst routes: Routes = [\n    { path: '', redirectTo: 'student', pathMatch: 'full' },\n    {\n      path: 'student',\n      loadChildren: () => import('./modules/student/student/student.module').then(m => m.StudentModule),\n    },\n\n];\n\n@NgModule({\n    imports: [\n        RouterModule.forRoot(routes),\n    ],\n    exports: [RouterModule]\n})\nexport class AppRoutingModule {}"
+    },
+    {
+      "filename": "app/app.state.interface.ts",
+      "title": "App.State.Interface",
+      "description": "Contents of app/app.state.interface.ts",
+      "code": "import { StudentsState } from './ngrx/students/students.state';\n\nexport interface AppState {\n  students: StudentsState;\n}\n"
+    },
+    {
+      "filename": "app/modules/student/student/student.module.ts",
+      "title": "Student.Module",
+      "description": "Contents of app/modules/student/student/student.module.ts",
+      "code": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StudentRoutingModule } from './student.routing';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StudentEffect } from '../../../ngrx/students/students.effect';\nimport { StudentService } from '../../../ngrx/students/students.service';\nimport { StudentSandbox } from '../../../ngrx/students/students.sandbox';\nimport { StudentslistComponent } from './studentslist/studentslist.component';\n\n@NgModule({\n  imports: [\n    CommonModule,\n    StudentRoutingModule,\n    EffectsModule.forFeature([StudentEffect])\n  ],\n  declarations: [\n    StudentslistComponent\n  ],\n  providers: [StudentService, StudentSandbox]\n})\nexport class StudentModule { }"
+    },
+    {
+      "filename": "app/modules/student/student/student.routing.ts",
+      "title": "Student.Routing",
+      "description": "Contents of app/modules/student/student/student.routing.ts",
+      "code": "// src/app/app-routing.module.ts\nimport { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { StudentslistComponent } from './studentslist/studentslist.component';\n\nconst routes: Routes = [\n    { path: '', redirectTo: 'list', pathMatch: 'full' },\n    {\n      path: 'list',\n      component: StudentslistComponent\n    }\n\n];\n\n@NgModule({\n    imports: [\n        RouterModule.forChild(routes),\n    ],\n    exports: [RouterModule]\n})\nexport class StudentRoutingModule {}"
+    },
+    {
+      "filename": "app/modules/student/student/studentslist/studentslist.component.html",
+      "title": "Studentslist.Component",
+      "description": "Contents of app/modules/student/student/studentslist/studentslist.component.html",
+      "code": "<p>\nstudents Module\n</p>\n<h2>title: {{(this.studentSandbox.studentList$ | async).title}}</h2> \n\n\n<pre>\n  <code>\n{{(this.studentSandbox.studentList$ | async)|json}}\n  </code>\n</pre>\n\n<button (click)=\"triggerCustom()\">trigger</button>"
+    },
+    {
+      "filename": "app/modules/student/student/studentslist/studentslist.component.ts",
+      "title": "Studentslist.Component",
+      "description": "Contents of app/modules/student/student/studentslist/studentslist.component.ts",
+      "code": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { StudentSandbox } from '../../../../ngrx/students/students.sandbox';\nimport { Subscription } from 'rxjs';\n\n@Component({\n  selector: 'app-studentslist',\n  templateUrl: './studentslist.component.html',\n  styleUrls: ['./studentslist.component.css']\n})\nexport class StudentslistComponent implements OnInit,OnDestroy {\n\n  subscription: Subscription = new Subscription();\n  subscriptions: Subscription[] = [];\n\n\n  constructor(public studentSandbox: StudentSandbox) { }\n\n  ngOnInit() {\n    this.getList();\n  }\n\n  getList() {\n    this.studentSandbox.studentList({});\n    this.subscriptions.push(this.studentSandbox.studentList$.subscribe((val) => {\n      console.log('data', val);\n    }));\n    \n    this.subscriptions.push(this.studentSandbox.studentListFailed$.subscribe((val) => {\n      console.log('error', val);\n    }));\n\n   \n    \n  }\n\n  triggerCustom() {\n    this.getList();\n    this.studentSandbox.addstudentList({});\n    this.subscriptions.push(this.studentSandbox.addStudentList$.subscribe(el => {\n      console.log('1',el)\n    }));\n    // this.subscriptions.forEach(val=>val.unsubscribe());\n  }\n\nngOnDestroy() {\n  this.subscriptions.forEach(val=>val.unsubscribe());\n}\n\n}"
+    },
+    {
+      "filename": "app/ngrx/students/students.action.ts",
+      "title": "Students.Action",
+      "description": "Contents of app/ngrx/students/students.action.ts",
+      "code": "import { Action } from '@ngrx/store';\n\nexport const ActionTypes = {\n    // studentList\n    STUDENTLIST: type('[Student] student list'),\n    STUDENTLISTSUCCESS: type('[Student] student list success'),\n    STUDENTLISTFAIL: type('[Student] student list fail'),\n\n    ADDSTUDENTLISTACTION: type('[Student] add student'),\n\n};\n\n\n\n// studentList\nexport class studentListAction implements Action {\n    type = ActionTypes.STUDENTLIST;\n    constructor(public payload: any) {}\n}\n\nexport class studentListSuccessAction implements Action {\n    type = ActionTypes.STUDENTLISTSUCCESS;\n    constructor(public payload: any, public payload2: any = null) {}\n}\n\nexport class studentListFailAction implements Action {\n    type = ActionTypes.STUDENTLISTFAIL;\n    constructor(public payload: any) {}\n}\n\nexport class addstudentListAction implements Action {\n    type = ActionTypes.ADDSTUDENTLISTACTION;\n    constructor(public payload: any) {}\n}\n\n\n\nexport type Actions = studentListAction\n    | studentListSuccessAction\n    | studentListFailAction;\n\n\n\n\n\n\n\nexport function type<T>(label: T | ''): T {\n    let typeCache: { [label: string]: boolean } = {};\n\n    if (typeCache[<string>label]) {\n        throw new Error(`Action type \"${label}\" is not unqiue\"`);\n    }\n\n    typeCache[<string>label] = true;\n\n    return <T>label;\n}"
+    },
+    {
+      "filename": "app/ngrx/students/students.effect.ts",
+      "title": "Students.Effect",
+      "description": "Contents of app/ngrx/students/students.effect.ts",
+      "code": "import { Injectable } from '@angular/core';\nimport { createEffect, Actions, ofType } from '@ngrx/effects';\nimport { Action } from '@ngrx/store';\nimport { Observable, of } from 'rxjs';\nimport { map, switchMap, catchError } from 'rxjs/operators';\nimport * as actions from './students.action';\nimport { StudentService } from './students.service';\n\n@Injectable()\nexport class StudentEffect {\n  constructor(\n    private actions$: Actions,\n    private studentService: StudentService\n  ) {}\n\n  // studentList\n\n  studentList$: Observable<Action> = createEffect(() =>\n    this.actions$.pipe(\n      ofType(actions.ActionTypes.STUDENTLIST),\n      map((action: actions.studentListAction) => action.payload),\n      switchMap((state) => {\n        return this.studentService.studentList(state).pipe(\n          map((response) => new actions.studentListSuccessAction(response)),\n          catchError((error) => of(new actions.studentListFailAction(error)))\n        );\n      })\n    )\n  );\n\n  \n}\n"
+    },
+    {
+      "filename": "app/ngrx/students/students.reducer.ts",
+      "title": "Students.Reducer",
+      "description": "Contents of app/ngrx/students/students.reducer.ts",
+      "code": "import * as actions from './students.action';\nimport { StudentsState, StudentsStateRecord } from './students.state';\n\nexport const initialState: StudentsState =\n  new StudentsStateRecord() as unknown as StudentsState;\n\nexport function reducer(\n  state = initialState,\n  { type, payload, payload2 }: any\n): StudentsState {\n  if (!type) {\n    return state;\n  }\n\n  switch (type) {\n    // studentList\n    case actions.ActionTypes.STUDENTLIST: {\n      return Object.assign({}, state, {\n        studentList: [],\n        studentListLoading: true,\n        studentListLoaded: false,\n        studentListFailed: false,\n      });\n    }\n\n    case actions.ActionTypes.STUDENTLISTSUCCESS: {\n      return Object.assign({}, state, {\n        studentList: payload,\n        studentListLoading: false,\n        studentListLoaded: true,\n        studentListFailed: false,\n      });\n    }\n\n    case actions.ActionTypes.STUDENTLISTFAIL: {\n      return Object.assign({}, state, {\n        studentList: [],\n        studentListLoading: false,\n        studentListLoaded: true,\n        studentListFailed: payload,\n      });\n    }\n\n    case actions.ActionTypes.ADDSTUDENTLISTACTION: {\n      console.log('sts',state)\n      return Object.assign({}, state, {\n        addStudentList: state.studentList,\n        // studentList: {...state.studentList, isChecked: true}\n      });\n    }\n\n    \n\n    default: {\n      return state;\n    }\n  }\n}\n\n// studentList\n\nexport const studentList = (state: StudentsState) => state.studentList;\nexport const studentListLoading = (state: StudentsState) =>\n  state.studentListLoading;\nexport const studentListLoaded = (state: StudentsState) =>\n  state.studentListLoaded;\nexport const studentListFailed = (state: StudentsState) =>\n  state.studentListFailed;\n\n  export const addStudentList = (state: StudentsState) =>\n  state.addStudentList;\n  \n"
+    },
+    {
+      "filename": "app/ngrx/students/students.sandbox.ts",
+      "title": "Students.Sandbox",
+      "description": "Contents of app/ngrx/students/students.sandbox.ts",
+      "code": "import {Injectable} from '@angular/core';\nimport {Store} from '@ngrx/store';\nimport * as store from '../../app.state.interface';\nimport * as studentsActions from './students.action';\nimport { addStudentList, studentList, studentListFailed, studentListLoaded, studentListLoading } from './students.selector';\n\n@Injectable()\nexport class StudentSandbox {\n    \n    // Student List\n    public studentList$ = this.appState$.select(studentList);\n    public studentListLoading$ = this.appState$.select(studentListLoading);\n    public studentListLoaded$ = this.appState$.select(studentListLoaded); \n    public studentListFailed$ = this.appState$.select(studentListFailed); \n\n    public addStudentList$ = this.appState$.select(addStudentList); \n    \n    constructor(public appState$: Store<store.AppState>) {\n        \n    }\n\n\n    // Student List\n    public studentList(params: any) {\n        console.log('paa',params);\n        this.appState$.dispatch(new studentsActions.studentListAction(params));\n    }\n\n    public addstudentList(params: any) {\n        console.log('paa',params);\n        this.appState$.dispatch(new studentsActions.addstudentListAction(params));\n    }    \n}\n\n"
+    },
+    {
+      "filename": "app/ngrx/students/students.selector.ts",
+      "title": "Students.Selector",
+      "description": "Contents of app/ngrx/students/students.selector.ts",
+      "code": "import {createSelector} from 'reselect';\nimport * as fromTemplateActivities from './students.reducer';\nimport { AppState } from '../../app.state.interface';\n\n\n\nexport const getStudentsState = (state: AppState) => state.students;\n\n\n// Student List\n\nexport const studentList = createSelector(getStudentsState, fromTemplateActivities.studentList);\nexport const studentListLoading = createSelector(getStudentsState, fromTemplateActivities.studentListLoading);\nexport const studentListLoaded = createSelector(getStudentsState, fromTemplateActivities.studentListLoaded);\nexport const studentListFailed = createSelector(getStudentsState, fromTemplateActivities.studentListFailed);\n\n\nexport const addStudentList = createSelector(getStudentsState, fromTemplateActivities.addStudentList);\n"
+    },
+    {
+      "filename": "app/ngrx/students/students.service.ts",
+      "title": "Students.Service",
+      "description": "Contents of app/ngrx/students/students.service.ts",
+      "code": "import { HttpClient } from '@angular/common/http';\nimport {Injectable} from '@angular/core';\nimport {Observable} from 'rxjs';\n\n@Injectable()\nexport class StudentService {\n\n    constructor( public http: HttpClient) { }\n    \n    // Student List\n    studentList(params: any): Observable<any> {\n        console.log('student list params')\n        return this.http.get('https://jsonplaceholder.typicode.com/todos/1');\n    }\n    \n}\n"
+    },
+    {
+      "filename": "app/ngrx/students/students.state.ts",
+      "title": "Students.State",
+      "description": "Contents of app/ngrx/students/students.state.ts",
+      "code": "import { Map, Record } from 'immutable';\n\nexport interface StudentsState extends Map<string, any> {\n  // Student List\n  studentList: any;\n  studentListLoading: boolean;\n  studentListLoaded: boolean;\n  studentListFailed: boolean;\n\n  addStudentList: any;\n}\n\nexport const StudentsStateRecord = Record({\n  // Student List\n  studentList: [],\n  studentListLoading: false,\n  studentListLoaded: false,\n  studentListFailed: false,\n\n  addStudentList: [],\n});\n"
+    }
+  ]
+}
+                        
                 
         
                 
@@ -11397,3 +12175,13 @@ export class DisableDirective implements OnChanges {
   
 
 ];
+
+
+export const listConst = {
+  id: 1,
+  title: '',
+  description: '',
+  image: '',
+  groupBy: [],
+  filesList: []
+}

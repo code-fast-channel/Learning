@@ -37,8 +37,8 @@ export const lists = [
     {
       path: '/general/games',
       title: 'Game',
-      description: `1) Here we can chat to any person.
-      2) using sockets we can communicate
+      description: `1) Here we play game.
+      2) Tic tac toe and Bingo
       `
     },
     {
